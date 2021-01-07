@@ -1,0 +1,115 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Yogarine\CraytaStubs\Lua;
+
+abstract class Variable
+{
+    public const TYPE_MAPPING = [
+        'bool'                     => 'boolean',
+        'float'                    => 'number',
+        'mesh'                     => 'Mesh',
+        'object'                   => 'table',
+        'unhandled/int64'          => 'number',
+        'unhandled/UPZPropertyBag' => 'Properties',
+        'unknown'                  => 'void',
+    ];
+
+    public const IDENTIFIER_REPLACE = [
+        'entityOrNill'  => 'entity',
+        'function '     => '',
+    ];
+
+    /**
+     * @var string|null
+     */
+    protected ?string $type;
+
+    /**
+     * @var string
+     */
+    protected string $identifier;
+
+    /**
+     * @var string
+     */
+    protected string $comment;
+
+    /**
+     * Variable constructor.
+     *
+     * @param  string|null  $type
+     * @param  string       $identifier
+     * @param  string       $comment
+     */
+    public function __construct(?string $type, string $identifier, string $comment)
+    {
+        $identifier = str_replace(
+            array_keys(static::IDENTIFIER_REPLACE),
+            array_values(static::IDENTIFIER_REPLACE),
+            $identifier
+        );
+        $identifier = trim($identifier);
+
+        $this->identifier = $identifier;
+        $this->comment    = $comment;
+        $this->type       = $this->parseType($type);
+    }
+
+    /**
+     * @param  string|null  $type
+     * @return string|null
+     */
+    public function parseType(?string $type): ?string
+    {
+        return self::TYPE_MAPPING[$type] ?? $type;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
+    }
+
+    public function getComment(): string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommentBlock(): string
+    {
+        $result = '';
+
+        if ($this->comment) {
+            $parts = explode('.', $this->comment, 2);
+            $parts[0] .= '.';
+
+            foreach ($parts as $part) {
+                if ($part) {
+                    $result .= "--- " . implode(
+                            "\n--- ", explode("\n", wordwrap(trim($part), 100))
+                        ) . "\n---\n";
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    public function getLocalModuleIdentifier(): ?string
+    {
+        if (preg_match('/^(?:function )?([^.:]+):/', $this->identifier, $matches)) {
+            return trim($matches[1]);
+        }
+
+        return null;
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Yogarine\\CraytaStubs\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8",
+        "ext-dom": "*",
+        "ext-libxml": "*"
+    }
+}
