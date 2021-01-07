@@ -10,6 +10,11 @@ use Yogarine\CraytaStubs\Lua\Module;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+// Ensure stubs target is created.
+if (! mkdir($concurrentDirectory = __DIR__ . '/../stubs') && ! is_dir($concurrentDirectory)) {
+    throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+}
+
 libxml_use_internal_errors(true);
 
 $document = new \DOMDocument();
