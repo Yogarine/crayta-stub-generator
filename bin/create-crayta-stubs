@@ -1,4 +1,4 @@
-#!/bin/env php
+#!/usr/bin/env php
 <?php
 
 declare(strict_types=1);
@@ -10,8 +10,10 @@ use Yogarine\CraytaStubs\Lua\Module;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$concurrentDirectory = __DIR__ . '/../stubs';
+
 // Ensure stubs target is created.
-if (! mkdir($concurrentDirectory = __DIR__ . '/../stubs') && ! is_dir($concurrentDirectory)) {
+if (! file_exists($concurrentDirectory) && ! mkdir($concurrentDirectory) && ! is_dir($concurrentDirectory)) {
     throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
 }
 
@@ -88,8 +90,7 @@ if ($classNodes) {
             $usageNode = $xPath->query('span[@class="api-parameter-usage"]', $node)->item(0);
             [$type, $identifier, $arguments] = parse_usage_node($usageNode);
 
-            $field = new Field($type, $identifier, $comment);
-            $module->addField($field);
+            $field = new Field($module, $type, $identifier, $comment);
         }
 
         /*

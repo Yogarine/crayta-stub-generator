@@ -1,4 +1,19 @@
 {
+    "name": "yogarine/crayta-stubs",
+    "description": "Lua stubs for Crayta",
+    "keywords": ["Crayta", "stubs"],
+    "type": "library",
+    "homepage": "https://github.com/Yogarine/crayta-stubs",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Alwin Garside",
+            "email": "alwin@garsi.de",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Yogarine\\CraytaStubs\\": "src/"
@@ -8,5 +23,11 @@
         "php": ">=8",
         "ext-dom": "*",
         "ext-libxml": "*"
-    }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "bin": [
+        "bin/create-crayta-stubs"
+    ]
 }

@@ -1,2 +1,0 @@
-
-local v = Vector.Zero

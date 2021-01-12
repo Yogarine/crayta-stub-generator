@@ -3,4 +3,6 @@ composer.phar
 /vendor/
 
 # Stubs
-/stubs
+/stubs/*
+!/stubs/LeaderboardMetadata.lua
+!/stubs/LeaderboardValue.lua

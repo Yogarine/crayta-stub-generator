@@ -14,12 +14,17 @@ abstract class Variable
         'unhandled/int64'          => 'number',
         'unhandled/UPZPropertyBag' => 'Properties',
         'unknown'                  => 'void',
+        'voxelmesh'                => 'VoxelMesh',
     ];
 
     public const IDENTIFIER_REPLACE = [
-        'entityOrNill'  => 'entity',
-        'function '     => '',
+        'entityOrNill'    => 'entity',
+        'function '       => '',
+        'voxelComponent:' => 'voxelMesh:',
+        'voxels:'         => 'voxelMesh:',
     ];
+
+    public const DEFAULT_LINE_LENGTH = 104;
 
     /**
      * @var string|null
@@ -43,8 +48,11 @@ abstract class Variable
      * @param  string       $identifier
      * @param  string       $comment
      */
-    public function __construct(?string $type, string $identifier, string $comment)
-    {
+    public function __construct(
+        ?string $type,
+        string $identifier,
+        string $comment
+    ) {
         $identifier = str_replace(
             array_keys(static::IDENTIFIER_REPLACE),
             array_values(static::IDENTIFIER_REPLACE),
@@ -52,7 +60,7 @@ abstract class Variable
         );
         $identifier = trim($identifier);
 
-        $this->identifier = $identifier;
+        $this->identifier = $this->parseIdentifier($identifier);
         $this->comment    = $comment;
         $this->type       = $this->parseType($type);
     }
@@ -66,19 +74,29 @@ abstract class Variable
         return self::TYPE_MAPPING[$type] ?? $type;
     }
 
+    /**
+     * @param  string  $identifier
+     * @return string
+     */
+    public function parseIdentifier(string $identifier): string
+    {
+        return $identifier;
+    }
+
+    /**
+     * @return string
+     */
     public function getType(): string
     {
         return $this->type;
     }
 
+    /**
+     * @return string
+     */
     public function getIdentifier(): string
     {
         return $this->identifier;
-    }
-
-    public function getComment(): string
-    {
-        return $this->comment;
     }
 
     /**
@@ -104,9 +122,16 @@ abstract class Variable
         return $result;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLocalModuleIdentifier(): ?string
     {
-        if (preg_match('/^(?:function )?([^.:]+):/', $this->identifier, $matches)) {
+        if (preg_match(
+            '/^(?:function )?([^.:]+):/',
+            $this->identifier,
+            $matches
+        )) {
             return trim($matches[1]);
         }
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Yogarine\CraytaStubs\Lua;
 
+use JetBrains\PhpStorm\Pure;
+
 class LuaFunction extends Variable
 {
     public const CUSTOM_RETURN_TYPES = [
@@ -23,12 +25,20 @@ class LuaFunction extends Variable
      * @param  string  $comment
      * @param  array   $arguments
      */
-    public function __construct(string $type, string $identifier, string $comment, array $arguments)
-    {
+    public function __construct(
+        string $type,
+        string $identifier,
+        string $comment,
+        array $arguments
+    ) {
         parent::__construct($type, $identifier, $comment);
 
         foreach ($arguments as $argumentIdentifier => $argumentType) {
-            $this->addArgument(new Argument($argumentType, $argumentIdentifier));
+            $this->addArgument(new Argument(
+                $this,
+                $argumentType,
+                $argumentIdentifier
+            ));
         }
     }
 
@@ -60,26 +70,46 @@ class LuaFunction extends Variable
         $this->arguments[$argument->getIdentifier()] = $argument;
     }
 
+    /**
+     * @return int
+     */
+    #[Pure] public function getMaxArgumentIdentifierLength(): int
+    {
+        $maxLength = 0;
+        foreach ($this->arguments as $argument) {
+            $argumentLength = strlen($argument->getIdentifier());
+
+            if ($argumentLength > $maxLength) {
+                $maxLength = $argumentLength;
+            }
+        }
+
+        return $maxLength;
+    }
+
     public function getFunctionCode(): string
     {
         $doc = [];
         $arg = [];
 
+        $maxIdentifierLength = $this->getMaxArgumentIdentifierLength();
+
         foreach ($this->arguments as $argument) {
 
             if ('...' === $argument->getIdentifier()) {
-                $doc[] = "@vararg any";
+                $doc[] = " @vararg any";
             } else {
-                $doc[] = "@param  {$argument->getIdentifier()}  {$argument->getType()}";
+                $identifier = str_pad($argument->getIdentifier(), $maxIdentifierLength);
+                $doc[] = " @param  {$identifier}  {$argument->getType()}";
             }
 
             $arg[] = $argument->getIdentifier();
         }
-        $doc[] = "@return {$this->getType()}";
+        $doc[] = " @return {$this->getType()}";
 
         $functionsTxt  = "----\n";
         $functionsTxt .= $this->getCommentBlock();
-        $functionsTxt .= '--- ' . implode("\n--- ", $doc) . "\n";
+        $functionsTxt .= '---' . implode("\n---", $doc) . "\n";
         $functionsTxt .= "----\n";
         $functionsTxt .= "function {$this->getIdentifier()}(" . implode(', ', $arg) . ')';
 

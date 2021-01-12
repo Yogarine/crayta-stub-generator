@@ -9,16 +9,18 @@ use JetBrains\PhpStorm\Pure;
 class Module extends Variable
 {
     public const EXTENDS = [
-        'Camera'    => 'Entity',
-        'Character' => 'Entity',
-        'Effect'    => 'Entity',
-        'Light'     => 'Entity',
-        'Locator'   => 'Entity',
-        'Mesh'      => 'Entity',
-        'Sound'     => 'Entity',
-        'Trigger'   => 'Entity',
-        'User'      => 'Entity',
-        'VoxelMesh' => 'Entity',
+        'Camera'            => 'Entity',
+        'Character'         => 'Entity',
+        'Effect'            => 'Entity',
+        'InnerHorizonAsset' => 'HorizonAsset',
+        'Light'             => 'Entity',
+        'Locator'           => 'Entity',
+        'Mesh'              => 'Entity',
+        'OuterHorizonAsset' => 'HorizonAsset',
+        'Sound'             => 'Entity',
+        'Trigger'           => 'Entity',
+        'User'              => 'Entity',
+        'VoxelMesh'         => 'Entity',
     ];
 
     /**
@@ -86,14 +88,6 @@ class Module extends Variable
     }
 
     /**
-     * @return \Yogarine\CraytaStubs\Lua\Constant[]
-     */
-    public function getConstants(): array
-    {
-        return $this->constants;
-    }
-
-    /**
      * @param  \Yogarine\CraytaStubs\Lua\Constant  $constant
      */
     public function addConstant(Constant $constant): void
@@ -101,7 +95,10 @@ class Module extends Variable
         $this->constants[$constant->getIdentifier()] = $constant;
         $localModuleIdentifier = $constant->getLocalModuleIdentifier();
 
-        if (null !== $localModuleIdentifier && $localModuleIdentifier !== $this->identifier) {
+        if (
+            null !== $localModuleIdentifier &&
+            $localModuleIdentifier !== $this->identifier
+        ) {
             $this->localIdentifier = $localModuleIdentifier;
         }
     }
@@ -121,14 +118,6 @@ class Module extends Variable
     }
 
     /**
-     * @return \Yogarine\CraytaStubs\Lua\Field[]
-     */
-    public function getFields(): array
-    {
-        return $this->fields;
-    }
-
-    /**
      * @param  \Yogarine\CraytaStubs\Lua\Field  $field
      */
     public function addField(Field $field): void
@@ -136,12 +125,18 @@ class Module extends Variable
         $this->fields[$field->getIdentifier()] = $field;
         $localModuleIdentifier = $field->getLocalModuleIdentifier();
 
-        if (null !== $localModuleIdentifier && $localModuleIdentifier !== $this->identifier) {
+        if (
+            null !== $localModuleIdentifier &&
+            $localModuleIdentifier !== $this->identifier
+        ) {
             $this->localIdentifier = $localModuleIdentifier;
         }
     }
 
-    public function getFieldCommentBlocks(): string
+    /**
+     * @return string
+     */
+    #[Pure] public function getFieldCommentBlocks(): string
     {
         $parameterDocTxt = '';
 
@@ -153,23 +148,18 @@ class Module extends Variable
     }
 
     /**
-     * @return \Yogarine\CraytaStubs\Lua\LuaFunction[]
-     */
-    public function getFunctions(): array
-    {
-        return $this->functions;
-    }
-
-    /**
      * @param  \Yogarine\CraytaStubs\Lua\LuaFunction  $function
      */
     public function addFunction(LuaFunction $function): void
     {
-        $this->functions[$function->getIdentifier()] = $function;
+        $this->functions[] = $function;
 
         $localModuleIdentifier = $function->getLocalModuleIdentifier();
 
-        if (null !== $localModuleIdentifier && $localModuleIdentifier !== $this->identifier) {
+        if (
+            null !== $localModuleIdentifier &&
+            $localModuleIdentifier !== $this->identifier
+        ) {
             $this->localIdentifier = $localModuleIdentifier;
         }
     }
@@ -188,13 +178,15 @@ class Module extends Variable
         return $functionsTxt;
     }
 
-    public function getCode(): string
+    public function getCode($lineLength = self::DEFAULT_LINE_LENGTH): string
     {
-        $classTxt = "--------------------------------------------------------------------------------------------------------\n";
+        $classTxt  = str_repeat("-", $lineLength) . "\n";
         $classTxt .= $this->getCommentBlock();
-        $classTxt .= "--- @class {$this->identifier}" . (isset($this->type) ? " : {$this->type}" : '') . "\n";
+        $classTxt .= "--- @class {$this->identifier}" . (
+                isset($this->type) ? " : {$this->type}" : ''
+            ) . "\n";
         $classTxt .= $this->getFieldCommentBlocks();
-        $classTxt .= "--------------------------------------------------------------------------------------------------------\n";
+        $classTxt .= str_repeat("-", $lineLength) . "\n";
 
         if ('math' !== $this->localIdentifier) {
             $classTxt .= "local {$this->localIdentifier} = {}\n";
@@ -210,5 +202,39 @@ class Module extends Variable
         $classTxt .= "return {$this->localIdentifier}\n";
 
         return $classTxt;
+    }
+
+    /**
+     * @return int
+     */
+    #[Pure] public function getMaxFieldIdentifierLength(): int
+    {
+        $maxLength = 0;
+
+        foreach ($this->fields as $field) {
+            $length = strlen($field->getIdentifier());
+            if ($length > $maxLength) {
+                $maxLength = $length;
+            }
+        }
+
+        return $maxLength;
+    }
+
+    /**
+     * @return int
+     */
+    #[Pure] public function getMaxFieldTypeLength(): int
+    {
+        $maxLength = 0;
+
+        foreach ($this->fields as $field) {
+            $length = strlen($field->getType());
+            if ($length > $maxLength) {
+                $maxLength = $length;
+            }
+        }
+
+        return $maxLength;
     }
 }
