@@ -4,5 +4,6 @@ composer.phar
 
 # Stubs
 /stubs/*
+!/stubs/HorizonAsset.lua
 !/stubs/LeaderboardMetadata.lua
 !/stubs/LeaderboardValue.lua
