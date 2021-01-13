@@ -120,6 +120,6 @@ if ($classNodes) {
             $localClassName = $moduleName;
         }
 
-        file_put_contents(__DIR__ . "/../stubs/{$moduleName}.lua", $module->getCode());
+        file_put_contents("{$targetDir}/{$moduleName}.lua", $module->getCode());
     }
 }
