@@ -30,6 +30,8 @@ $document->loadHTMLFile("https://developer.crayta.com/api-docs/");
 $xPath = new \DOMXPath($document);
 $classNodes = $xPath->query('//*[@id="api-doc"]/*[@class="api"]');
 
+exec('cp -a ' . __DIR__ . "/../template-stubs/* {$targetDir}/");
+
 function parse_usage_node(\DOMElement $node): array
 {
     $type = 'void';
