@@ -11,7 +11,7 @@ class Constant extends Variable
      */
     public function getCode(): string
     {
-        $constantTxt  = "----\n";
+        $constantTxt = "----\n";
         $constantTxt .= $this->getCommentBlock();
         $constantTxt .= "--- @type {$this->type}\n";
         $constantTxt .= "----\n";

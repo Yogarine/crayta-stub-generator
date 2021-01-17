@@ -9,31 +9,31 @@ use JetBrains\PhpStorm\Pure;
 class Module extends Variable
 {
     public const EXTENDS = [
-        'Camera'            => 'Entity',
-        'Character'         => 'Entity',
+        'Camera' => 'Entity',
+        'Character' => 'Entity',
         'ColorGradingAsset' => 'Asset',
-        'Effect'            => 'Entity',
-        'EffectAsset'       => 'Asset',
+        'Effect' => 'Entity',
+        'EffectAsset' => 'Asset',
         'InnerHorizonAsset' => 'HorizonAsset',
-        'Light'             => 'Entity',
-        'Locator'           => 'Entity',
-        'Mesh'              => 'Entity',
-        'MeshAsset'         => 'Asset',
+        'Light' => 'Entity',
+        'Locator' => 'Entity',
+        'Mesh' => 'Entity',
+        'MeshAsset' => 'Asset',
         'OuterHorizonAsset' => 'HorizonAsset',
         'PostProcessAsset ' => 'Asset',
-        'ScriptAsset'       => 'Asset',
-        'SkydomeAsset'      => 'Asset',
-        'SkyMeshAsset'      => 'Asset',
-        'Sound'             => 'Entity',
-        'SoundAsset'        => 'Asset',
-        'Template'          => 'Asset',
-        'Trigger'           => 'Entity',
-        'User'              => 'Entity',
-        'VoxelMesh'         => 'Entity',
-        'VoxelMeshAsset'    => 'Asset',
-        'VoxelAsset'        => 'Asset',
-        'WidgetAsset'       => 'Asset',
-        'WorldAsset'        => 'Asset',
+        'ScriptAsset' => 'Asset',
+        'SkydomeAsset' => 'Asset',
+        'SkyMeshAsset' => 'Asset',
+        'Sound' => 'Entity',
+        'SoundAsset' => 'Asset',
+        'Template' => 'Asset',
+        'Trigger' => 'Entity',
+        'User' => 'Entity',
+        'VoxelMesh' => 'Entity',
+        'VoxelMeshAsset' => 'Asset',
+        'VoxelAsset' => 'Asset',
+        'WidgetAsset' => 'Asset',
+        'WorldAsset' => 'Asset',
     ];
 
     public const EXTRA_FIELDS = [
@@ -131,7 +131,7 @@ class Module extends Variable
     public function addConstant(Constant $constant): void
     {
         $this->constants[$constant->getIdentifier()] = $constant;
-        $localModuleIdentifier = $constant->getLocalModuleIdentifier();
+        $localModuleIdentifier                       = $constant->getLocalModuleIdentifier();
 
         if (
             null !== $localModuleIdentifier &&
@@ -162,7 +162,7 @@ class Module extends Variable
     public function addField(Field $field): void
     {
         $this->fields[$field->getIdentifier()] = $field;
-        $localModuleIdentifier = $field->getLocalModuleIdentifier();
+        $localModuleIdentifier                 = $field->getLocalModuleIdentifier();
 
         if (
             null !== $localModuleIdentifier &&
@@ -224,13 +224,12 @@ class Module extends Variable
      */
     public function getCode(int $lineLength = self::DEFAULT_LINE_LENGTH): string
     {
-        $classTxt  = str_repeat("-", $lineLength) . "\n";
+        $classTxt = str_repeat("-", $lineLength) . "\n";
         $classTxt .= $this->getCommentBlock();
         $classTxt .= "--- @generated GENERATED CODE! DO NOT EDIT!\n";
         $classTxt .= "---\n";
-        $classTxt .= "--- @class {$this->identifier}{$this->getGenerics()}" . (
-                isset($this->type) ? " : {$this->type}" : ''
-            ) . "\n";
+        $classTxt .= "--- @class {$this->identifier}{$this->getGenerics()}"
+            . (isset($this->type) ? " : {$this->type}" : '') . "\n";
         $classTxt .= $this->getFieldCommentBlocks();
         $classTxt .= str_repeat("-", $lineLength) . "\n";
 

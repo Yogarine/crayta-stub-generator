@@ -1,7 +1,6 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
     <PHPCodeStyleSettings>
-      <option name="ALIGN_KEY_VALUE_PAIRS" value="true" />
       <option name="ALIGN_PHPDOC_PARAM_NAMES" value="true" />
       <option name="ALIGN_PHPDOC_COMMENTS" value="true" />
       <option name="ALIGN_ASSIGNMENTS" value="true" />
@@ -20,10 +19,10 @@
       <option name="ALIGN_CLASS_CONSTANTS" value="true" />
       <option name="BLANK_LINES_AFTER_OPENING_TAG" value="1" />
       <option name="KEEP_BLANK_LINES_AFTER_LBRACE" value="1" />
+      <option name="SPACE_AFTER_UNARY_NOT" value="true" />
       <option name="FORCE_SHORT_DECLARATION_ARRAY_STYLE" value="true" />
       <option name="NEW_LINE_AFTER_PHP_OPENING_TAG" value="true" />
       <option name="PHPDOC_USE_FQCN" value="true" />
-      <option name="PLACE_PARENS_FOR_CONSTRUCTOR" value="1" />
       <option name="IF_LPAREN_ON_NEXT_LINE" value="true" />
       <option name="IF_RPAREN_ON_NEXT_LINE" value="true" />
     </PHPCodeStyleSettings>
@@ -39,6 +38,7 @@
       <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="0" />
       <option name="BLANK_LINES_AFTER_PACKAGE" value="1" />
       <option name="SPECIAL_ELSE_IF_TREATMENT" value="true" />
+      <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
       <option name="ALIGN_GROUP_FIELD_DECLARATIONS" value="true" />
       <option name="CALL_PARAMETERS_WRAP" value="5" />
       <option name="CALL_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
@@ -60,7 +60,6 @@
       <option name="ARRAY_INITIALIZER_LBRACE_ON_NEXT_LINE" value="true" />
       <option name="ARRAY_INITIALIZER_RBRACE_ON_NEXT_LINE" value="true" />
       <option name="ASSIGNMENT_WRAP" value="5" />
-      <option name="PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE" value="true" />
       <option name="IF_BRACE_FORCE" value="3" />
       <option name="DOWHILE_BRACE_FORCE" value="3" />
       <option name="WHILE_BRACE_FORCE" value="3" />

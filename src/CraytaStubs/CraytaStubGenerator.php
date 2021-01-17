@@ -45,15 +45,15 @@ class CraytaStubGenerator
      */
     public function generateStubs(string $targetDir): void
     {
-        $xPath = new DOMXPath($this->document);
+        $xPath      = new DOMXPath($this->document);
         $classNodes = $xPath->query('//*[@id="api-doc"]/*[@class="api"]');
 
         self::ensureTargetDir($targetDir);
 
         if ($classNodes) {
             foreach ($classNodes as $classNode) {
-                $moduleName     = $xPath->evaluate('string(div[@class="api-name"])', $classNode);
-                $moduleComment  = $xPath->evaluate('string(div[@class="api-comment"])', $classNode);
+                $moduleName    = $xPath->evaluate('string(div[@class="api-name"])', $classNode);
+                $moduleComment = $xPath->evaluate('string(div[@class="api-comment"])', $classNode);
 
                 $module = new Module($moduleName, $extends[$moduleName] ?? null, $moduleComment);
 
@@ -77,7 +77,8 @@ class CraytaStubGenerator
                 /*
                  * FIELDS
                  */
-                foreach ($xPath->query('div[@class="api-parameters"]/div[@class="api-parameter"]', $classNode) as $node) {
+                foreach ($xPath->query('div[@class="api-parameters"]/div[@class="api-parameter"]', $classNode) as $node)
+                {
                     //$name = trim($xPath->evaluate('string(span[@class="api-parameter-name"])', $node));
                     // TODO: get all child nodes to get elements with classes like `comment-bold`.
                     $comment = trim($xPath->evaluate('string(span[@class="api-parameter-comment"])', $node));
@@ -111,14 +112,26 @@ class CraytaStubGenerator
                 /*
                  * FUNCTIONS
                  */
-                $functionNodes = $xPath->query('div[@class="api-functions" or @class="api-entrypoints"]/div[@class="api-function" or @class="api-entrypoint"]', $classNode);
+                $functionNodes =
+                    $xPath->query(
+                        'div[@class="api-functions" or @class="api-entrypoints"]/div[@class="api-function" or @class="api-entrypoint"]',
+                        $classNode
+                    );
                 foreach ($functionNodes as $node) {
                     //$name = trim($xPath->evaluate('string(span[@class="api-function-name" or @class="api-entrypoint-name"])', $node));
                     // TODO: get all child nodes to get elements with classes like `comment-bold`.
-                    $comment = trim($xPath->evaluate('string(span[@class="api-function-comment" or @class="api-entrypoint-comment"])', $node));
+                    $comment =
+                        trim(
+                            $xPath->evaluate(
+                                'string(span[@class="api-function-comment" or @class="api-entrypoint-comment"])',
+                                $node
+                            )
+                        );
 
                     /** @var \DOMElement $usageNode */
-                    $usageNode = $xPath->query('span[@class="api-function-usage" or @class="api-entrypoint-usage"]', $node)->item(0);
+                    $usageNode =
+                        $xPath->query('span[@class="api-function-usage" or @class="api-entrypoint-usage"]', $node)
+                            ->item(0);
                     [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
 
                     $function = new LuaFunction($type, $identifier, $comment, $arguments);
@@ -129,7 +142,6 @@ class CraytaStubGenerator
                 file_put_contents("{$targetDir}/{$moduleName}.lua", $module->getCode());
             }
         }
-
     }
 
     /**

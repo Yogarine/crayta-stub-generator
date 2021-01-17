@@ -7,24 +7,29 @@ namespace Yogarine\CraytaStubs\Lua;
 abstract class Variable
 {
     public const TYPE_MAPPING = [
-        'bool'                     => 'boolean',
-        'float'                    => 'number',
-        'mesh'                     => 'Mesh',
-        'object'                   => 'table',
-        'unhandled/int64'          => 'number',
+        'bool' => 'boolean',
+        'float' => 'number',
+        'int' => 'number',
+        'mesh' => 'Mesh',
+        'object' => 'table',
+        'unhandled/int64' => 'number',
         'unhandled/UPZPropertyBag' => 'Properties',
-        'unknown'                  => 'void',
-        'voxelmesh'                => 'VoxelMesh',
+        'unknown' => 'void',
+        'vector' => 'Vector',
+        'voxelmesh' => 'VoxelMesh',
     ];
 
     public const IDENTIFIER_REPLACE = [
-        'entityOrNill'    => 'entity',
-        'function '       => '',
+        'entityOrNill' => 'entity',
+        'function ' => '',
         'voxelComponent:' => 'voxelMesh:',
-        'voxels:'         => 'voxelMesh:',
+        'voxels:' => 'voxelMesh:',
+        'trigger:' => 'triggerComponent:',
     ];
 
     public const DEFAULT_LINE_LENGTH = 104;
+
+    private const REGEX = '/^(?:function )?([^.:]+):/';
 
     /**
      * @var string|null
@@ -107,13 +112,14 @@ abstract class Variable
         $result = '';
 
         if ($this->comment) {
-            $parts = explode('.', $this->comment, 2);
+            $parts    = explode('.', $this->comment, 2);
             $parts[0] .= '.';
 
             foreach ($parts as $part) {
                 if ($part) {
                     $result .= "--- " . implode(
-                            "\n--- ", explode("\n", wordwrap(trim($part), 100))
+                            "\n--- ",
+                            explode("\n", wordwrap(trim($part), 100))
                         ) . "\n---\n";
                 }
             }
@@ -127,11 +133,7 @@ abstract class Variable
      */
     public function getLocalModuleIdentifier(): ?string
     {
-        if (preg_match(
-            '/^(?:function )?([^.:]+):/',
-            $this->identifier,
-            $matches
-        )) {
+        if (preg_match(self::REGEX, $this->identifier, $matches)) {
             return trim($matches[1]);
         }
 

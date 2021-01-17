@@ -34,11 +34,9 @@ class LuaFunction extends Variable
         parent::__construct($type, $identifier, $comment);
 
         foreach ($arguments as $argumentIdentifier => $argumentType) {
-            $this->addArgument(new Argument(
-                $this,
-                $argumentType,
-                $argumentIdentifier
-            ));
+            $this->addArgument(
+                new Argument($this, $argumentType, $argumentIdentifier)
+            );
         }
     }
 
@@ -98,7 +96,6 @@ class LuaFunction extends Variable
         $maxIdentifierLength = $this->getMaxArgumentIdentifierLength();
 
         foreach ($this->arguments as $argument) {
-
             if ('...' === $argument->getIdentifier()) {
                 $doc[] = " @vararg any";
             } else {
@@ -106,7 +103,7 @@ class LuaFunction extends Variable
                     $argument->getIdentifier(),
                     $maxIdentifierLength
                 );
-                $doc[] = " @param  {$identifier}  {$argument->getType()}";
+                $doc[]      = " @param  {$identifier}  {$argument->getType()}";
             }
 
             $arg[] = $argument->getIdentifier();
@@ -115,7 +112,7 @@ class LuaFunction extends Variable
 
         $argTxt = implode(', ', $arg);
 
-        $functionsTxt  = "----\n";
+        $functionsTxt = "----\n";
         $functionsTxt .= $this->getCommentBlock();
         $functionsTxt .= '---' . implode("\n---", $doc) . "\n";
         $functionsTxt .= "----\n";

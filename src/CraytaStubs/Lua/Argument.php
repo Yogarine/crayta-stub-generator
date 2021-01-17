@@ -12,11 +12,29 @@ class Argument extends Variable
     public const CUSTOM_ARGUMENT_IDENTIFIERS = [
         'world:Raycast' => [
             'start' => 'startPosition',
-            'end'   => 'endPosition',
+            'end' => 'endPosition',
         ],
     ];
 
     public const CUSTOM_ARGUMENT_TYPES = [
+        'camera:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
+        'character:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
+        'effect:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
+        'light:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
+        'locator:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
+        'mesh:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
         'GameStorage.GetCounter' => [
             'callback' => 'fun(count: number): void',
         ],
@@ -53,16 +71,26 @@ class Argument extends Variable
         'scriptComponent:GetSaveData' => [
             'callback' => 'fun(saveData: table): void',
         ],
+        'sound:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
+        'triggerComponent:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
         'user:GetLeaderboardValue' => [
             'callback' => 'fun(score: number, rank: string): void',
         ],
         'user:AddToLeaderboardValue' => [
             'callback' => 'fun(score: number): void',
         ],
+        'user:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
+        'voxelMesh:RevertClientProperty' => [
+            'propertyName' => 'string',
+        ],
         'world:Raycast' => [
-            'collisionCallback'
-                => 'fun(entity: Entity, hitResult: HitResult): void'
-            ,
+            'collisionCallback' => 'fun(entity: Entity, hitResult: HitResult): void',
         ],
         'world:ForEachUser' => [
             'callback' => 'fun(user: User, ...): void',
@@ -93,8 +121,8 @@ class Argument extends Variable
 
         $identifier = match ($identifier) {
             'function' => 'callback',
-            'varArgs'  => '...',
-            default    => $identifier,
+            'varArgs' => '...',
+            default => $identifier,
         };
 
         if ('…' === $type) {
