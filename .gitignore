@@ -4,3 +4,9 @@ composer.phar
 
 # Stubs
 /stubs/*
+!/stubs/BooleanProperty.lua
+!/stubs/HorizonAsset.lua
+!/stubs/LeaderboardMetadata.lua
+!/stubs/LeaderboardValue.lua
+!/stubs/Property.lua
+!/stubs/PropertyBag.lua

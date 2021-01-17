@@ -11,16 +11,39 @@ class Module extends Variable
     public const EXTENDS = [
         'Camera'            => 'Entity',
         'Character'         => 'Entity',
+        'ColorGradingAsset' => 'Asset',
         'Effect'            => 'Entity',
+        'EffectAsset'       => 'Asset',
         'InnerHorizonAsset' => 'HorizonAsset',
         'Light'             => 'Entity',
         'Locator'           => 'Entity',
         'Mesh'              => 'Entity',
+        'MeshAsset'         => 'Asset',
         'OuterHorizonAsset' => 'HorizonAsset',
+        'PostProcessAsset ' => 'Asset',
+        'ScriptAsset'       => 'Asset',
+        'SkydomeAsset'      => 'Asset',
+        'SkyMeshAsset'      => 'Asset',
         'Sound'             => 'Entity',
+        'SoundAsset'        => 'Asset',
+        'Template'          => 'Asset',
         'Trigger'           => 'Entity',
         'User'              => 'Entity',
         'VoxelMesh'         => 'Entity',
+        'VoxelMeshAsset'    => 'Asset',
+        'VoxelAsset'        => 'Asset',
+        'WidgetAsset'       => 'Asset',
+        'WorldAsset'        => 'Asset',
+    ];
+
+    public const EXTRA_FIELDS = [
+        'Script' => [
+            'properties' => 'Properties',
+        ],
+    ];
+
+    public const GENERICS = [
+        'PropertyArray' => '<T>',
     ];
 
     /**
@@ -69,6 +92,20 @@ class Module extends Variable
         $this->constants       = $constants;
         $this->fields          = $fields;
         $this->functions       = $functions;
+
+        foreach (
+            self::EXTRA_FIELDS[$identifier] ?? [] as $fieldName => $fieldType
+        ) {
+            new Field($this, $fieldType, $fieldName, '');
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getGenerics(): string
+    {
+        return static::GENERICS[$this->identifier] ?? '';
     }
 
     /**
@@ -89,6 +126,7 @@ class Module extends Variable
 
     /**
      * @param  \Yogarine\CraytaStubs\Lua\Constant  $constant
+     * @return void
      */
     public function addConstant(Constant $constant): void
     {
@@ -119,6 +157,7 @@ class Module extends Variable
 
     /**
      * @param  \Yogarine\CraytaStubs\Lua\Field  $field
+     * @return void
      */
     public function addField(Field $field): void
     {
@@ -149,6 +188,7 @@ class Module extends Variable
 
     /**
      * @param  \Yogarine\CraytaStubs\Lua\LuaFunction  $function
+     * @return void
      */
     public function addFunction(LuaFunction $function): void
     {
@@ -178,11 +218,17 @@ class Module extends Variable
         return $functionsTxt;
     }
 
-    public function getCode($lineLength = self::DEFAULT_LINE_LENGTH): string
+    /**
+     * @param  int  $lineLength
+     * @return string
+     */
+    public function getCode(int $lineLength = self::DEFAULT_LINE_LENGTH): string
     {
         $classTxt  = str_repeat("-", $lineLength) . "\n";
         $classTxt .= $this->getCommentBlock();
-        $classTxt .= "--- @class {$this->identifier}" . (
+        $classTxt .= "--- @generated GENERATED CODE! DO NOT EDIT!\n";
+        $classTxt .= "---\n";
+        $classTxt .= "--- @class {$this->identifier}{$this->getGenerics()}" . (
                 isset($this->type) ? " : {$this->type}" : ''
             ) . "\n";
         $classTxt .= $this->getFieldCommentBlocks();

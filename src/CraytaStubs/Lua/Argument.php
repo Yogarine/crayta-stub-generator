@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Yogarine\CraytaStubs\Lua;
 
+/**
+ * Represents a Lua function argument.
+ */
 class Argument extends Variable
 {
     public const CUSTOM_ARGUMENT_IDENTIFIERS = [

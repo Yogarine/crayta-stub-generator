@@ -8,10 +8,44 @@ use JetBrains\PhpStorm\Pure;
 
 class Field extends Variable
 {
+    public const CUSTOM_IDENTIFIERS = [
+        'Entity' => [
+            'entity.var' => '[string]',
+        ],
+        'Properties' => [
+            'properties.var' => '[string]',
+        ],
+        'PropertyArray' => [
+            'propertyArray.var' => '[number]'
+        ],
+    ];
+
     public const CUSTOM_TYPES = [
+        'Entity' => [
+            '[string]' => 'Script|Widget',
+        ],
+        'Properties' => [
+            '[string]' => 'any',
+        ],
+        'PropertyArray' => [
+            '[number]' => 'T',
+            'length'   => 'number',
+        ],
         'World' => [
             'innerHorizon' => 'InnerHorizonAsset',
             'outerHorizon' => 'OuterHorizonAsset',
+        ],
+    ];
+
+    public const SKIP_FIELDS = [
+        'Sound' => [
+            'sound.var' => true,
+        ],
+        'Properties' => [
+            'properties.var =' => true,
+        ],
+        'PropertyArray' => [
+            'propertyArray.var =' => true,
         ],
     ];
 
@@ -36,7 +70,11 @@ class Field extends Variable
 
         parent::__construct($type, $identifier, $comment);
 
-        $module->addField($this);
+        if (! isset(
+            self::SKIP_FIELDS[$module->getIdentifier()][$this->identifier]
+        )) {
+            $module->addField($this);
+        }
     }
 
     /**
@@ -49,6 +87,18 @@ class Field extends Variable
 
         return static::CUSTOM_TYPES[$module][$this->identifier]
             ?? parent::parseType($type);
+    }
+
+    /**
+     * @param  string  $identifier
+     * @return string
+     */
+    public function parseIdentifier(string $identifier): string
+    {
+        $module = $this->module->getIdentifier();
+
+        return static::CUSTOM_IDENTIFIERS[$module][$identifier]
+            ?? parent::parseType($identifier);
     }
 
     /**

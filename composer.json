@@ -16,7 +16,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Yogarine\\CraytaStubs\\": "src/"
+            "Yogarine\\": "src/"
         }
     },
     "require": {

@@ -87,6 +87,9 @@ class LuaFunction extends Variable
         return $maxLength;
     }
 
+    /**
+     * @return string
+     */
     public function getFunctionCode(): string
     {
         $doc = [];
@@ -99,7 +102,10 @@ class LuaFunction extends Variable
             if ('...' === $argument->getIdentifier()) {
                 $doc[] = " @vararg any";
             } else {
-                $identifier = str_pad($argument->getIdentifier(), $maxIdentifierLength);
+                $identifier = str_pad(
+                    $argument->getIdentifier(),
+                    $maxIdentifierLength
+                );
                 $doc[] = " @param  {$identifier}  {$argument->getType()}";
             }
 
@@ -107,11 +113,13 @@ class LuaFunction extends Variable
         }
         $doc[] = " @return {$this->getType()}";
 
+        $argTxt = implode(', ', $arg);
+
         $functionsTxt  = "----\n";
         $functionsTxt .= $this->getCommentBlock();
         $functionsTxt .= '---' . implode("\n---", $doc) . "\n";
         $functionsTxt .= "----\n";
-        $functionsTxt .= "function {$this->getIdentifier()}(" . implode(', ', $arg) . ')';
+        $functionsTxt .= "function {$this->getIdentifier()}({$argTxt})";
 
         if ('void' !== $this->type) {
             $types = explode(',', $this->type);
