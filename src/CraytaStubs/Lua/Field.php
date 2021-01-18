@@ -8,8 +8,6 @@ use JetBrains\PhpStorm\Pure;
 
 class Field extends Variable
 {
-    public const ENTITY_VAR_TYPES = 'Script|Widget';
-
     public const CUSTOM_IDENTIFIERS = [
         'Camera' => [
             'camera.var' => '[string]',
@@ -57,25 +55,25 @@ class Field extends Variable
 
     public const CUSTOM_TYPES = [
         'Camera' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<Camera>|Widget',
         ],
         'Character' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<Character>|Widget',
         ],
         'Effect' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<Effect>|Widget',
         ],
         'Entity' => [
-            '[string]' => self::ENTITY_VAR_TYPES . '|any',
+            '[string]' => 'Script<Entity>|Widget|any',
         ],
         'Light' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<Light>|Widget',
         ],
         'Locator' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<Locator>|Widget',
         ],
         'Mesh' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<Mesh>|Widget',
             'mesh' => 'MeshAsset',
         ],
         'Properties' => [
@@ -86,20 +84,20 @@ class Field extends Variable
             'length' => 'number',
         ],
         'Trigger' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<Trigger>|Widget',
         ],
         'User' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<User>|Widget',
         ],
         'VoxelMesh' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<VoxelMesh>|Widget',
             'mesh' => 'VoxelMeshAsset',
         ],
         'Widget' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<Widget>|Widget',
         ],
         'WidgetBindings' => [
-            '[string]' => self::ENTITY_VAR_TYPES,
+            '[string]' => 'Script<WidgetBindings>|Widget',
         ],
         'World' => [
             'innerHorizon' => 'InnerHorizonAsset',

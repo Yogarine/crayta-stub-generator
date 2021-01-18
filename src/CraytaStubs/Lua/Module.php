@@ -39,11 +39,13 @@ class Module extends Variable
     public const EXTRA_FIELDS = [
         'Script' => [
             'properties' => 'Properties',
+            'Properties' => 'PropertyBag',
         ],
     ];
 
     public const GENERICS = [
         'PropertyArray' => '<T>',
+        'Script' => '<T>',
     ];
 
     /**

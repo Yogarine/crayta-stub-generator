@@ -10,6 +10,7 @@ class LuaFunction extends Variable
 {
     public const CUSTOM_RETURN_TYPES = [
         'scriptComponent:GetProperties' => 'Properties',
+        'scriptComponent:GetEntity' => 'T',
     ];
 
     /**
