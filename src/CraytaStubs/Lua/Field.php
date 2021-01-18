@@ -76,6 +76,7 @@ class Field extends Variable
         ],
         'Mesh' => [
             '[string]' => self::ENTITY_VAR_TYPES,
+            'mesh' => 'MeshAsset',
         ],
         'Properties' => [
             '[string]' => 'any',
@@ -92,6 +93,7 @@ class Field extends Variable
         ],
         'VoxelMesh' => [
             '[string]' => self::ENTITY_VAR_TYPES,
+            'mesh' => 'VoxelMeshAsset',
         ],
         'Widget' => [
             '[string]' => self::ENTITY_VAR_TYPES,
@@ -180,7 +182,7 @@ class Field extends Variable
         $module = $this->module->getIdentifier();
 
         return static::CUSTOM_IDENTIFIERS[$module][$identifier]
-            ?? parent::parseType($identifier);
+            ?? parent::parseIdentifier($identifier);
     }
 
     /**
