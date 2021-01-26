@@ -1,7 +1,3 @@
 --------------------------------------------------------------------------------------------------------
---- @shape EventProperty : Property<Event>
---- @field type  "event"
+--- @alias Primitive Character|User|Mesh|Light|Sound|Effect|Trigger|Locator|Camera|VoxelMesh
 --------------------------------------------------------------------------------------------------------
-local EventProperty = {}
-
-return EventProperty

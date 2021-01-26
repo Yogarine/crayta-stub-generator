@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------------------------------
 --- Similar to string, but localisable. Uses a Text type at runtime.
 ---
---- @shape TextProperty : BaseProperty
+--- @shape TextProperty : Property<Text>
 --- @field type     "text"
 --- @field default  string|nil
 --- @field options  StringPropertyOptions|nil  @A list of allowed values, either named:

@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
---- @shape StringProperty : BaseProperty
+--- @shape StringProperty : Property<string>
 --- @alias StringPropertyOptions table<string,string>|number[]
 ---
 --- @field type                    "string"

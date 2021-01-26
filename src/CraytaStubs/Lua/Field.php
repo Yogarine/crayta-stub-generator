@@ -8,6 +8,20 @@ use JetBrains\PhpStorm\Pure;
 
 class Field extends Variable
 {
+    public const TYPE_MAPPING = [
+        'bool' => 'boolean',
+        'float' => 'number',
+        'int' => 'number',
+        'mesh' => 'Mesh',
+        'object' => 'table',
+        'unhandled/int64' => 'number',
+        'unhandled/UPZPropertyBag' => 'Properties',
+        'unknown' => 'void',
+        'vector' => 'Vector',
+        'voxelmesh' => 'VoxelMesh',
+        'Script' => 'Script<Entity>',
+    ];
+
     public const CUSTOM_IDENTIFIERS = [
         'Camera' => [
             'camera.var' => '[string]',
@@ -77,7 +91,7 @@ class Field extends Variable
             'mesh' => 'MeshAsset',
         ],
         'Properties' => [
-            '[string]' => 'any',
+            '[string]' => 'PropertyValue',
         ],
         'PropertyArray' => [
             '[number]' => 'T',
@@ -190,17 +204,12 @@ class Field extends Variable
     #[Pure] public function getCommentBlock(
         $lineLength = self::DEFAULT_LINE_LENGTH
     ): string {
-        $identifier = str_pad(
-            $this->identifier,
-            $this->module->getMaxFieldIdentifierLength()
-        );
+        $field = str_pad(
+                $this->identifier,
+                $this->module->getMaxCombinedFieldLength() - strlen($this->type)
+            ) . $this->type;
 
-        $type = str_pad(
-            $this->type,
-            $this->module->getMaxFieldTypeLength()
-        );
-
-        $doc          = " @field public {$identifier} {$type} ";
+        $doc          = " @field public {$field} ";
         $docComment   = "---{$doc}";
         $commentBreak = "\n---" . str_repeat(' ', strlen($doc));
         $commentWidth = self::DEFAULT_LINE_LENGTH - strlen($docComment);

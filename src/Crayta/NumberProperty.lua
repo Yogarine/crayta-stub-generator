@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
---- @shape NumberProperty : BaseProperty
+--- @shape NumberProperty : Property<number>
 --- @alias NumberPropertyOptions table<string,number>|number[]
 --- @alias NumberPropertyEditor  "int"|"float"|"seconds"|"days"|"slider"
 ---

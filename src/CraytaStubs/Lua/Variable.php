@@ -17,6 +17,7 @@ abstract class Variable
         'unknown' => 'void',
         'vector' => 'Vector',
         'voxelmesh' => 'VoxelMesh',
+        'Script' => 'Script<Entity>',
     ];
 
     public const IDENTIFIER_REPLACE = [
@@ -76,7 +77,7 @@ abstract class Variable
      */
     public function parseType(?string $type): ?string
     {
-        return self::TYPE_MAPPING[$type] ?? $type;
+        return static::TYPE_MAPPING[$type] ?? $type;
     }
 
     /**

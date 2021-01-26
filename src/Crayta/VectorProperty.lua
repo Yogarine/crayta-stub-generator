@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------------------------------
 --- Similar to string, but localisable. Uses a Text type at runtime.
 ---
---- @shape VectorProperty : BaseProperty
+--- @shape VectorProperty : Property<Vector>
 --- @field type           "vector"
 --- @field default        Vector|nil  @Vector.Zero or any other Vector value using Vector.New(1,2,3).
 --- @field stepSpeed      number|nil  Adjusts how fast the number changes with a gamepad.

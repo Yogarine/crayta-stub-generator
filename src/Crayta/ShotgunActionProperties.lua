@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------------------------------
---- @shape EventProperty : Property<Event>
---- @field type  "event"
+--- @shape ShotgunActionProperties<T : string> : AnimationProperties
+--- @field events ShotgunReloadActionEvents
 --------------------------------------------------------------------------------------------------------
-local EventProperty = {}
+local ShotgunReloadActionProperties = {}
 
-return EventProperty
+return ShotgunReloadActionProperties

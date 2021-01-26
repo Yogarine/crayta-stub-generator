@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
---- @shape ColorProperty : BaseProperty
+--- @shape ColorProperty : Property<Color>
 ---
 --- @field type     "color"
 --- @field default  Color|nil

@@ -45,7 +45,7 @@ class Module extends Variable
 
     public const GENERICS = [
         'PropertyArray' => '<T>',
-        'Script' => '<T>',
+        'Script' => '<T : Entity>',
     ];
 
     /**
@@ -277,6 +277,24 @@ class Module extends Variable
 
         foreach ($this->fields as $field) {
             $length = strlen($field->getType());
+            if ($length > $maxLength) {
+                $maxLength = $length;
+            }
+        }
+
+        return $maxLength;
+    }
+
+
+    /**
+     * @return int
+     */
+    #[Pure] public function getMaxCombinedFieldLength(): int
+    {
+        $maxLength = 0;
+
+        foreach ($this->fields as $field) {
+            $length = strlen("{$field->getIdentifier()} {$field->getType()}");
             if ($length > $maxLength) {
                 $maxLength = $length;
             }

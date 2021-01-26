@@ -9,6 +9,11 @@ namespace Yogarine\CraytaStubs\Lua;
  */
 class Argument extends Variable
 {
+    public const BUTTON_NAMES
+        = '"jump"|"crouch"|"interact"|"sprint"|"next"|'
+        . '"previous"|"primary"|"secondary"|"extra1"|'
+        . '"extra2"|"extra3"|"extra4"|"extra5"';
+
     public const CUSTOM_ARGUMENT_IDENTIFIERS = [
         'world:Raycast' => [
             'start' => 'startPosition',
@@ -17,11 +22,17 @@ class Argument extends Variable
     ];
 
     public const CUSTOM_ARGUMENT_TYPES = [
+        'Analytics.PlayerHealthCritical' => [
+            'playerOrUser' => 'Character|User',
+        ],
         'camera:RevertClientProperty' => [
             'propertyName' => 'string',
         ],
         'character:RevertClientProperty' => [
             'propertyName' => 'string',
+        ],
+        'character:SetGrip' => [
+            'gripPresetAsset' => 'GripAsset|nil',
         ],
         'effect:RevertClientProperty' => [
             'propertyName' => 'string',
@@ -70,6 +81,18 @@ class Argument extends Variable
         ],
         'scriptComponent:GetSaveData' => [
             'callback' => 'fun(saveData: table): void',
+        ],
+        'Script:OnButtonPressed' => [
+            'buttonName' => self::BUTTON_NAMES,
+        ],
+        'Script:OnButtonReleased' => [
+            'buttonName' => self::BUTTON_NAMES,
+        ],
+        'Script:LocalOnButtonPressed' => [
+            'buttonName' => self::BUTTON_NAMES,
+        ],
+        'Script:LocalOnButtonReleased' => [
+            'buttonIndex' => self::BUTTON_NAMES,
         ],
         'sound:RevertClientProperty' => [
             'propertyName' => 'string',

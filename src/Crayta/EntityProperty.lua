@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------------------------------
 --- Similar to string, but localisable. Uses a Text type at runtime.
 ---
---- @shape EntityProperty : BaseProperty
+--- @shape EntityProperty : Property<Primitive>
 --- @alias EntityPropertyType "Character"|"User"|"Mesh"|"Light"|"Sound"|"Effect"|"Voxels"|"Trigger"|"Locator"|"Camera"
 ---
 --- @field type  "entity"

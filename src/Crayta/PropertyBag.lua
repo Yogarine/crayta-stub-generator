@@ -1,7 +1,8 @@
 --------------------------------------------------------------------------------------------------------
 --- Used to define Script properties.
 ---
---- @alias PropertyBag Property[]
+--- @alias PropertyTypes NumberProperty|StringProperty|TextProperty|BooleanProperty|VectorProperty|Vector2DProperty|RotationProperty|EntityProperty|ColorProperty|EventProperty|AssetProperty
+--- @alias PropertyBag   PropertyTypes[]
 --- @type  PropertyBag
 --------------------------------------------------------------------------------------------------------
 local PropertyBag = {}
