@@ -31,17 +31,38 @@ class CraytaStubGenerator
     }
 
     /**
-     * @param  string  $targetDir
-     * @return void
+     * Returns the path to directory containing the static Crayta stubs.
+     *
+     * @return string  Absolute path to static Crayta stubs.
      */
-    public static function copyStaticStubs(string $targetDir): void
+    #[Pure]
+    public static function getStaticStubsDir(): string
     {
-        exec('cp -af "' . __DIR__ . "/../Crayta/\"*.lua \"{$targetDir}\"/");
+        return realpath(dirname(__DIR__) . "/Crayta");
     }
 
     /**
+     * Copy static Crayta stubs over to the provided target directory.
+     *
      * @param  string  $targetDir
      * @return void
+     */
+    public function copyStaticStubs(string $targetDir): void
+    {
+        self::ensureTargetDir($targetDir);
+
+        $staticStubsDir = escapeshellarg(self::getStaticStubsDir());
+        $targetDir      = escapeshellarg($targetDir);
+        exec("cp -af {$staticStubsDir}/*.lua {$targetDir}/");
+    }
+
+    /**
+     * Generates Crayta stubs in the provided target directory.
+     *
+     * @param  string  $targetDir
+     * @return void
+     *
+     * @throws \RuntimeException
      */
     public function generateStubs(string $targetDir): void
     {
@@ -50,97 +71,106 @@ class CraytaStubGenerator
 
         self::ensureTargetDir($targetDir);
 
-        if ($classNodes) {
-            foreach ($classNodes as $classNode) {
-                $moduleName    = $xPath->evaluate('string(div[@class="api-name"])', $classNode);
-                $moduleComment = $xPath->evaluate('string(div[@class="api-comment"])', $classNode);
+        if (! $classNodes) {
+            throw new \RuntimeException("Unable to find class nodes in HTML DOM.");
+        }
 
-                $module = new Module($moduleName, $extends[$moduleName] ?? null, $moduleComment);
+        foreach ($classNodes as $classNode) {
+            $moduleName    = $xPath->evaluate('string(div[@class="api-name"])', $classNode);
+            $moduleComment = $xPath->evaluate('string(div[@class="api-comment"])', $classNode);
 
-                /*
-                 * CONSTANTS
-                 */
-                foreach ($xPath->query('div[@class="api-constants"]/div[@class="api-constant"]', $classNode) as $node) {
-                    //$name    = trim($xPath->evaluate('string(span[@class="api-constant-name"])', $node));
-                    // TODO: get all child nodes to get elements with classes like `comment-bold`.
-                    $comment = trim($xPath->evaluate('string(span[@class="api-constant-comment"])', $node));
+            $module = new Module($moduleName, $extends[$moduleName] ?? null, $moduleComment);
 
-                    /** @var \DOMElement $usageNode */
-                    $usageNode = $xPath->query('span[@class="api-constant-usage"]', $node)->item(0);
+            /*
+             * CONSTANTS
+             */
+            foreach ($xPath->query('div[@class="api-constants"]/div[@class="api-constant"]', $classNode) as $node) {
+                //$name    = trim($xPath->evaluate('string(span[@class="api-constant-name"])', $node));
 
-                    /** @noinspection PhpUnusedLocalVariableInspection */
-                    [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
+                // TODO: get all child nodes to get elements with classes like `comment-bold`.
+                $comment = trim($xPath->evaluate('string(span[@class="api-constant-comment"])', $node));
 
-                    $module->addConstant(new Constant($type, $identifier, $comment));
-                }
+                /** @var \DOMElement $usageNode */
+                $usageNode = $xPath->query('span[@class="api-constant-usage"]', $node)->item(0);
 
-                /*
-                 * FIELDS
-                 */
-                foreach ($xPath->query('div[@class="api-parameters"]/div[@class="api-parameter"]', $classNode) as $node)
-                {
-                    //$name = trim($xPath->evaluate('string(span[@class="api-parameter-name"])', $node));
-                    // TODO: get all child nodes to get elements with classes like `comment-bold`.
-                    $comment = trim($xPath->evaluate('string(span[@class="api-parameter-comment"])', $node));
+                /** @noinspection PhpUnusedLocalVariableInspection */
+                [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
 
-                    /** @var \DOMElement $usageNode */
-                    $usageNode = $xPath->query('span[@class="api-parameter-usage"]', $node)->item(0);
-
-                    /** @noinspection PhpUnusedLocalVariableInspection */
-                    [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
-
-                    new Field($module, $type, $identifier, $comment);
-                }
-
-                /*
-                 * OVERRIDES
-                 */
-                foreach ($xPath->query('div[@class="api-overrides"]/div[@class="api-override"]', $classNode) as $node) {
-                    //$name = trim($xPath->evaluate('string(span[@class="api-override-name"])', $node));
-                    // TODO: get all child nodes to get elements with classes like `comment-bold`.
-                    $comment = trim($xPath->evaluate('string(span[@class="api-override-comment"])', $node));
-
-                    /** @var \DOMElement $usageNode */
-                    $usageNode = $xPath->query('span[@class="api-override-usage"]', $node)->item(0);
-
-                    /** @noinspection PhpUnusedLocalVariableInspection */
-                    [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
-
-                    new Field($module, $type, $identifier, $comment);
-                }
-
-                /*
-                 * FUNCTIONS
-                 */
-                $functionNodes =
-                    $xPath->query(
-                        'div[@class="api-functions" or @class="api-entrypoints"]/div[@class="api-function" or @class="api-entrypoint"]',
-                        $classNode
-                    );
-                foreach ($functionNodes as $node) {
-                    //$name = trim($xPath->evaluate('string(span[@class="api-function-name" or @class="api-entrypoint-name"])', $node));
-                    // TODO: get all child nodes to get elements with classes like `comment-bold`.
-                    $comment =
-                        trim(
-                            $xPath->evaluate(
-                                'string(span[@class="api-function-comment" or @class="api-entrypoint-comment"])',
-                                $node
-                            )
-                        );
-
-                    /** @var \DOMElement $usageNode */
-                    $usageNode =
-                        $xPath->query('span[@class="api-function-usage" or @class="api-entrypoint-usage"]', $node)
-                            ->item(0);
-                    [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
-
-                    $function = new LuaFunction($type, $identifier, $comment, $arguments);
-
-                    $module->addFunction($function);
-                }
-
-                file_put_contents("{$targetDir}/{$moduleName}.lua", $module->getCode());
+                $module->addConstant(new Constant($type, $identifier, $comment));
             }
+
+            /*
+             * FIELDS
+             */
+            foreach ($xPath->query('div[@class="api-parameters"]/div[@class="api-parameter"]', $classNode) as $node) {
+                //$name = trim($xPath->evaluate('string(span[@class="api-parameter-name"])', $node));
+
+                // TODO: get all child nodes to get elements with classes like `comment-bold`.
+                $comment = trim($xPath->evaluate('string(span[@class="api-parameter-comment"])', $node));
+
+                /** @var \DOMElement $usageNode */
+                $usageNode = $xPath->query('span[@class="api-parameter-usage"]', $node)->item(0);
+
+                /** @noinspection PhpUnusedLocalVariableInspection */
+                [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
+
+                new Field($module, $type, $identifier, $comment);
+            }
+
+            /*
+             * OVERRIDES
+             */
+            foreach ($xPath->query('div[@class="api-overrides"]/div[@class="api-override"]', $classNode) as $node) {
+                //$name = trim($xPath->evaluate('string(span[@class="api-override-name"])', $node));
+
+                // TODO: get all child nodes to get elements with classes like `comment-bold`.
+                $comment = trim($xPath->evaluate('string(span[@class="api-override-comment"])', $node));
+
+                /** @var \DOMElement $usageNode */
+                $usageNode = $xPath->query('span[@class="api-override-usage"]', $node)->item(0);
+
+                /** @noinspection PhpUnusedLocalVariableInspection */
+                [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
+
+                new Field($module, $type, $identifier, $comment);
+            }
+
+            /*
+             * FUNCTIONS
+             */
+            $functionNodes = $xPath->query(
+                'div[@class="api-functions" or @class="api-entrypoints"]' .
+                '/div[@class="api-function" or @class="api-entrypoint"]',
+                $classNode
+            );
+            foreach ($functionNodes as $node) {
+                //$name = trim(
+                //    $xPath->evaluate(
+                //        'string(span[@class="api-function-name" or @class="api-entrypoint-name"])',
+                //        $node
+                //    )
+                //);
+
+                // TODO: get all child nodes to get elements with classes like `comment-bold`.
+                $comment = trim(
+                    $xPath->evaluate(
+                        'string(span[@class="api-function-comment" or @class="api-entrypoint-comment"])',
+                        $node
+                    )
+                );
+
+                /** @var \DOMElement $usageNode */
+                $usageNode = $xPath
+                    ->query('span[@class="api-function-usage" or @class="api-entrypoint-usage"]', $node)
+                    ->item(0);
+                [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
+
+                $function = new LuaFunction($type, $identifier, $comment, $arguments);
+
+                $module->addFunction($function);
+            }
+
+            file_put_contents("{$targetDir}/{$moduleName}.lua", $module->getCode());
         }
     }
 
@@ -152,9 +182,19 @@ class CraytaStubGenerator
      */
     private static function ensureTargetDir(string $targetDir): void
     {
-        // Ensure stubs target is created.
-        if (! file_exists($targetDir) && ! mkdir($targetDir) && ! is_dir($targetDir)) {
-            throw new RuntimeException(sprintf('Directory "%s" was not created', $targetDir));
+        /**
+         * Ensure stubs target is created.
+         *
+         * @noinspection MkdirRaceConditionInspection
+         *               NotOptimalIfConditionsInspection
+         */
+        if (
+            (file_exists($targetDir) || ! mkdir($targetDir))
+            && ! is_dir($targetDir)
+        ) {
+            throw new RuntimeException(
+                sprintf('Directory "%s" was not created', $targetDir)
+            );
         }
     }
 
@@ -169,7 +209,10 @@ class CraytaStubGenerator
         $type = 'void';
 
         $sibling = $node->firstChild;
-        if ($sibling instanceof DOMElement && $sibling->getAttribute('class') === 'type') {
+        if (
+            $sibling instanceof DOMElement &&
+            $sibling->getAttribute('class') === 'type'
+        ) {
             $type    = $sibling->textContent;
             $sibling = $sibling->nextSibling;
         }

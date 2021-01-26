@@ -12,18 +12,67 @@ if (file_exists(__DIR__ . '/../../../autoload.php')) {
     require_once __DIR__ . '/../vendor/autoload.php';
 }
 
-$targetDir = getcwd() . '/stubs';
+$copy_static_stubs = true;
 
-$copyStaticStubs = true;
-if (in_array("--skip-static-stubs", $argv, true) || in_array("-S", $argv, true)) {
-    echo "Note: static stubs are not being copied over." . PHP_EOL;
-} else {
-    echo "Copying static Crayta stubs to '{$targetDir}'...";
-    CraytaStubGenerator::copyStaticStubs($targetDir);
+$options = getopt(
+    'hS',
+    [
+        'help',
+        'skip-static-stubs',
+    ],
+    $rest_index,
+);
+
+foreach ($options as $option) {
+    switch ($option) {
+        case 'skip-static-stubs':
+        case 'S':
+            $copy_static_stubs = false;
+            break;
+
+        case 'help':
+        case 'h':
+        default:
+            print_usage();
+            exit(0);
+    }
+}
+
+$craytaStubGenerator = new CraytaStubGenerator();
+
+$target_dir = getcwd() . '/stubs';
+if (
+    dirname(CraytaStubGenerator::getStaticStubsDir(), 2) === dirname($target_dir)
+) {
+    $copy_static_stubs = false;
+    echo "NOT copying static stubs to not taint our stubs directory." . PHP_EOL;
+}
+
+if ($copy_static_stubs) {
+    echo "Copying static Crayta stubs to '{$target_dir}'...";
+    $craytaStubGenerator->copyStaticStubs($target_dir);
     echo " Done!" . PHP_EOL;
 }
 
-echo "Generating Crayta stubs in {$targetDir}...";
-$craytaStubGenerator = new CraytaStubGenerator();
-$craytaStubGenerator->generateStubs($targetDir);
+echo "Generating Crayta stubs in {$target_dir}...";
+try {
+    $craytaStubGenerator->generateStubs($target_dir);
+} catch (RuntimeException $e) {
+    echo " Failed:" . PHP_EOL;
+    fwrite(STDERR, $e->getMessage() . PHP_EOL);
+
+    exit(1);
+}
 echo " Done!" . PHP_EOL;
+
+function print_usage(): void
+{
+    global $argv;
+
+    echo "Usage:  {$argv[0]} [--skip-static-stubs]" . PHP_EOL
+        . "        {$argv[0]} --help" . PHP_EOL
+        . PHP_EOL
+        . "  -S --skip-static-stubs        Skip copying static stubs" . PHP_EOL
+        . "  -h --help                     Show this help text" . PHP_EOL
+        . PHP_EOL;
+}
