@@ -108,10 +108,10 @@ class Field extends Variable
             'mesh' => 'VoxelMeshAsset',
         ],
         'Widget' => [
-            '[string]' => 'Script<Widget>|Widget',
+            '[string]' => 'table',
         ],
         'WidgetBindings' => [
-            '[string]' => 'Script<WidgetBindings>|Widget',
+            '[string]' => 'table',
         ],
         'World' => [
             'innerHorizon' => 'InnerHorizonAsset',
@@ -137,6 +137,7 @@ class Field extends Variable
         ],
         'Widget' => [
             'widget.var =' => true,
+            '[string]' => true,
         ],
         'WidgetBindings' => [
             'widgetBindings.var =' => true,
@@ -201,7 +202,7 @@ class Field extends Variable
      * @param  int  $lineLength
      * @return string
      */
-    #[Pure] public function getCommentBlock(
+    #[Pure] public function getCommentDocBlock(
         $lineLength = self::DEFAULT_LINE_LENGTH
     ): string {
         $field = str_pad(

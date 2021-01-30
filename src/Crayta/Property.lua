@@ -1,6 +1,8 @@
 --------------------------------------------------------------------------------------------------------
 --- @alias PropertyValue number|string|Text|boolean|Vector|Vector2D|Rotation|Primitive|Color|Event|Asset
----
+--------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------
 --- @shape Property<T : PropertyValue>
 --- @field name                           string      @The property name that will appear in the editor.
 --- @field tooltip                        string|nil  @A tooltip message that appears when hovering over

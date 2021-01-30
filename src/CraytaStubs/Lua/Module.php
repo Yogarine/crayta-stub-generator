@@ -182,7 +182,7 @@ class Module extends Variable
         $parameterDocTxt = '';
 
         foreach ($this->fields as $field) {
-            $parameterDocTxt .= $field->getCommentBlock();
+            $parameterDocTxt .= $field->getCommentDocBlock();
         }
 
         return $parameterDocTxt;
@@ -227,7 +227,7 @@ class Module extends Variable
     public function getCode(int $lineLength = self::DEFAULT_LINE_LENGTH): string
     {
         $classTxt = str_repeat("-", $lineLength) . "\n";
-        $classTxt .= $this->getCommentBlock();
+        $classTxt .= $this->getCommentDocBlock();
         $classTxt .= "--- @generated GENERATED CODE! DO NOT EDIT!\n";
         $classTxt .= "---\n";
         $classTxt .= "--- @class {$this->identifier}{$this->getGenerics()}"

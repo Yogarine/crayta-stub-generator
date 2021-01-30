@@ -9,11 +9,6 @@ namespace Yogarine\CraytaStubs\Lua;
  */
 class Argument extends Variable
 {
-    public const BUTTON_NAMES
-        = '"jump"|"crouch"|"interact"|"sprint"|"next"|'
-        . '"previous"|"primary"|"secondary"|"extra1"|'
-        . '"extra2"|"extra3"|"extra4"|"extra5"';
-
     public const CUSTOM_ARGUMENT_IDENTIFIERS = [
         'world:Raycast' => [
             'start' => 'startPosition',
@@ -27,6 +22,13 @@ class Argument extends Variable
         ],
         'camera:RevertClientProperty' => [
             'propertyName' => 'string',
+        ],
+        'character:PlayAction(actionName)' => [
+            'actionName' => 'string',
+        ],
+        'character:PlayAction(actionName, properties)' => [
+            'actionName' => '"Fire"',
+            'animationProperties' => 'AnimationProperties<nil>',
         ],
         'character:RevertClientProperty' => [
             'propertyName' => 'string',
@@ -83,16 +85,16 @@ class Argument extends Variable
             'callback' => 'fun(saveData: table): void',
         ],
         'Script:OnButtonPressed' => [
-            'buttonName' => self::BUTTON_NAMES,
+            'buttonName' => 'ButtonName',
         ],
         'Script:OnButtonReleased' => [
-            'buttonName' => self::BUTTON_NAMES,
+            'buttonName' => 'ButtonName',
         ],
         'Script:LocalOnButtonPressed' => [
-            'buttonName' => self::BUTTON_NAMES,
+            'buttonName' => 'ButtonName',
         ],
         'Script:LocalOnButtonReleased' => [
-            'buttonIndex' => self::BUTTON_NAMES,
+            'buttonIndex' => 'ButtonName',
         ],
         'sound:RevertClientProperty' => [
             'propertyName' => 'string',
@@ -161,10 +163,12 @@ class Argument extends Variable
      */
     public function parseIdentifier(string $identifier): string
     {
-        $function = $this->function->getIdentifier();
+        $function  = $this->function->getIdentifier();
+        $signature = $this->function->getSignature();
 
         $identifier = parent::parseIdentifier($identifier);
-        $identifier = self::CUSTOM_ARGUMENT_IDENTIFIERS[$function][$identifier]
+        $identifier = self::CUSTOM_ARGUMENT_IDENTIFIERS[$signature][$identifier]
+            ?? self::CUSTOM_ARGUMENT_IDENTIFIERS[$function][$identifier]
             ?? $identifier;
 
         return $identifier;
@@ -176,11 +180,14 @@ class Argument extends Variable
      */
     public function parseType(?string $type): ?string
     {
-        $function = $this->function->getIdentifier();
-        $argument = $this->identifier;
+        $function  = $this->function->getIdentifier();
+        $signature = $this->function->getSignature();
+        $argument  = $this->identifier;
 
         $type = parent::parseType($type);
-        $type = self::CUSTOM_ARGUMENT_TYPES[$function][$argument] ?? $type;
+        $type = self::CUSTOM_ARGUMENT_TYPES[$signature][$argument]
+            ?? self::CUSTOM_ARGUMENT_TYPES[$function][$argument]
+            ?? $type;
 
         return $type;
     }

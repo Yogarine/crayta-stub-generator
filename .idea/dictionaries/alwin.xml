@@ -1,9 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="alwin">
     <words>
+      <w>copysign</w>
       <w>crosshair</w>
       <w>hotbar</w>
       <w>interactable</w>
+      <w>lerp</w>
     </words>
   </dictionary>
 </component>

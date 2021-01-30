@@ -42,20 +42,37 @@ ExampleScript.Properties = {
 	},
 }
 
----This function is called on the server when this entity is created
+--- This function is called on the server when this entity is created
 function ExampleScript:Init()
-	local animData = {}
-	animData.playbackSpeed = 2.0
-	animData.events = {
-		IsReloadComplete = function()
-			Print("Checking if full")
-			return self.bullets == self.properties.maxBullets
-		end,
-		AmmoAdded        = function()
-			self.bullets = self.bullets + 1
-			Print("Added Bullets, current ammo = " .. self.bullets)
-		end
+	local entity = self:GetEntity()
+	local scriptOrWidget = entity.foo
+	local scriptEntity = scriptOrWidget:GetEntity()
+	scriptOrWidget:Show()
+	local speedMultiplier = scriptEntity.speedMultiplier
+
+	local foo = self.properties.vector
+end
+
+function ExampleScript:PlayReloadAnimation()
+	--- @type AnimationProperties<ReloadAnimationEvents>
+	local animData = {
+		playbackSpeed = 2.0,
+		events        = {
+			IsReloadComplete = function()
+				Print("Checking if full")
+				return self.bullets == self.properties.maxBullets
+			end,
+			AmmoAdded        = function()
+				self.bullets = self.bullets + 1
+				Print("Added Bullets, current ammo = " .. self.bullets)
+			end,
+			Foo              = function()
+				self.bullets = self.bullets + 1
+				Print("Added Bullets, current ammo = " .. self.bullets)
+			end,
+		}
 	}
+
 	self:GetEntity():PlayAction("Reload", animData)
 end
 

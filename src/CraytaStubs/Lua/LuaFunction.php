@@ -13,6 +13,19 @@ class LuaFunction extends Variable
         'scriptComponent:GetEntity' => 'T',
     ];
 
+    public const OVERLOADS = [
+        'character:PlayAction(actionName, properties)' => [
+            'fun('
+            . 'actionName: "Melee",  '
+            . 'properties: AnimationProperties<MeleeAnimationEvents>' .
+            ')',
+            'fun('
+            . 'actionName: "Reload",  '
+            . 'properties: AnimationProperties<ReloadAnimationEvents>' .
+            ')',
+        ],
+    ];
+
     /**
      * @var \Yogarine\CraytaStubs\Lua\Argument[]
      */
@@ -86,13 +99,41 @@ class LuaFunction extends Variable
         return $maxLength;
     }
 
+    public function getSignature(): string
+    {
+        $argTxt = implode(', ', $this->getArgumentIdentifiers());
+
+        return "{$this->getIdentifier()}({$argTxt})";
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getArgumentIdentifiers(): array
+    {
+        $arg = [];
+
+        foreach ($this->arguments as $argument) {
+            $arg[] = $argument->getIdentifier();
+        }
+
+        return $arg;
+    }
+
     /**
      * @return string
      */
-    public function getFunctionCode(): string
+    public function getArgumentDocBlock(): string
     {
         $doc = [];
-        $arg = [];
+
+        $overloads = self::OVERLOADS[$this->getSignature()]
+            ?? self::OVERLOADS[$this->getIdentifier()]
+            ?? [];
+
+        foreach ($overloads as $overload) {
+            $doc[] = " @overload {$overload}";
+        }
 
         $maxIdentifierLength = $this->getMaxArgumentIdentifierLength();
 
@@ -106,18 +147,22 @@ class LuaFunction extends Variable
                 );
                 $doc[]      = " @param  {$identifier}  {$argument->getType()}";
             }
-
-            $arg[] = $argument->getIdentifier();
         }
         $doc[] = " @return {$this->getType()}";
 
-        $argTxt = implode(', ', $arg);
+        return '---' . implode("\n---", $doc) . "\n";;
+    }
 
+    /**
+     * @return string
+     */
+    public function getFunctionCode(): string
+    {
         $functionsTxt = "----\n";
-        $functionsTxt .= $this->getCommentBlock();
-        $functionsTxt .= '---' . implode("\n---", $doc) . "\n";
+        $functionsTxt .= $this->getCommentDocBlock();
+        $functionsTxt .= $this->getArgumentDocBlock();
         $functionsTxt .= "----\n";
-        $functionsTxt .= "function {$this->getIdentifier()}({$argTxt})";
+        $functionsTxt .= "function {$this->getSignature()}";
 
         if ('void' !== $this->type) {
             $types = explode(',', $this->type);
@@ -125,10 +170,10 @@ class LuaFunction extends Variable
             foreach ($types as $key => $type) {
                 $types[$key] = 'nil';
             }
-            $functionsTxt .= ' return ' . implode(', ', $types);
+            $functionsTxt .= "\n\treturn " . implode(', ', $types);
         }
 
-        $functionsTxt .= " end\n\n";
+        $functionsTxt .= "\nend\n\n";
 
         return $functionsTxt;
     }

@@ -108,7 +108,7 @@ abstract class Variable
     /**
      * @return string
      */
-    public function getCommentBlock(): string
+    public function getCommentDocBlock(): string
     {
         $result = '';
 
