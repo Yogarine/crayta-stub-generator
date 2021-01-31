@@ -91,7 +91,7 @@ class Field extends Variable
             'mesh' => 'MeshAsset',
         ],
         'Properties' => [
-            '[string]' => 'PropertyValue',
+            '[string]' => 'PropertyValue|PropertyArray<PropertyValue>',
         ],
         'PropertyArray' => [
             '[number]' => 'T',

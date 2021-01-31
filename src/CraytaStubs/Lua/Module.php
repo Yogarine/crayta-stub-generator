@@ -48,6 +48,13 @@ class Module extends Variable
         'Script' => '<T : Entity>',
     ];
 
+    public const ANNOTATIONS = [
+        'PropertyArray' => self::ANNOTATION_SHAPE,
+    ];
+
+    protected const ANNOTATION_CLASS = 'class';
+    protected const ANNOTATION_SHAPE = 'shape';
+
     /**
      * Identifier used only for the local declaration of the module.
      *
@@ -133,7 +140,8 @@ class Module extends Variable
     public function addConstant(Constant $constant): void
     {
         $this->constants[$constant->getIdentifier()] = $constant;
-        $localModuleIdentifier                       = $constant->getLocalModuleIdentifier();
+
+        $localModuleIdentifier = $constant->getLocalModuleIdentifier();
 
         if (
             null !== $localModuleIdentifier &&
@@ -164,7 +172,8 @@ class Module extends Variable
     public function addField(Field $field): void
     {
         $this->fields[$field->getIdentifier()] = $field;
-        $localModuleIdentifier                 = $field->getLocalModuleIdentifier();
+
+        $localModuleIdentifier = $field->getLocalModuleIdentifier();
 
         if (
             null !== $localModuleIdentifier &&
@@ -226,11 +235,14 @@ class Module extends Variable
      */
     public function getCode(int $lineLength = self::DEFAULT_LINE_LENGTH): string
     {
+        $identifier = $this->identifier;
+        $annotation = self::ANNOTATIONS[$identifier] ?? self::ANNOTATION_CLASS;
+
         $classTxt = str_repeat("-", $lineLength) . "\n";
         $classTxt .= $this->getCommentDocBlock();
         $classTxt .= "--- @generated GENERATED CODE! DO NOT EDIT!\n";
         $classTxt .= "---\n";
-        $classTxt .= "--- @class {$this->identifier}{$this->getGenerics()}"
+        $classTxt .= "--- @{$annotation} {$identifier}{$this->getGenerics()}"
             . (isset($this->type) ? " : {$this->type}" : '') . "\n";
         $classTxt .= $this->getFieldCommentBlocks();
         $classTxt .= str_repeat("-", $lineLength) . "\n";
