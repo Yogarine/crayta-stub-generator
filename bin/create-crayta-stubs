@@ -20,7 +20,7 @@ $options = getopt(
         'help',
         'skip-static-stubs',
     ],
-    $rest_index,
+    $rest_index
 );
 
 foreach ($options as $option) {
@@ -65,7 +65,10 @@ try {
 }
 echo " Done!" . PHP_EOL;
 
-function print_usage(): void
+/**
+ * @return void
+ */
+function print_usage()
 {
     global $argv;
 
