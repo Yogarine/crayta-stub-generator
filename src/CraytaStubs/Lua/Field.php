@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Yogarine\CraytaStubs\Lua;
 
-use JetBrains\PhpStorm\Pure;
-
 class Field extends Variable
 {
-    public const TYPE_MAPPING = [
+    const TYPE_MAPPING = [
         'bool' => 'boolean',
         'float' => 'number',
         'int' => 'number',
@@ -22,7 +20,7 @@ class Field extends Variable
         'Script' => 'Script<Entity>',
     ];
 
-    public const CUSTOM_IDENTIFIERS = [
+    const CUSTOM_IDENTIFIERS = [
         'Camera' => [
             'camera.var' => '[string]',
         ],
@@ -67,7 +65,7 @@ class Field extends Variable
         ],
     ];
 
-    public const CUSTOM_TYPES = [
+    const CUSTOM_TYPES = [
         'Camera' => [
             '[string]' => 'Script<Camera>|Widget',
         ],
@@ -119,7 +117,7 @@ class Field extends Variable
         ],
     ];
 
-    public const SKIP_FIELDS = [
+    const SKIP_FIELDS = [
         'Sound' => [
             'sound.var' => true,
         ],
@@ -147,17 +145,19 @@ class Field extends Variable
     /**
      * @var \Yogarine\CraytaStubs\Lua\Module
      */
-    private Module $module;
+    private $module;
 
     /**
      * @param  \Yogarine\CraytaStubs\Lua\Module  $module
      * @param  string|null                       $type
      * @param  string                            $identifier
      * @param  string                            $comment
+     *
+     * @noinspection PhpOptionalBeforeRequiredParametersInspection
      */
     public function __construct(
         Module $module,
-        ?string $type,
+        string $type = null,
         string $identifier,
         string $comment
     ) {
@@ -177,8 +177,10 @@ class Field extends Variable
     /**
      * @param  string|null  $type
      * @return string|null
+     *
+     * @noinspection PhpMissingReturnTypeInspection
      */
-    public function parseType(?string $type): ?string
+    public function parseType(string $type = null)
     {
         $module = $this->module->getIdentifier();
 
@@ -202,7 +204,7 @@ class Field extends Variable
      * @param  int  $lineLength
      * @return string
      */
-    #[Pure] public function getCommentDocBlock(
+    public function getCommentDocBlock(
         $lineLength = self::DEFAULT_LINE_LENGTH
     ): string {
         $field = str_pad(

@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Yogarine\CraytaStubs\Lua;
 
-use JetBrains\PhpStorm\Pure;
-
 class LuaFunction extends Variable
 {
-    public const CUSTOM_RETURN_TYPES = [
+    const CUSTOM_RETURN_TYPES = [
         'scriptComponent:GetProperties' => 'Properties',
         'scriptComponent:GetEntity' => 'T',
     ];
 
-    public const OVERLOADS = [
+    const OVERLOADS = [
         'character:PlayAction(actionName, properties)' => [
             'fun('
             . 'actionName: "Melee",  '
@@ -29,7 +27,7 @@ class LuaFunction extends Variable
     /**
      * @var \Yogarine\CraytaStubs\Lua\Argument[]
      */
-    protected array $arguments = [];
+    protected $arguments = [];
 
     /**
      * LuaFunction constructor.
@@ -57,8 +55,10 @@ class LuaFunction extends Variable
     /**
      * @param  string|null  $type
      * @return string|null
+     *
+     * @noinspection PhpMissingReturnTypeInspection
      */
-    public function parseType(?string $type): ?string
+    public function parseType(string $type = null)
     {
         $type = parent::parseType($type);
         $type = self::CUSTOM_RETURN_TYPES[$this->identifier] ?? $type;
@@ -76,8 +76,9 @@ class LuaFunction extends Variable
 
     /**
      * @param  \Yogarine\CraytaStubs\Lua\Argument  $argument
+     * @return void
      */
-    public function addArgument(Argument $argument): void
+    public function addArgument(Argument $argument)
     {
         $this->arguments[$argument->getIdentifier()] = $argument;
     }
@@ -85,7 +86,7 @@ class LuaFunction extends Variable
     /**
      * @return int
      */
-    #[Pure] public function getMaxArgumentIdentifierLength(): int
+    public function getMaxArgumentIdentifierLength(): int
     {
         $maxLength = 0;
         foreach ($this->arguments as $argument) {
@@ -99,6 +100,9 @@ class LuaFunction extends Variable
         return $maxLength;
     }
 
+    /**
+     * @return string
+     */
     public function getSignature(): string
     {
         $argTxt = implode(', ', $this->getArgumentIdentifiers());
@@ -150,7 +154,7 @@ class LuaFunction extends Variable
         }
         $doc[] = " @return {$this->getType()}";
 
-        return '---' . implode("\n---", $doc) . "\n";;
+        return '---' . implode("\n---", $doc) . "\n";
     }
 
     /**

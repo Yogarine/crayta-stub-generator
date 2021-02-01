@@ -7,7 +7,6 @@ namespace Yogarine\CraytaStubs;
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
-use JetBrains\PhpStorm\Pure;
 use RuntimeException;
 use Yogarine\CraytaStubs\Lua\Constant;
 use Yogarine\CraytaStubs\Lua\Field;
@@ -21,7 +20,7 @@ class CraytaStubGenerator
      *
      * @var \DOMDocument
      */
-    private DOMDocument $document;
+    private $document;
 
     public function __construct()
     {
@@ -35,7 +34,6 @@ class CraytaStubGenerator
      *
      * @return string  Absolute path to static Crayta stubs.
      */
-    #[Pure]
     public static function getStaticStubsDir(): string
     {
         return realpath(dirname(__DIR__) . "/Crayta");
@@ -47,7 +45,7 @@ class CraytaStubGenerator
      * @param  string  $targetDir
      * @return void
      */
-    public function copyStaticStubs(string $targetDir): void
+    public function copyStaticStubs(string $targetDir)
     {
         self::ensureTargetDir($targetDir);
 
@@ -64,7 +62,7 @@ class CraytaStubGenerator
      *
      * @throws \RuntimeException
      */
-    public function generateStubs(string $targetDir): void
+    public function generateStubs(string $targetDir)
     {
         $xPath      = new DOMXPath($this->document);
         $classNodes = $xPath->query('//*[@id="api-doc"]/*[@class="api"]');
@@ -93,8 +91,7 @@ class CraytaStubGenerator
                 /** @var \DOMElement $usageNode */
                 $usageNode = $xPath->query('span[@class="api-constant-usage"]', $node)->item(0);
 
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
+                list($type, $identifier, $arguments) = self::parseUsageNode($usageNode);
 
                 $module->addConstant(new Constant($type, $identifier, $comment));
             }
@@ -111,8 +108,7 @@ class CraytaStubGenerator
                 /** @var \DOMElement $usageNode */
                 $usageNode = $xPath->query('span[@class="api-parameter-usage"]', $node)->item(0);
 
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
+                list($type, $identifier, $arguments) = self::parseUsageNode($usageNode);
 
                 new Field($module, $type, $identifier, $comment);
             }
@@ -129,8 +125,7 @@ class CraytaStubGenerator
                 /** @var \DOMElement $usageNode */
                 $usageNode = $xPath->query('span[@class="api-override-usage"]', $node)->item(0);
 
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
+                list($type, $identifier, $arguments) = self::parseUsageNode($usageNode);
 
                 new Field($module, $type, $identifier, $comment);
             }
@@ -163,7 +158,7 @@ class CraytaStubGenerator
                 $usageNode = $xPath
                     ->query('span[@class="api-function-usage" or @class="api-entrypoint-usage"]', $node)
                     ->item(0);
-                [$type, $identifier, $arguments] = self::parseUsageNode($usageNode);
+                list($type, $identifier, $arguments) = self::parseUsageNode($usageNode);
 
                 $function = new LuaFunction($type, $identifier, $comment, $arguments);
 
@@ -180,7 +175,7 @@ class CraytaStubGenerator
      *
      * @throws \RuntimeException
      */
-    private static function ensureTargetDir(string $targetDir): void
+    private static function ensureTargetDir(string $targetDir)
     {
         /**
          * Ensure stubs target is created.
@@ -201,10 +196,8 @@ class CraytaStubGenerator
     /**
      * @param  \DOMElement  $node
      * @return array
-     *
-     * @noinspection PhpPureFunctionMayProduceSideEffectsInspection
      */
-    #[Pure] private static function parseUsageNode(\DOMElement $node): array
+    private static function parseUsageNode(\DOMElement $node): array
     {
         $type = 'void';
 
@@ -217,7 +210,7 @@ class CraytaStubGenerator
             $sibling = $sibling->nextSibling;
         }
 
-        [$identifier] = explode('(', $sibling->textContent, 2);
+        list($identifier) = explode('(', $sibling->textContent, 2);
 
         $arguments = [];
         while ($sibling = $sibling->nextSibling) {
@@ -228,7 +221,7 @@ class CraytaStubGenerator
                 $sibling      = $sibling->nextSibling;
             }
 
-            [$argumentName] = explode(')', $sibling->textContent, 2);
+            list($argumentName) = explode(')', $sibling->textContent, 2);
             $argumentName = trim($argumentName, ", \t\n\r\0\x0B");
 
             $arguments[$argumentName] = $argumentType;

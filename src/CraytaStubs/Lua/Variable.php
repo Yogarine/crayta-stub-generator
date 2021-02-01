@@ -6,7 +6,7 @@ namespace Yogarine\CraytaStubs\Lua;
 
 abstract class Variable
 {
-    public const TYPE_MAPPING = [
+    const TYPE_MAPPING = [
         'bool' => 'boolean',
         'float' => 'number',
         'int' => 'number',
@@ -20,7 +20,7 @@ abstract class Variable
         'Script' => 'Script<Entity>',
     ];
 
-    public const IDENTIFIER_REPLACE = [
+    const IDENTIFIER_REPLACE = [
         'entityOrNill' => 'entity',
         'function ' => '',
         'voxelComponent:' => 'voxelMesh:',
@@ -28,24 +28,24 @@ abstract class Variable
         'trigger:' => 'triggerComponent:',
     ];
 
-    public const DEFAULT_LINE_LENGTH = 104;
+    const DEFAULT_LINE_LENGTH = 104;
 
-    private const REGEX = '/^(?:function )?([^.:]+):/';
+    const REGEX = '/^(?:function )?([^.:]+):/';
 
     /**
      * @var string|null
      */
-    protected ?string $type;
+    protected $type;
 
     /**
      * @var string
      */
-    protected string $identifier;
+    protected $identifier;
 
     /**
      * @var string
      */
-    protected string $comment;
+    protected $comment;
 
     /**
      * Variable constructor.
@@ -53,9 +53,11 @@ abstract class Variable
      * @param  string|null  $type
      * @param  string       $identifier
      * @param  string       $comment
+     *
+     * @noinspection PhpOptionalBeforeRequiredParametersInspection
      */
     public function __construct(
-        ?string $type,
+        string $type = null,
         string $identifier,
         string $comment
     ) {
@@ -74,8 +76,10 @@ abstract class Variable
     /**
      * @param  string|null  $type
      * @return string|null
+     *
+     * @noinspection PhpMissingReturnTypeInspection
      */
-    public function parseType(?string $type): ?string
+    public function parseType(string $type = null)
     {
         return static::TYPE_MAPPING[$type] ?? $type;
     }
@@ -131,8 +135,10 @@ abstract class Variable
 
     /**
      * @return string|null
+     *
+     * @noinspection PhpMissingReturnTypeInspection
      */
-    public function getLocalModuleIdentifier(): ?string
+    public function getLocalModuleIdentifier()
     {
         if (preg_match(self::REGEX, $this->identifier, $matches)) {
             return trim($matches[1]);

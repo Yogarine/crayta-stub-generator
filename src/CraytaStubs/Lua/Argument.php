@@ -9,14 +9,14 @@ namespace Yogarine\CraytaStubs\Lua;
  */
 class Argument extends Variable
 {
-    public const CUSTOM_ARGUMENT_IDENTIFIERS = [
+    const CUSTOM_ARGUMENT_IDENTIFIERS = [
         'world:Raycast' => [
             'start' => 'startPosition',
             'end' => 'endPosition',
         ],
     ];
 
-    public const CUSTOM_ARGUMENT_TYPES = [
+    const CUSTOM_ARGUMENT_TYPES = [
         'Analytics.PlayerHealthCritical' => [
             'playerOrUser' => 'Character|User',
         ],
@@ -115,7 +115,8 @@ class Argument extends Variable
             'propertyName' => 'string',
         ],
         'world:Raycast' => [
-            'collisionCallback' => 'fun(entity: Entity, hitResult: HitResult): void',
+            'collisionCallback' =>
+                'fun(entity: Entity, hitResult: HitResult): void',
         ],
         'world:ForEachUser' => [
             'callback' => 'fun(user: User, ...): void',
@@ -128,7 +129,7 @@ class Argument extends Variable
     /**
      * @var \Yogarine\CraytaStubs\Lua\LuaFunction
      */
-    private LuaFunction $function;
+    private $function;
 
     /**
      * Argument constructor.
@@ -136,19 +137,20 @@ class Argument extends Variable
      * @param  \Yogarine\CraytaStubs\Lua\LuaFunction  $function
      * @param  string|null                            $type
      * @param  string                                 $identifier
+     *
+     * @noinspection PhpOptionalBeforeRequiredParametersInspection
      */
     public function __construct(
         LuaFunction $function,
-        ?string $type,
+        string $type = null,
         string $identifier
     ) {
         $this->function = $function;
 
-        $identifier = match ($identifier) {
-            'function' => 'callback',
-            'varArgs' => '...',
-            default => $identifier,
-        };
+        $identifier = [
+                'function' => 'callback',
+                'varArgs' => '...',
+            ][$identifier] ?? $identifier;
 
         if ('…' === $type) {
             $identifier = '...';
@@ -177,8 +179,10 @@ class Argument extends Variable
     /**
      * @param  string|null  $type
      * @return string|null
+     *
+     * @noinspection PhpMissingReturnTypeInspection
      */
-    public function parseType(?string $type): ?string
+    public function parseType(string $type = null)
     {
         $function  = $this->function->getIdentifier();
         $signature = $this->function->getSignature();

@@ -1,7 +1,10 @@
 {
     "name": "yogarine/crayta-stubs",
     "description": "Lua stubs for Crayta",
-    "keywords": ["Crayta", "stubs"],
+    "keywords": [
+        "Crayta",
+        "stubs"
+    ],
     "type": "library",
     "homepage": "https://github.com/Yogarine/crayta-stubs",
     "minimum-stability": "stable",
@@ -20,7 +23,7 @@
         }
     },
     "require": {
-        "php": ">=8",
+        "php": ">=7",
         "ext-dom": "*",
         "ext-libxml": "*"
     },

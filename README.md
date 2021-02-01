@@ -4,13 +4,13 @@ Lua stub generator for the Crayta API Docs
 
 ## Requirements:
 
-- PHP 8.0 or higher
-- Composer
+- PHP 7.0 or higher (https://www.php.net/manual/en/install.php)
+- Composer (https://getcomposer.org/download/)
 
 ## Installation
 
-Add this package to your project by running `compose require yogarine/crayta-stubs` or install it globally using
-`compose global require yogarine/crayta-stubs`.
+Add this package to your project by running `composer require yogarine/crayta-stubs` or install it globally using
+`composer global require yogarine/crayta-stubs`.
 
 ## Usage
 

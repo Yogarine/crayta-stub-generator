@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Yogarine\CraytaStubs\Lua;
 
-use JetBrains\PhpStorm\Pure;
-
 class Module extends Variable
 {
-    public const EXTENDS = [
+    const EXTENDS = [
         'Camera' => 'Entity',
         'Character' => 'Entity',
         'ColorGradingAsset' => 'Asset',
@@ -36,46 +34,46 @@ class Module extends Variable
         'WorldAsset' => 'Asset',
     ];
 
-    public const EXTRA_FIELDS = [
+    const EXTRA_FIELDS = [
         'Script' => [
             'properties' => 'Properties',
             'Properties' => 'PropertyBag',
         ],
     ];
 
-    public const GENERICS = [
+    const GENERICS = [
         'PropertyArray' => '<T>',
         'Script' => '<T : Entity>',
     ];
 
-    public const ANNOTATIONS = [
+    const ANNOTATIONS = [
         'PropertyArray' => self::ANNOTATION_SHAPE,
     ];
 
-    protected const ANNOTATION_CLASS = 'class';
-    protected const ANNOTATION_SHAPE = 'shape';
+    const ANNOTATION_CLASS = 'class';
+    const ANNOTATION_SHAPE = 'shape';
 
     /**
      * Identifier used only for the local declaration of the module.
      *
      * @var string
      */
-    private string $localIdentifier;
+    private $localIdentifier;
 
     /**
      * @var \Yogarine\CraytaStubs\Lua\Constant[]
      */
-    private array $constants;
+    private $constants;
 
     /**
      * @var \Yogarine\CraytaStubs\Lua\Field[]
      */
-    private array $fields;
+    private $fields;
 
     /**
      * @var \Yogarine\CraytaStubs\Lua\LuaFunction[]
      */
-    private array $functions;
+    private $functions;
 
     /**
      * @param  string                                   $identifier
@@ -127,8 +125,10 @@ class Module extends Variable
 
     /**
      * @return string|null
+     *
+     * @noinspection PhpMissingReturnTypeInspection
      */
-    #[Pure] public function getLocalModuleIdentifier(): ?string
+    public function getLocalModuleIdentifier()
     {
         return $this->getLocalIdentifier();
     }
@@ -137,7 +137,7 @@ class Module extends Variable
      * @param  \Yogarine\CraytaStubs\Lua\Constant  $constant
      * @return void
      */
-    public function addConstant(Constant $constant): void
+    public function addConstant(Constant $constant)
     {
         $this->constants[$constant->getIdentifier()] = $constant;
 
@@ -169,7 +169,7 @@ class Module extends Variable
      * @param  \Yogarine\CraytaStubs\Lua\Field  $field
      * @return void
      */
-    public function addField(Field $field): void
+    public function addField(Field $field)
     {
         $this->fields[$field->getIdentifier()] = $field;
 
@@ -186,7 +186,7 @@ class Module extends Variable
     /**
      * @return string
      */
-    #[Pure] public function getFieldCommentBlocks(): string
+    public function getFieldCommentBlocks(): string
     {
         $parameterDocTxt = '';
 
@@ -201,7 +201,7 @@ class Module extends Variable
      * @param  \Yogarine\CraytaStubs\Lua\LuaFunction  $function
      * @return void
      */
-    public function addFunction(LuaFunction $function): void
+    public function addFunction(LuaFunction $function)
     {
         $this->functions[] = $function;
 
@@ -266,7 +266,7 @@ class Module extends Variable
     /**
      * @return int
      */
-    #[Pure] public function getMaxFieldIdentifierLength(): int
+    public function getMaxFieldIdentifierLength(): int
     {
         $maxLength = 0;
 
@@ -283,7 +283,7 @@ class Module extends Variable
     /**
      * @return int
      */
-    #[Pure] public function getMaxFieldTypeLength(): int
+    public function getMaxFieldTypeLength(): int
     {
         $maxLength = 0;
 
@@ -301,7 +301,7 @@ class Module extends Variable
     /**
      * @return int
      */
-    #[Pure] public function getMaxCombinedFieldLength(): int
+    public function getMaxCombinedFieldLength(): int
     {
         $maxLength = 0;
 
