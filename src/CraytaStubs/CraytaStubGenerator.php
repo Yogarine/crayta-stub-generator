@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @author    Alwin Garside <alwin@garsi.de>
+ * @copyright 2021 Alwin Garside
+ * @license   MIT
+ */
+
 declare(strict_types=1);
 
 namespace Yogarine\CraytaStubs;

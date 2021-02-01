@@ -14,5 +14,5 @@ Add this package to your project by running `composer require yogarine/crayta-st
 
 ## Usage
 
-Run `vendor/bin/create-crayta-stubs` from your project dir, or `create-crayta-stubs` if installed publicly, to generate
+Run `vendor/bin/create-crayta-stubs` from your project dir, or `create-crayta-stubs` if installed globally, to generate
 the stubs. They will be placed in the `stubs` subdirectory of the current working directory.

@@ -9,7 +9,7 @@
     "homepage": "https://github.com/Yogarine/crayta-stubs",
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "license": "BSD-2-Clause",
+    "license": "MIT",
     "authors": [
         {
             "name": "Alwin Garside",
