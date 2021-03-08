@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
---- @alias PropertyValue number|string|Text|boolean|Vector|Vector2D|Rotation|Primitive|Color|Event|Asset
+--- @alias PropertyValue number|string|Text|boolean|Vector|Vector2D|Rotation|Entity|Primitive|Color|Event|Asset
 --------------------------------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------------------------------

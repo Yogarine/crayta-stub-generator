@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
---- @alias AssetPropertyType "meshasset"|"soundasset"|"effectasset"|"voxelmeshasset"|"templateasset"|"voxelasset"|"worldasset"|"scriptasset"|"widgetasset"|"skydomeasset"|"innerhorizonasset"|"outerhorizonasset"|"gripasset"|"colorgradingasset"|"postprocessasset"|"skymeshasset"|"skylayerasset"
+--- @alias AssetPropertyType "meshasset"|"soundasset"|"effectasset"|"voxelmeshasset"|"voxelasset"|"worldasset"|"scriptasset"|"widgetasset"|"skydomeasset"|"innerhorizonasset"|"outerhorizonasset"|"gripasset"|"colorgradingasset"|"postprocessasset"|"skymeshasset"|"skylayerasset"|"vibrationeffectasset"
 ---
 --- @shape AssetProperty : Property<Asset>
 --- @field type  AssetPropertyType
