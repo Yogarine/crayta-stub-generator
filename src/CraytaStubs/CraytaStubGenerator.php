@@ -149,7 +149,7 @@ class CraytaStubGenerator
          *               NotOptimalIfConditionsInspection
          */
         if (
-            (file_exists($targetDir) || ! mkdir($targetDir))
+            (file_exists($targetDir) || ! mkdir($targetDir, 0777, true))
             && ! is_dir($targetDir)
         ) {
             throw new RuntimeException(
