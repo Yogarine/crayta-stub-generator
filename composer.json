@@ -1,12 +1,12 @@
 {
-    "name": "yogarine/crayta-stubs",
+    "name": "yogarine/crayta-stub-generator",
     "description": "Lua stubs for Crayta",
     "keywords": [
         "Crayta",
         "stubs"
     ],
     "type": "library",
-    "homepage": "https://github.com/Yogarine/crayta-stubs",
+    "homepage": "https://github.com/Yogarine/crayta-stub-generator",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "license": "MIT",

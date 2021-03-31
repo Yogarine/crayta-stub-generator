@@ -123,8 +123,12 @@ abstract class Variable
         $result = '';
 
         if ($this->comment) {
-            $parts    = explode('.', $this->comment, 2);
-            $parts[0] .= '.';
+            $parts = explode('. ', $this->comment, 2);
+            if (count($parts) === 1) {
+                $parts = explode("\n", $this->comment, 2);
+            } else {
+                $parts[0] .= '.';
+            }
 
             foreach ($parts as $part) {
                 if ($part) {

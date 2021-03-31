@@ -12,6 +12,7 @@ namespace Yogarine\CraytaStubs;
 
 use DOMDocument;
 use DOMElement;
+use DOMNode;
 use DOMXPath;
 use RuntimeException;
 use Yogarine\CraytaStubs\Lua\Constant;
@@ -22,17 +23,19 @@ use Yogarine\CraytaStubs\Lua\Module;
 class CraytaStubGenerator
 {
     /**
-     * Contains the Crayta API docs HTML DOM.
-     *
-     * @var \DOMDocument
+     * @var \DOMXPath
      */
-    private $document;
+    private $xPath;
 
     public function __construct()
     {
-        libxml_use_internal_errors(true);
-        $this->document = new DOMDocument();
-        $this->document->loadHTMLFile("https://developer.crayta.com/api-docs/");
+        $filename = dirname(__DIR__, 2) . '/LuaDocs/LuaApi.xml';
+
+        $document          = new DOMDocument();
+        $document->recover = true;
+        $document->load($filename, LIBXML_NOWARNING | LIBXML_NOERROR);
+
+        $this->xPath = new DOMXPath($document);
     }
 
     /**
@@ -70,34 +73,27 @@ class CraytaStubGenerator
      */
     public function generateStubs(string $targetDir)
     {
-        $xPath      = new DOMXPath($this->document);
-        $classNodes = $xPath->query('//*[@id="api-doc"]/*[@class="api"]');
+        $xPath       = $this->xPath;
+        $apiVersion  = $xPath->evaluate('string(/apidocs/@version)');
+        $apiNodeList = $xPath->query('/apidocs/apidoc');
 
-        self::ensureTargetDir($targetDir);
-
-        if (! $classNodes) {
+        if (! $apiNodeList || 0 === $apiNodeList->length) {
             throw new \RuntimeException("Unable to find class nodes in HTML DOM.");
         }
 
-        foreach ($classNodes as $classNode) {
-            $moduleName    = $xPath->evaluate('string(div[@class="api-name"])', $classNode);
-            $moduleComment = $xPath->evaluate('string(div[@class="api-comment"])', $classNode);
+        self::ensureTargetDir($targetDir);
 
-            $module = new Module($moduleName, $extends[$moduleName] ?? null, $moduleComment);
+        foreach ($apiNodeList as $apiNode) {
+            $moduleName    = $xPath->evaluate('string(@name)', $apiNode);
+            $moduleComment = $xPath->evaluate('string(comment)', $apiNode);
+
+            $module = new Module($moduleName, $extends[$moduleName] ?? null, $moduleComment, $apiVersion);
 
             /*
              * CONSTANTS
              */
-            foreach ($xPath->query('div[@class="api-constants"]/div[@class="api-constant"]', $classNode) as $node) {
-                //$name    = trim($xPath->evaluate('string(span[@class="api-constant-name"])', $node));
-
-                // TODO: get all child nodes to get elements with classes like `comment-bold`.
-                $comment = trim($xPath->evaluate('string(span[@class="api-constant-comment"])', $node));
-
-                /** @var \DOMElement $usageNode */
-                $usageNode = $xPath->query('span[@class="api-constant-usage"]', $node)->item(0);
-
-                list($type, $identifier, $arguments) = self::parseUsageNode($usageNode);
+            foreach ($xPath->query('constants/constant', $apiNode) as $node) {
+                list($type, $identifier, $arguments, $comment) = $this->parseNode($node);
 
                 $module->addConstant(new Constant($type, $identifier, $comment));
             }
@@ -105,16 +101,8 @@ class CraytaStubGenerator
             /*
              * FIELDS
              */
-            foreach ($xPath->query('div[@class="api-parameters"]/div[@class="api-parameter"]', $classNode) as $node) {
-                //$name = trim($xPath->evaluate('string(span[@class="api-parameter-name"])', $node));
-
-                // TODO: get all child nodes to get elements with classes like `comment-bold`.
-                $comment = trim($xPath->evaluate('string(span[@class="api-parameter-comment"])', $node));
-
-                /** @var \DOMElement $usageNode */
-                $usageNode = $xPath->query('span[@class="api-parameter-usage"]', $node)->item(0);
-
-                list($type, $identifier, $arguments) = self::parseUsageNode($usageNode);
+            foreach ($xPath->query('parameters/parameter', $apiNode) as $node) {
+                list($type, $identifier, $arguments, $comment) = $this->parseNode($node);
 
                 new Field($module, $type, $identifier, $comment);
             }
@@ -122,16 +110,8 @@ class CraytaStubGenerator
             /*
              * OVERRIDES
              */
-            foreach ($xPath->query('div[@class="api-overrides"]/div[@class="api-override"]', $classNode) as $node) {
-                //$name = trim($xPath->evaluate('string(span[@class="api-override-name"])', $node));
-
-                // TODO: get all child nodes to get elements with classes like `comment-bold`.
-                $comment = trim($xPath->evaluate('string(span[@class="api-override-comment"])', $node));
-
-                /** @var \DOMElement $usageNode */
-                $usageNode = $xPath->query('span[@class="api-override-usage"]', $node)->item(0);
-
-                list($type, $identifier, $arguments) = self::parseUsageNode($usageNode);
+            foreach ($xPath->query('overrides/override', $apiNode) as $node) {
+                list($type, $identifier, $arguments, $comment) = $this->parseNode($node);
 
                 new Field($module, $type, $identifier, $comment);
             }
@@ -140,34 +120,13 @@ class CraytaStubGenerator
              * FUNCTIONS
              */
             $functionNodes = $xPath->query(
-                'div[@class="api-functions" or @class="api-entrypoints"]' .
-                '/div[@class="api-function" or @class="api-entrypoint"]',
-                $classNode
+                '*[self::functions or self::entrypoints]/*[self::function or self::entrypoint]',
+                $apiNode
             );
             foreach ($functionNodes as $node) {
-                //$name = trim(
-                //    $xPath->evaluate(
-                //        'string(span[@class="api-function-name" or @class="api-entrypoint-name"])',
-                //        $node
-                //    )
-                //);
-
-                // TODO: get all child nodes to get elements with classes like `comment-bold`.
-                $comment = trim(
-                    $xPath->evaluate(
-                        'string(span[@class="api-function-comment" or @class="api-entrypoint-comment"])',
-                        $node
-                    )
-                );
-
-                /** @var \DOMElement $usageNode */
-                $usageNode = $xPath
-                    ->query('span[@class="api-function-usage" or @class="api-entrypoint-usage"]', $node)
-                    ->item(0);
-                list($type, $identifier, $arguments) = self::parseUsageNode($usageNode);
+                list($type, $identifier, $arguments, $comment) = $this->parseNode($node);
 
                 $function = new LuaFunction($type, $identifier, $comment, $arguments);
-
                 $module->addFunction($function);
             }
 
@@ -197,6 +156,118 @@ class CraytaStubGenerator
                 sprintf('Directory "%s" was not created', $targetDir)
             );
         }
+    }
+
+    /**
+     * @param  \DOMNode  $node
+     * @return array
+     */
+    private function parseNode(DOMNode $node): array
+    {
+        $xPath = $this->xPath;
+
+//        $name       = trim($xPath->evaluate('string(@name)', $node));
+        $serverOnly = trim($xPath->evaluate('string(@serveronly)', $node)) === 'true';
+        $localOnly  = trim($xPath->evaluate('string(@localonly)', $node)) === 'true';
+        $usage      = $xPath->evaluate('string(usage)', $node);
+        $comment    = trim($this->xPath->evaluate('string(comment)', $node));
+
+        if ($serverOnly || $localOnly) {
+            $comment .= "\n\n";
+            $notes   = [];
+
+            if ($serverOnly) {
+                $notes[] = "Server Only";
+            }
+
+            if ($localOnly) {
+                $notes[] = "Local Only";
+            }
+
+            $comment .= implode(', ', $notes);
+            $comment = trim($comment);
+        }
+
+        list($type, $identifier, $arguments) = self::parseUsage($usage);
+
+        foreach ($xPath->query('info', $node) as $infoNode) {
+            $returnType = $xPath->evaluate('string(@returntype)', $infoNode);
+            $static     = $xPath->evaluate('string(@static)', $infoNode) === 'true';
+
+            if ($returnType) {
+                $type = $returnType;
+            }
+
+            foreach ($xPath->query('args/arg', $infoNode) as $argNode) {
+                $argumentType = $xPath->evaluate('string(@type)', $argNode);
+                $argumentName = $xPath->evaluate('string(@name)', $argNode);
+
+                if ($argumentType && $argumentName) {
+                    $arguments[$argumentName] = $argumentType;
+                }
+            }
+        }
+
+        return [
+            $type,
+            $identifier,
+            $arguments,
+            $comment,
+        ];
+    }
+
+    /**
+     * @param  string  $usage
+     * @return array
+     */
+    private static function parseUsage(string $usage): array
+    {
+        $matched = preg_match(
+            '/^'
+            . '(?:(?<assignment>[a-z_][a-z0-9_.]*\s*=)\s*)?'
+            . '(?:(?<type>[a-z_][a-z0-9_,\/]*)\s+)?'
+            . '(?<identifier>(?:[+\-*\/]|[a-z_][a-z0-9_:.]*))'
+            . '(?:\('
+            . '(?<arguments>[^)]+)?'
+            . '\).*)?'
+            . '$/i',
+            $usage,
+            $matches
+        );
+
+        if (! $matched) {
+            throw new RuntimeException("Unable to parse usage '{$usage}'");
+        }
+
+        $type       = $matches['type'] ?: 'void';
+        $identifier = $matches['assignment'] ?: $matches['identifier'];
+
+        $arguments = [];
+        if ($matches['arguments']) {
+            $argumentsMatched = preg_match_all(
+                '/'
+                . '(?:(?<argumentType>(?:\.{3}|[a-z_][a-z0-9\/_]*))\s+)?'
+                . '(?<argumentName>[a-z_][a-z0-9_.]*)(?:,\s*)?'
+                . '/i',
+                $matches['arguments'],
+                $argumentsMatches,
+                PREG_SET_ORDER
+            );
+
+            if (! $argumentsMatched) {
+                throw new RuntimeException("Unable to parse arguments '{$matches['arguments']}'");
+            }
+
+            foreach ($argumentsMatches as $key => $argumentSet) {
+                $argumentType = $argumentSet['argumentType'] ?: 'any';
+                $argumentName = $argumentSet['argumentName'];
+                $argumentName = trim($argumentName, ", \t\n\r\0\x0B");
+
+                $arguments[$argumentName] = $argumentType;
+            }
+        }
+
+        return [$type, $identifier, $arguments];
     }
 
     /**

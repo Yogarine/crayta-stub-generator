@@ -1,12 +1,17 @@
 <component name="ProjectDictionaryState">
   <dictionary name="alwin">
     <words>
+      <w>apidoc</w>
+      <w>apidocs</w>
       <w>copysign</w>
       <w>crosshair</w>
       <w>garside</w>
       <w>hotbar</w>
       <w>interactable</w>
       <w>lerp</w>
+      <w>localonly</w>
+      <w>returntype</w>
+      <w>serveronly</w>
       <w>vibrationeffectasset</w>
     </words>
   </dictionary>

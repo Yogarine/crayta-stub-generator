@@ -1,0 +1,132 @@
+<apidocs version="0.6.106.99988">
+    <apidoc name="Globals">
+        <comment></comment>
+        <functions>
+            <function name="IsInSchedule">
+                <usage>bool IsInSchedule()</usage>
+                <info returntype="bool">
+                    <args></args>
+                </info>
+                <comment></comment>
+            </function>
+            <function name="Wait">
+                <usage>number Wait(number time)</usage>
+                <info returntype="number" static="true">
+                    <args>
+                        <arg type="number" name="time"/>
+                    </args>
+                </info>
+                <comment>Wait for at least given time interval in seconds then
+                    resume execution, and return the exact time taken which is =
+                    Time seconds. Only valid within a Schedule function
+                </comment>
+            </function>
+            <function name="Wait">
+                <usage>number Wait()</usage>
+                <info returntype="number" static="true">
+                    <args></args>
+                </info>
+                <comment>Wait a single frame then resume execution, and return
+                    the time taken. Only valid within a Schedule function.
+                    Within a Schedule function this is how you implement a loop
+                    to make something happen every frame and give you a delta of
+                    time between the frames for smooth animation.
+                </comment>
+            </function>
+            <function name="print">
+                <usage>print(... varArgs)</usage>
+                <info static="true">
+                    <args>
+                        <arg type="..." name="varArgs"/>
+                    </args>
+                </info>
+                <comment>Standard print function (same as Print), takes a comma
+                    separated list of arguments and prints out their string
+                    representation.
+                </comment>
+            </function>
+            <function name="Print">
+                <usage>Print(... varArgs)</usage>
+                <info static="true">
+                    <args>
+                        <arg type="..." name="varArgs"/>
+                    </args>
+                </info>
+                <comment>Standard print function (same as print), takes a comma
+                    separated list of arguments and prints out their string
+                    representation.
+                </comment>
+            </function>
+            <function name="printf">
+                <usage>printf(string format, ... varArgs)</usage>
+                <info static="true">
+                    <args>
+                        <arg type="string" name="format"/>
+                        <arg type="..." name="varArgs"/>
+                    </args>
+                </info>
+                <comment>This print function replaces instances of {1} with the
+                    first argument passed in, {2} with the second etc (same as
+                    Printf).
+                </comment>
+            </function>
+            <function name="Printf">
+                <usage>Printf(string format, ... varArgs)</usage>
+                <info static="true">
+                    <args>
+                        <arg type="string" name="format"/>
+                        <arg type="..." name="varArgs"/>
+                    </args>
+                </info>
+                <comment>This print function replaces instances of {1} with the
+                    first argument passed in, {2} with the second etc (same as
+                    printf).
+                </comment>
+            </function>
+            <function name="FormatString">
+                <usage>string FormatString(string format, ... varArgs)</usage>
+                <info returntype="string" static="true">
+                    <args>
+                        <arg type="string" name="format"/>
+                        <arg type="..." name="varArgs"/>
+                    </args>
+                </info>
+                <comment>Format a string using either {1}, {2}, etc or using
+                    named variables.
+                </comment>
+            </function>
+            <function name="ScreenPrint" supported="false">
+                <usage>ScreenPrint(... varArgs)</usage>
+                <info static="true">
+                    <args>
+                        <arg type="..." name="varArgs"/>
+                    </args>
+                </info>
+                <comment></comment>
+            </function>
+            <function name="GetWorld">
+                <usage>World GetWorld()</usage>
+                <info returntype="World">
+                    <args></args>
+                </info>
+                <comment>Get the World object</comment>
+            </function>
+            <function name="IsClient">
+                <usage>bool IsClient()</usage>
+                <info returntype="bool">
+                    <args></args>
+                </info>
+                <comment>Return true if this script is running on the client
+                </comment>
+            </function>
+            <function name="IsServer">
+                <usage>bool IsServer()</usage>
+                <info returntype="bool">
+                    <args></args>
+                </info>
+                <comment>Return true if this script is running on the server
+                </comment>
+            </function>
+        </functions>
+    </apidoc>
+</apidocs>

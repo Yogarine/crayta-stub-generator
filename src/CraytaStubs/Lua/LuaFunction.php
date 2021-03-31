@@ -12,6 +12,21 @@ namespace Yogarine\CraytaStubs\Lua;
 
 class LuaFunction extends Variable
 {
+    const TYPE_MAPPING = [
+        'bool' => 'boolean',
+        'float' => 'number',
+        'int' => 'number',
+        'mesh' => 'Mesh',
+        'object' => 'table',
+        'unhandled/int64' => 'number',
+        'unhandled/UPZPropertyBag' => 'Properties',
+        'unknown' => 'void',
+        'vector' => 'Vector',
+        'voxelmesh' => 'VoxelMesh',
+        'Script' => 'Script<Entity>',
+        'function' => 'void',
+    ];
+
     const CUSTOM_RETURN_TYPES = [
         'scriptComponent:GetProperties' => 'Properties',
         'scriptComponent:GetEntity' => 'T',

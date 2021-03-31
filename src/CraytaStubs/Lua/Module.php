@@ -33,6 +33,7 @@ class Module extends Variable
         'Template' => 'Asset',
         'Trigger' => 'Entity',
         'User' => 'Entity',
+        'VibrationEffectAsset' => 'Asset',
         'VoxelMesh' => 'Entity',
         'VoxelMeshAsset' => 'Asset',
         'VoxelAsset' => 'Asset',
@@ -67,6 +68,13 @@ class Module extends Variable
     private $localIdentifier;
 
     /**
+     * Crayta API Version that this Module applies to.
+     *
+     * @var string
+     */
+    private $apiVersion;
+
+    /**
      * @var \Yogarine\CraytaStubs\Lua\Constant[]
      */
     private $constants;
@@ -85,14 +93,18 @@ class Module extends Variable
      * @param  string                                   $identifier
      * @param  string|null                              $type
      * @param  string                                   $comment
+     * @param  string                                   $apiVersion
      * @param  \Yogarine\CraytaStubs\Lua\Constant[]     $constants
      * @param  \Yogarine\CraytaStubs\Lua\Field[]        $fields
      * @param  \Yogarine\CraytaStubs\Lua\LuaFunction[]  $functions
+     *
+     * @noinspection PhpOptionalBeforeRequiredParametersInspection
      */
     public function __construct(
         string $identifier,
         string $type = null,
-        string $comment = '',
+        string $comment,
+        string $apiVersion,
         array $constants = [],
         array $fields = [],
         array $functions = []
@@ -102,6 +114,7 @@ class Module extends Variable
         parent::__construct($type, $identifier, $comment);
 
         $this->localIdentifier = $identifier;
+        $this->apiVersion      = $apiVersion;
         $this->constants       = $constants;
         $this->fields          = $fields;
         $this->functions       = $functions;
@@ -247,6 +260,7 @@ class Module extends Variable
         $classTxt = str_repeat("-", $lineLength) . "\n";
         $classTxt .= $this->getCommentDocBlock();
         $classTxt .= "--- @generated GENERATED CODE! DO NOT EDIT!\n";
+        $classTxt .= "--- @version {$this->apiVersion}\n";
         $classTxt .= "---\n";
         $classTxt .= "--- @{$annotation} {$identifier}{$this->getGenerics()}"
             . (isset($this->type) ? " : {$this->type}" : '') . "\n";

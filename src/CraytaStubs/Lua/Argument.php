@@ -158,7 +158,7 @@ class Argument extends Variable
                 'varArgs' => '...',
             ][$identifier] ?? $identifier;
 
-        if ('…' === $type) {
+        if ('…' === $type || '...' === $type) {
             $identifier = '...';
         }
 

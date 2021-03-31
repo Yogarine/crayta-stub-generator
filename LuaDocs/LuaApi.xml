@@ -1,0 +1,2600 @@
+<apidocs version="0.6.106.99988">
+  <apidoc name="Globals">
+    <comment></comment>
+    <functions>
+      <function name="IsInSchedule">
+        <usage>bool IsInSchedule()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="Wait">
+        <usage>number Wait(number time)</usage>
+        <info returntype="number" static="true"><args><arg type="number" name="time"/></args></info>
+        <comment>Wait for at least given time interval in seconds then resume execution, and return the exact time taken which is = Time seconds. Only valid within a Schedule function</comment>
+      </function>
+      <function name="Wait">
+        <usage>number Wait()</usage>
+        <info returntype="number" static="true"><args></args></info>
+        <comment>Wait a single frame then resume execution, and return the time taken. Only valid within a Schedule function. Within a Schedule function this is how you implement a loop to make something happen every frame and give you a delta of time between the frames for smooth animation.</comment>
+      </function>
+      <function name="print">
+        <usage>print(... varArgs)</usage>
+        <info static="true"><args><arg type="..." name="varArgs"/></args></info>
+        <comment>Standard print function (same as Print), takes a comma separated list of arguments and prints out their string representation.</comment>
+      </function>
+      <function name="Print">
+        <usage>Print(... varArgs)</usage>
+        <info static="true"><args><arg type="..." name="varArgs"/></args></info>
+        <comment>Standard print function (same as print), takes a comma separated list of arguments and prints out their string representation.</comment>
+      </function>
+      <function name="printf">
+        <usage>printf(string format, ... varArgs)</usage>
+        <info static="true"><args><arg type="string" name="format"/><arg type="..." name="varArgs"/></args></info>
+        <comment>This print function replaces instances of {1} with the first argument passed in, {2} with the second etc (same as Printf).</comment>
+      </function>
+      <function name="Printf">
+        <usage>Printf(string format, ... varArgs)</usage>
+        <info static="true"><args><arg type="string" name="format"/><arg type="..." name="varArgs"/></args></info>
+        <comment>This print function replaces instances of {1} with the first argument passed in, {2} with the second etc (same as printf).</comment>
+      </function>
+      <function name="FormatString">
+        <usage>string FormatString(string format, ... varArgs)</usage>
+        <info returntype="string" static="true"><args><arg type="string" name="format"/><arg type="..." name="varArgs"/></args></info>
+        <comment>Format a string using either {1}, {2}, etc or using named variables.</comment>
+      </function>
+      <function name="ScreenPrint" supported="false">
+        <usage>ScreenPrint(... varArgs)</usage>
+        <info static="true"><args><arg type="..." name="varArgs"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GetWorld">
+        <usage>World GetWorld()</usage>
+        <info returntype="World"><args></args></info>
+        <comment>Get the World object</comment>
+      </function>
+      <function name="IsClient">
+        <usage>bool IsClient()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment>Return true if this script is running on the client</comment>
+      </function>
+      <function name="IsServer">
+        <usage>bool IsServer()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment>Return true if this script is running on the server</comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="math">
+    <comment></comment>
+    <functions>
+      <function name="lerp">
+        <usage>number math.lerp(number a, number b, number alpha)</usage>
+        <info returntype="number" static="true"><args><arg type="number" name="a"/><arg type="number" name="b"/><arg type="number" name="alpha"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="sign">
+        <usage>number math.sign(number value)</usage>
+        <info returntype="number" static="true"><args><arg type="number" name="value"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="copysign">
+        <usage>number math.copysign(number value, number sign)</usage>
+        <info returntype="number" static="true"><args><arg type="number" name="value"/><arg type="number" name="sign"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="clamp">
+        <usage>number math.clamp(number value, number min, number max)</usage>
+        <info returntype="number" static="true"><args><arg type="number" name="value"/><arg type="number" name="min"/><arg type="number" name="max"/></args></info>
+        <comment></comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="Analytics">
+    <comment></comment>
+    <functions>
+      <function name="SendTelemetry">
+        <usage>Analytics.SendTelemetry(Entity entity, string type, table parametersTable)</usage>
+        <info static="true"><args><arg type="Entity" name="entity"/><arg type="string" name="type"/><arg type="table" name="parametersTable"/></args></info>
+        <comment>Send an type of telemetry event to the telemetry server with the given entity and parametersTable for later analysis. (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+      <function name="SendTelemetry">
+        <usage>Analytics.SendTelemetry(string type, table parametersTable)</usage>
+        <info static="true"><args><arg type="string" name="type"/><arg type="table" name="parametersTable"/></args></info>
+        <comment>Send an type of telemetry event to the telemetry server with the given parametersTable for later analysis. (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+      <function name="MatchStarted">
+        <usage>Handle Analytics.MatchStarted()</usage>
+        <info returntype="Handle"><args></args></info>
+        <comment>Send a MatchStarted event for later analysis. It is up to the game to define what a match is, for example a single round of a game might be defined as a match. Returns a handle that can be passed to MatchEnded to define the match start and end. (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+      <function name="MatchEnded">
+        <usage>Analytics.MatchEnded(Handle matchHandle)</usage>
+        <info static="true"><args><arg type="Handle" name="matchHandle"/></args></info>
+        <comment>Send a MatchEnded event for later analysis. (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+      <function name="MatchEnded">
+        <usage>Analytics.MatchEnded(Handle matchHandle, table userEntriesTable)</usage>
+        <info static="true"><args><arg type="Handle" name="matchHandle"/><arg type="table" name="userEntriesTable"/></args></info>
+        <comment>Send a MatchEnded event for later analysis. Takes a table with an entry per user with a 'user' and 'rank' value (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+      <function name="Attacked">
+        <usage>Analytics.Attacked(Entity attacker, Entity victim)</usage>
+        <info static="true"><args><arg type="Entity" name="attacker"/><arg type="Entity" name="victim"/></args></info>
+        <comment>Send an Attacked event for later analysis. When an attack entity attack another victim entity. Should be recorded when an attack makes contact or impacts a player or entity. (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+      <function name="Attacked">
+        <usage>Analytics.Attacked(Entity attacker, Entity victim, Entity weapon)</usage>
+        <info static="true"><args><arg type="Entity" name="attacker"/><arg type="Entity" name="victim"/><arg type="Entity" name="weapon"/></args></info>
+        <comment>Send an Attacked event for later analysis. When an attack entity attack another victim entity. Should be recorded when an attack makes contact or impacts a player or entity. (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+      <function name="Defeated">
+        <usage>Analytics.Defeated(Entity attacker, Entity victim)</usage>
+        <info static="true"><args><arg type="Entity" name="attacker"/><arg type="Entity" name="victim"/></args></info>
+        <comment>Send a Defeated event for later analysis. When a player or entity is defeated. (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+      <function name="PlayerHealthCritical">
+        <usage>Analytics.PlayerHealthCritical(Entity playerOrUser)</usage>
+        <info static="true"><args><arg type="Entity" name="playerOrUser"/></args></info>
+        <comment>Send a PlayerHealthCritical event for later analysis. When a players health is critically low. (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="Asset">
+    <comment></comment>
+    <functions>
+      <function name="GetName">
+        <usage>string asset:GetName()</usage>
+        <info returntype="string"><args></args></info>
+        <comment>Get the debug name of this asset, this is the develoer name and not a player facing localised Text.</comment>
+      </function>
+      <function name="GetIcon">
+        <usage>string asset:GetIcon()</usage>
+        <info returntype="string"><args></args></info>
+        <comment>Get a string which when passed as the src attribute of an HTML img tag will display the icon from this mesh or voxel asset.</comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="VoxelAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="Template">
+    <comment></comment>
+    <functions>
+      <function name="Find">
+        <usage>Template Template.Find(string name)</usage>
+        <info returntype="Template" static="true"><args><arg type="string" name="name"/></args></info>
+        <comment>Find a Template in the world by name. Returns nil if not found. Alternative to World:FindTemplate()</comment>
+      </function>
+      <function name="FindScriptProperty">
+        <usage>object templateAsset:FindScriptProperty(string propertyName)</usage>
+        <info returntype="object"><args><arg type="string" name="propertyName"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="FindScriptProperties">
+        <usage>unhandled/UPZPropertyBag templateAsset:FindScriptProperties(string scriptName)</usage>
+        <info returntype="unhandled/UPZPropertyBag"><args><arg type="string" name="scriptName"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="FindScriptProperties">
+        <usage>unhandled/UPZPropertyBag templateAsset:FindScriptProperties(ScriptAsset script)</usage>
+        <info returntype="unhandled/UPZPropertyBag"><args><arg type="ScriptAsset" name="script"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="FindAllScriptProperties">
+        <usage>table templateAsset:FindAllScriptProperties(string scriptName)</usage>
+        <info returntype="table"><args><arg type="string" name="scriptName"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="FindAllScriptProperties">
+        <usage>table templateAsset:FindAllScriptProperties(ScriptAsset script)</usage>
+        <info returntype="table"><args><arg type="ScriptAsset" name="script"/></args></info>
+        <comment></comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="MeshAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="EffectAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="SoundAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="GripAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="VoxelMeshAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="PostProcessAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="ColorGradingAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="SkydomeAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="InnerHorizonAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="OuterHorizonAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="SkyMeshAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="WorldAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="ScriptAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="WidgetAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="VibrationEffectAsset">
+    <comment></comment>
+  </apidoc>
+  <apidoc name="Camera">
+    <comment>Camera is a physical entity which provides a camera that a User can set with SetCamera. Camera derives from Entity so if you have a Camera you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Camera) to see if a particular entity variable is a Camera type entity.</comment>
+    <parameters>
+      <parameter name="fov">
+        <usage>number fov</usage>
+        <comment>Field of view property of the camera</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+  <apidoc name="Character">
+    <comment>A Character is a type of Entity which provides additional features for a humanoid character model in the game. A Character can be controlled by a User. To get one from a User do user:GetPlayer(). Character derives from Entity so if you have a Character you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Character) to see if a particular entity variable is a Character type entity.</comment>
+    <functions>
+      <function name="Attach" deprecated="true" serveronly="true">
+        <usage>characterToAttachTo:Attach(Entity entityToAttach, string socketName)</usage>
+        <info><args><arg type="Entity" name="entityToAttach"/><arg type="string" name="socketName"/></args></info>
+        <comment>Attach an entity to this character using the given socketName (this is deprecated and will be removed, do entity:AttachTo(characterToAttachTo, socketName))</comment>
+      </function>
+      <function name="GetUser">
+        <usage>User character:GetUser()</usage>
+        <info returntype="User"><args></args></info>
+        <comment>Get the User entity which controls this Character</comment>
+      </function>
+      <function name="SetAlive" serveronly="true">
+        <usage>character:SetAlive(bool alive)</usage>
+        <info><args><arg type="bool" name="alive"/></args></info>
+        <comment>For a Player set it to be alive (true) or dead (false).</comment>
+      </function>
+      <function name="IsAlive">
+        <usage>bool character:IsAlive()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment>Get whether a Player is alive. Return false for non-Player.</comment>
+      </function>
+      <function name="GetLookAtPos" serveronly="true" localonly="true">
+        <usage>Vector character:GetLookAtPos()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get the point the player is looking at, for an action camera this is the same as User:GetCameraLookAtPos but for orbit style cameras it will be in front of the player</comment>
+      </function>
+      <function name="GetLookAt" serveronly="true" localonly="true">
+        <usage>Vector,Vector character:GetLookAt()</usage>
+        <info returntype="Vector,Vector"><args></args></info>
+        <comment>Return two values, the position of the player's virtual "eye" and the position the player is looking at. For an action camera this is the same as User:GetCameraLookAt but for an orbit style camera it will be the player's head position and what is in front of the player.</comment>
+      </function>
+      <function name="SetInputLocked" serveronly="true" localonly="true">
+        <usage>character:SetInputLocked(bool inputLocked)</usage>
+        <info><args><arg type="bool" name="inputLocked"/></args></info>
+        <comment>Lock player control</comment>
+      </function>
+      <function name="SetGrip">
+        <usage>character:SetGrip(GripAsset gripPresetAsset)</usage>
+        <info><args><arg type="GripAsset" name="gripPresetAsset"/></args></info>
+        <comment>Set the current grip animations used by this player.  Passing nil is the same as calling SetNoGrip()</comment>
+      </function>
+      <function name="SetNoGrip">
+        <usage>character:SetNoGrip()</usage>
+        <info><args></args></info>
+        <comment>Reverts the player back to the default 'unarmed' animations.  Can also be achieved by calling SetGrip(nil)</comment>
+      </function>
+      <function name="PlayAction">
+        <usage>character:PlayAction(string actionName, table properties)</usage>
+        <info><args><arg type="string" name="actionName"/><arg type="table" name="properties"/></args></info>
+        <comment>Play an animation action, with properties specifying how it should be played</comment>
+      </function>
+      <function name="PlayAction">
+        <usage>character:PlayAction(string actionName)</usage>
+        <info><args><arg type="string" name="actionName"/></args></info>
+        <comment>Play an animation action with default properties</comment>
+      </function>
+      <function name="HasAction">
+        <usage>bool character:HasAction(string actionName)</usage>
+        <info returntype="bool"><args><arg type="string" name="actionName"/></args></info>
+        <comment>Returns true if the current grip can perform this type of action</comment>
+      </function>
+      <function name="GetActions">
+        <usage>table character:GetActions()</usage>
+        <info returntype="table"><args></args></info>
+        <comment>Get the name of every available action for this grip type</comment>
+      </function>
+      <function name="GetActionEvents">
+        <usage>table character:GetActionEvents(string actionName)</usage>
+        <info returntype="table"><args><arg type="string" name="actionName"/></args></info>
+        <comment>Get the name of every event available event for an action</comment>
+      </function>
+      <function name="HasActionEvent">
+        <usage>bool character:HasActionEvent(string actionName, string eventName)</usage>
+        <info returntype="bool"><args><arg type="string" name="actionName"/><arg type="string" name="eventName"/></args></info>
+        <comment>Returns true if this action has an animation event of the specified name</comment>
+      </function>
+      <function name="GetPlayLength">
+        <usage>number character:GetPlayLength(string actionName)</usage>
+        <info returntype="number"><args><arg type="string" name="actionName"/></args></info>
+        <comment>Returns the length of an animation, in seconds, assuming a playbackSpeed of 1 is set</comment>
+      </function>
+      <function name="Launch">
+        <usage>character:Launch(Vector impulse)</usage>
+        <info><args><arg type="Vector" name="impulse"/></args></info>
+        <comment>Launch the character</comment>
+      </function>
+      <function name="GetInteraction" serveronly="true" localonly="true">
+        <usage>Entity,HitResult character:GetInteraction()</usage>
+        <info returntype="Entity,HitResult"><args></args></info>
+        <comment>Get whichever Entity you would interact with if you pressed interact</comment>
+      </function>
+      <function name="PlayVibrationEffect">
+        <usage>character:PlayVibrationEffect(VibrationEffectAsset vibrationEffect)</usage>
+        <info><args><arg type="VibrationEffectAsset" name="vibrationEffect"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="PlayManualVibration">
+        <usage>character:PlayManualVibration(number intensity, number duration, bool affectSmallMotors, bool affectLargeMotors)</usage>
+        <info><args><arg type="number" name="intensity"/><arg type="number" name="duration"/><arg type="bool" name="affectSmallMotors"/><arg type="bool" name="affectLargeMotors"/></args></info>
+        <comment></comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="speedMultiplier">
+        <usage>number speedMultiplier</usage>
+        <comment>Multiplier on movement speed (default is 1.0)</comment>
+      </parameter>
+      <parameter name="jumpHeightMultiplier">
+        <usage>number jumpHeightMultiplier</usage>
+        <comment>Multiplier on jump height (default is 1.0)</comment>
+      </parameter>
+      <parameter name="canSprint">
+        <usage>bool canSprint</usage>
+        <comment>Turn on or off ability to sprint</comment>
+      </parameter>
+      <parameter name="canJump">
+        <usage>bool canJump</usage>
+        <comment>Turn on or off ability to jump</comment>
+      </parameter>
+      <parameter name="displayDefaultNameTag">
+        <usage>bool displayDefaultNameTag</usage>
+        <comment>Turn on or off the default name tag</comment>
+      </parameter>
+      <parameter name="displayDefaultQuickChat">
+        <usage>bool displayDefaultQuickChat</usage>
+        <comment>Turn on or off the default overhead quick chat</comment>
+      </parameter>
+      <parameter name="canCrouch">
+        <usage>bool canCrouch</usage>
+        <comment>Turn on or off ability to crouch or go prone</comment>
+      </parameter>
+      <parameter name="interactionRange">
+        <usage>number interactionRange</usage>
+        <comment>Interaction range (from camera in cm)</comment>
+      </parameter>
+      <parameter name="cameraType">
+        <usage>number cameraType</usage>
+        <comment>Set the character camera type. 1 = Action, 2 = Orbit</comment>
+      </parameter>
+      <parameter name="forcedCameraPerspective">
+        <usage>number forcedCameraPerspective</usage>
+        <comment>Set restrictions on the action player camera perspective. 1 = No Restrictions, 2 = 1st Person Only, 3 = 3rd Person Only. (Default is 1)</comment>
+      </parameter>
+      <parameter name="canIronSight">
+        <usage>bool canIronSight</usage>
+        <comment>Will the action camera iron-sight on secondary press</comment>
+      </parameter>
+      <parameter name="thirdPersonFOV">
+        <usage>number thirdPersonFOV</usage>
+        <comment>FOV of the third person action camera</comment>
+      </parameter>
+      <parameter name="thirdPersonIronSightFOV">
+        <usage>number thirdPersonIronSightFOV</usage>
+        <comment>FOV of the third person action camera in Iron Sight mode</comment>
+      </parameter>
+      <parameter name="firstPersonFOV">
+        <usage>number firstPersonFOV</usage>
+        <comment>FOV of the third person action camera</comment>
+      </parameter>
+      <parameter name="firstPersonIronSightFOV">
+        <usage>number firstPersonIronSightFOV</usage>
+        <comment>FOV of the third person action camera in Iron Sight mode</comment>
+      </parameter>
+      <parameter name="ironSightLookSpeedMultiplier">
+        <usage>number ironSightLookSpeedMultiplier</usage>
+        <comment>Speed multiplier of the look controls in Iron Sight mode</comment>
+      </parameter>
+      <parameter name="cameraDistance">
+        <usage>number cameraDistance</usage>
+        <comment>Set the orbit camera max distance from the character</comment>
+      </parameter>
+      <parameter name="cameraPitch">
+        <usage>number cameraPitch</usage>
+        <comment>Set the orbit camera's pitch</comment>
+      </parameter>
+      <parameter name="cameraYaw">
+        <usage>number cameraYaw</usage>
+        <comment>Set the orbit camera's yaw</comment>
+      </parameter>
+      <parameter name="cameraLock">
+        <usage>bool cameraLock</usage>
+        <comment>Lock/Unlock the orbit camera</comment>
+      </parameter>
+      <parameter name="cameraCollisionEnabled">
+        <usage>bool cameraCollisionEnabled</usage>
+        <comment>Enable/Disable the camera's collision</comment>
+      </parameter>
+      <parameter name="damageEnabled">
+        <usage>bool damageEnabled</usage>
+        <comment>Turn on or off damage (ie calling of entry point OnDamaged).</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+  <apidoc name="Color">
+    <comment></comment>
+    <functions>
+      <function name="New">
+        <usage>Color.New(number red, number green, number blue, number alpha)</usage>
+        <info static="true"><args><arg type="number" name="red"/><arg type="number" name="green"/><arg type="number" name="blue"/><arg type="number" name="alpha"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="New">
+        <usage>Color.New(number red, number green, number blue)</usage>
+        <info static="true"><args><arg type="number" name="red"/><arg type="number" name="green"/><arg type="number" name="blue"/></args></info>
+        <comment></comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="red">
+        <usage>number red</usage>
+        <comment></comment>
+      </parameter>
+      <parameter name="green">
+        <usage>number green</usage>
+        <comment></comment>
+      </parameter>
+      <parameter name="blue">
+        <usage>number blue</usage>
+        <comment></comment>
+      </parameter>
+      <parameter name="alpha">
+        <usage>number alpha</usage>
+        <comment></comment>
+      </parameter>
+    </parameters>
+    <overrides>
+      <override name="to_string">
+        <usage>string tostring(Color var)</usage>
+        <comment></comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="Effect">
+    <comment>An Entity can have a single physical representation. ParticleSystem can be turned on and off with active (which is distinct to entity visible flag). Effect derives from Entity so if you have a Effect you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Effect) to see if a particular entity variable is a Effect type entity.</comment>
+    <parameters>
+      <parameter name="active">
+        <usage>bool active</usage>
+        <comment>Set whether the particle system is emitting particles or not.</comment>
+      </parameter>
+      <parameter name="effect">
+        <usage>EffectAsset effect</usage>
+        <comment>EffectAsset on this entity</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+  <apidoc name="Entity">
+    <comment>Entity is a physical item in the world, viewable in the world tree when editing the game. Entities contain any number of scripts and widgets, and can have a maximum of 1 "physical" component (mesh, light). Additionally there are two special types that derive from Entity (Player and User).</comment>
+    <functions>
+      <function name="IsValid">
+        <usage>bool entityOrNill:IsValid()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="IsA">
+        <usage>bool entity:IsA(table derivedType)</usage>
+        <info returntype="bool"><args><arg type="table" name="derivedType"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GetName">
+        <usage>string entity:GetName()</usage>
+        <info returntype="string"><args></args></info>
+        <comment>Get the name of this Entity.</comment>
+      </function>
+      <function name="GetWorld" deprecated="true">
+        <usage>World entity:GetWorld()</usage>
+        <info returntype="World"><args></args></info>
+        <comment>Get the World from an Entity (currently all entities in a game exist within the same World).</comment>
+      </function>
+      <function name="RevertClientProperty" clientonly="true">
+        <usage>entity:RevertClientProperty(string propertyName)</usage>
+        <info><args><arg type="string" name="propertyName"/></args></info>
+        <comment>Revert a property that's been changed on the client back to the server's value for it</comment>
+      </function>
+      <function name="SetPosition">
+        <usage>entity:SetPosition(Vector position)</usage>
+        <info><args><arg type="Vector" name="position"/></args></info>
+        <comment>Set the position of this Entity in 3D space.</comment>
+      </function>
+      <function name="AlterPosition">
+        <usage>number entity:AlterPosition(Vector position, number time)</usage>
+        <info returntype="number"><args><arg type="Vector" name="position"/><arg type="number" name="time"/></args></info>
+        <comment>Move from current to position over time.</comment>
+      </function>
+      <function name="AlterPosition">
+        <usage>number entity:AlterPosition(Vector fromPosition, Vector toPosition, number time)</usage>
+        <info returntype="number"><args><arg type="Vector" name="fromPosition"/><arg type="Vector" name="toPosition"/><arg type="number" name="time"/></args></info>
+        <comment>Move from fromPosition to toPosition over time.</comment>
+      </function>
+      <function name="GetPosition">
+        <usage>Vector entity:GetPosition()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get the position of this Entity.</comment>
+      </function>
+      <function name="SetRotation">
+        <usage>entity:SetRotation(Rotation rotation)</usage>
+        <info><args><arg type="Rotation" name="rotation"/></args></info>
+        <comment>Set the rotation of this Entity.</comment>
+      </function>
+      <function name="AlterRotation">
+        <usage>number entity:AlterRotation(Rotation rotation, number time)</usage>
+        <info returntype="number"><args><arg type="Rotation" name="rotation"/><arg type="number" name="time"/></args></info>
+        <comment>Rotate from current to rotation over time.</comment>
+      </function>
+      <function name="AlterRotation">
+        <usage>number entity:AlterRotation(Rotation fromRotation, Rotation toRotation, number time)</usage>
+        <info returntype="number"><args><arg type="Rotation" name="fromRotation"/><arg type="Rotation" name="toRotation"/><arg type="number" name="time"/></args></info>
+        <comment>Rotate from fromRotation to toRotation over time.</comment>
+      </function>
+      <function name="GetRotation">
+        <usage>Rotation entity:GetRotation()</usage>
+        <info returntype="Rotation"><args></args></info>
+        <comment>Get the rotation of this Entity.</comment>
+      </function>
+      <function name="SetRelativePosition">
+        <usage>entity:SetRelativePosition(Vector position)</usage>
+        <info><args><arg type="Vector" name="position"/></args></info>
+        <comment>Set the position of this Entity relative to whatever this entity is parented to.</comment>
+      </function>
+      <function name="AlterRelativePosition">
+        <usage>number entity:AlterRelativePosition(Vector position, number time)</usage>
+        <info returntype="number"><args><arg type="Vector" name="position"/><arg type="number" name="time"/></args></info>
+        <comment>Move from current to position over time relative to whatever this entity is parented to.</comment>
+      </function>
+      <function name="AlterRelativePosition">
+        <usage>number entity:AlterRelativePosition(Vector fromPosition, Vector toPosition, number time)</usage>
+        <info returntype="number"><args><arg type="Vector" name="fromPosition"/><arg type="Vector" name="toPosition"/><arg type="number" name="time"/></args></info>
+        <comment>Move from fromPosition to toPosition over time relative to whatever this entity is parented to.</comment>
+      </function>
+      <function name="GetRelativePosition">
+        <usage>Vector entity:GetRelativePosition()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get the position of this Entity relative to whatever this entity is parented to.</comment>
+      </function>
+      <function name="SetRelativeRotation">
+        <usage>entity:SetRelativeRotation(Rotation rotation)</usage>
+        <info><args><arg type="Rotation" name="rotation"/></args></info>
+        <comment>Set the rotation of this Entity relative to whatever this entity is parented to.</comment>
+      </function>
+      <function name="AlterRelativeRotation">
+        <usage>number entity:AlterRelativeRotation(Rotation rotation, number time)</usage>
+        <info returntype="number"><args><arg type="Rotation" name="rotation"/><arg type="number" name="time"/></args></info>
+        <comment>Rotate from current to rotation over time relative to whatever this entity is parented to.</comment>
+      </function>
+      <function name="AlterRelativeRotation">
+        <usage>number entity:AlterRelativeRotation(Rotation fromRotation, Rotation toRotation, number time)</usage>
+        <info returntype="number"><args><arg type="Rotation" name="fromRotation"/><arg type="Rotation" name="toRotation"/><arg type="number" name="time"/></args></info>
+        <comment>Rotate from fromRotation to toRotation over time relative to whatever this entity is parented to.</comment>
+      </function>
+      <function name="GetRelativeRotation">
+        <usage>Rotation entity:GetRelativeRotation()</usage>
+        <info returntype="Rotation"><args></args></info>
+        <comment>Get the rotation of this Entity relative to whatever this entity is parented to.</comment>
+      </function>
+      <function name="GetForward">
+        <usage>Vector entity:GetForward()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get the forward facing vector of an Entity from its rotation.</comment>
+      </function>
+      <function name="SetForward">
+        <usage>entity:SetForward(Vector forward)</usage>
+        <info><args><arg type="Vector" name="forward"/></args></info>
+        <comment>Set the rotation of an Entity to make its front face in a given direction.</comment>
+      </function>
+      <function name="SetForward">
+        <usage>entity:SetForward(Vector forward, Vector up)</usage>
+        <info><args><arg type="Vector" name="forward"/><arg type="Vector" name="up"/></args></info>
+        <comment>Set the rotation of an Entity to make its front face in a given direction, and its top point in another.</comment>
+      </function>
+      <function name="PlaySound">
+        <usage>Handle entity:PlaySound(SoundAsset sound)</usage>
+        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/></args></info>
+        <comment>Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound.</comment>
+      </function>
+      <function name="PlaySound">
+        <usage>Handle entity:PlaySound(SoundAsset sound, number fadeIn)</usage>
+        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/></args></info>
+        <comment>Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound. Fades in over the given fadeIn time.</comment>
+      </function>
+      <function name="PlaySound">
+        <usage>Handle entity:PlaySound(SoundAsset sound, number fadeIn, string groupName)</usage>
+        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/><arg type="string" name="groupName"/></args></info>
+        <comment>Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound. Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the given fadeIn time.</comment>
+      </function>
+      <function name="PlaySound2D">
+        <usage>Handle entity:PlaySound2D(SoundAsset sound)</usage>
+        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/></args></info>
+        <comment>Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds, stereo music stings, etc).</comment>
+      </function>
+      <function name="PlaySound2D">
+        <usage>Handle entity:PlaySound2D(SoundAsset sound, number fadeIn)</usage>
+        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/></args></info>
+        <comment>Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds, stereo music stings, etc). Fades in over the given fadeIn time.</comment>
+      </function>
+      <function name="PlaySound2D">
+        <usage>Handle entity:PlaySound2D(SoundAsset sound, number fadeIn, string groupName)</usage>
+        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/><arg type="string" name="groupName"/></args></info>
+        <comment>Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds, stereo music stings, etc). Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the given fadeIn time.</comment>
+      </function>
+      <function name="PlaySoundAtLocation">
+        <usage>Handle entity:PlaySoundAtLocation(Vector location, SoundAsset sound)</usage>
+        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="SoundAsset" name="sound"/></args></info>
+        <comment>Play a sound Asset on this Entity at the given location.</comment>
+      </function>
+      <function name="PlaySoundAtLocation">
+        <usage>Handle entity:PlaySoundAtLocation(Vector location, SoundAsset sound, number fadeIn)</usage>
+        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/></args></info>
+        <comment>Play a sound Asset on this Entity at the given location. Fades in over the given fadeIn time.</comment>
+      </function>
+      <function name="PlaySoundAtLocation">
+        <usage>Handle entity:PlaySoundAtLocation(Vector location, SoundAsset sound, number fadeIn, string groupName)</usage>
+        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/><arg type="string" name="groupName"/></args></info>
+        <comment>Play a sound Asset on this Entity at the given location. Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the given fadeIn time.</comment>
+      </function>
+      <function name="StopSound">
+        <usage>entity:StopSound(Handle soundHandle)</usage>
+        <info><args><arg type="Handle" name="soundHandle"/></args></info>
+        <comment>Given a sound Handle stop the sound on this Entity.</comment>
+      </function>
+      <function name="StopSound">
+        <usage>entity:StopSound(Handle soundHandle, number fadeOut)</usage>
+        <info><args><arg type="Handle" name="soundHandle"/><arg type="number" name="fadeOut"/></args></info>
+        <comment>Given a sound Handle stop the sound on this Entity. Fade the sound out over the given fadeOut time.</comment>
+      </function>
+      <function name="PlayEffect">
+        <usage>Handle entity:PlayEffect(EffectAsset effect)</usage>
+        <info returntype="Handle"><args><arg type="EffectAsset" name="effect"/></args></info>
+        <comment>Play a particle effect Asset on this Entity, returning a Handle which can be used to stop the effect.</comment>
+      </function>
+      <function name="PlayEffect">
+        <usage>Handle entity:PlayEffect(EffectAsset effect, bool attached)</usage>
+        <info returntype="Handle"><args><arg type="EffectAsset" name="effect"/><arg type="bool" name="attached"/></args></info>
+        <comment>Play a particle effect Asset on this Entity, returning a Handle which can be used to stop the effect. Optionally the effect is attached to the entity and so all spawned particles are relative to it.</comment>
+      </function>
+      <function name="PlayEffectAtLocation">
+        <usage>Handle entity:PlayEffectAtLocation(Vector location, Rotation rotation, EffectAsset effect)</usage>
+        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="Rotation" name="rotation"/><arg type="EffectAsset" name="effect"/></args></info>
+        <comment>Play a particle effect Asset at a given world location and rotation, returning a Handle which can be used to stop the effect.</comment>
+      </function>
+      <function name="PlayEffectAtLocation">
+        <usage>Handle entity:PlayEffectAtLocation(Vector location, Rotation rotation, EffectAsset effect, bool attached)</usage>
+        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="Rotation" name="rotation"/><arg type="EffectAsset" name="effect"/><arg type="bool" name="attached"/></args></info>
+        <comment>Play a particle effect Asset at a given world location and rotation, returning a Handle which can be used to stop the effect. Optionally the effect is attached to the entity and so all spawned particles are relative to it.</comment>
+      </function>
+      <function name="StopEffect">
+        <usage>entity:StopEffect(Handle effectHandle)</usage>
+        <info><args><arg type="Handle" name="effectHandle"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="Clone" serveronly="true">
+        <usage>Entity entity:Clone()</usage>
+        <info returntype="Entity"><args></args></info>
+        <comment>Clone the Entity returning the clone.</comment>
+      </function>
+      <function name="AttachTo" serveronly="true">
+        <usage>entity:AttachTo(Entity entityToAttachTo)</usage>
+        <info><args><arg type="Entity" name="entityToAttachTo"/></args></info>
+        <comment>Attach this Entity to another Entity</comment>
+      </function>
+      <function name="AttachTo" serveronly="true">
+        <usage>entity:AttachTo(Character characterToAttachTo, string socketName)</usage>
+        <info><args><arg type="Character" name="characterToAttachTo"/><arg type="string" name="socketName"/></args></info>
+        <comment>Attach this Entity to a Character entity, using the named socket</comment>
+      </function>
+      <function name="Detach">
+        <usage>entity:Detach()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="ApplyDamage">
+        <usage>entity:ApplyDamage(number damageAmount, HitResult hitResult, Vector shootDirection, Entity fromEntity)</usage>
+        <info><args><arg type="number" name="damageAmount"/><arg type="HitResult" name="hitResult"/><arg type="Vector" name="shootDirection"/><arg type="Entity" name="fromEntity"/></args></info>
+        <comment>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a HitResult from a World Raycast function and a shootDirection Vector and fromEntity which will be passed to the OnDamage function.</comment>
+      </function>
+      <function name="ApplyDamage">
+        <usage>entity:ApplyDamage(number damageAmount, HitResult hitResult, Vector shootDirection, Entity fromEntity, table damageModifiers)</usage>
+        <info><args><arg type="number" name="damageAmount"/><arg type="HitResult" name="hitResult"/><arg type="Vector" name="shootDirection"/><arg type="Entity" name="fromEntity"/><arg type="table" name="damageModifiers"/></args></info>
+        <comment>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a HitResult from a World Raycast function and a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</comment>
+      </function>
+      <function name="ApplyDamage">
+        <usage>entity:ApplyDamage(number damageAmount, Vector shootDirection, Entity fromEntity)</usage>
+        <info><args><arg type="number" name="damageAmount"/><arg type="Vector" name="shootDirection"/><arg type="Entity" name="fromEntity"/></args></info>
+        <comment>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a shootDirection Vector and fromEntity which will be passed to the OnDamage function.</comment>
+      </function>
+      <function name="ApplyDamage">
+        <usage>entity:ApplyDamage(number damageAmount, Vector shootDirection, Entity fromEntity, table damageModifiers)</usage>
+        <info><args><arg type="number" name="damageAmount"/><arg type="Vector" name="shootDirection"/><arg type="Entity" name="fromEntity"/><arg type="table" name="damageModifiers"/></args></info>
+        <comment>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</comment>
+      </function>
+      <function name="GetParent">
+        <usage>Entity entity:GetParent()</usage>
+        <info returntype="Entity"><args></args></info>
+        <comment>Get a parent Entity that this Entity is attached to either within the world tree or using the Attach function.</comment>
+      </function>
+      <function name="GetChildren">
+        <usage>table entity:GetChildren()</usage>
+        <info returntype="table"><args></args></info>
+        <comment>Get all children directly below this. The order of children is not guaranteed, and may change randomly.</comment>
+      </function>
+      <function name="Destroy" serveronly="true">
+        <usage>entity:Destroy()</usage>
+        <info><args></args></info>
+        <comment>Destroy an Entity. Use with care as any variables referencing that Entity will now be invalid.</comment>
+      </function>
+      <function name="SendToScripts">
+        <usage>entity:SendToScripts(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Call eventName function with the given args on all scripts that have it as a function. If called on the server do it only on the server, if called on a client do it only on that client.</comment>
+      </function>
+      <function name="SendToAllClients" serveronly="true">
+        <usage>entity:SendToAllClients(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Call eventName on all scripts of this Entity on all clients connected to the server with the given args.</comment>
+      </function>
+      <function name="SendToServer" localonly="true">
+        <usage>entity:SendToServer(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Call eventName on all script of this Entity on the server.</comment>
+      </function>
+      <function name="SendToLocal" serveronly="true">
+        <usage>entity:SendToLocal(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Call eventName on all scripts of this Entity on the client that owns the Player or User this script is attached to.</comment>
+      </function>
+      <function name="IsLocal" localonly="true">
+        <usage>bool entity:IsLocal()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment>See if this Entity is owned by the local client.</comment>
+      </function>
+      <function name="IsClient" deprecated="true">
+        <usage>bool entity:IsClient()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment>Check if this Entity is on the client</comment>
+      </function>
+      <function name="FindScript">
+        <usage>Script entity:FindScript(string scriptName)</usage>
+        <info returntype="Script"><args><arg type="string" name="scriptName"/></args></info>
+        <comment>This is alternative to entity.scriptName which is the preferred way of getting a script.</comment>
+      </function>
+      <function name="FindScript">
+        <usage>Script entity:FindScript(string scriptName, bool recursive)</usage>
+        <info returntype="Script"><args><arg type="string" name="scriptName"/><arg type="bool" name="recursive"/></args></info>
+        <comment>This is alternative to entity.scriptName which is the preferred way of getting a script. This can be recursive to find the script on any child entities.</comment>
+      </function>
+      <function name="FindScript">
+        <usage>Script entity:FindScript(ScriptAsset templateRefScript)</usage>
+        <info returntype="Script"><args><arg type="ScriptAsset" name="templateRefScript"/></args></info>
+        <comment>Find a script by its script asset.</comment>
+      </function>
+      <function name="FindScript">
+        <usage>Script entity:FindScript(ScriptAsset templateRefScript, bool recursive)</usage>
+        <info returntype="Script"><args><arg type="ScriptAsset" name="templateRefScript"/><arg type="bool" name="recursive"/></args></info>
+        <comment>Find a script by its script asset. This can be recursive to find the script on any child entities.</comment>
+      </function>
+      <function name="FindScriptProperty">
+        <usage>object entity:FindScriptProperty(string propertyName)</usage>
+        <info returntype="object"><args><arg type="string" name="propertyName"/></args></info>
+        <comment>Find a script with the named property on it and return value from the property</comment>
+      </function>
+      <function name="FindAllScripts">
+        <usage>table entity:FindAllScripts(string scriptName)</usage>
+        <info returntype="table"><args><arg type="string" name="scriptName"/></args></info>
+        <comment>Find all scripts named scriptName recursively on this entity and all child entities. Most often used where multiple scripts are used to simulate an array of structures.</comment>
+      </function>
+      <function name="FindAllScripts">
+        <usage>table entity:FindAllScripts(ScriptAsset templateRefScript)</usage>
+        <info returntype="table"><args><arg type="ScriptAsset" name="templateRefScript"/></args></info>
+        <comment>Find all scripts of the given script asset recursively on this entity and all child entities. Most often used where multiple scripts are used to simulate an array of structures.</comment>
+      </function>
+      <function name="FindAllScripts">
+        <usage>table entity:FindAllScripts(string scriptName, bool recursive)</usage>
+        <info returntype="table"><args><arg type="string" name="scriptName"/><arg type="bool" name="recursive"/></args></info>
+        <comment>Find all scripts named scriptName on this entity (and optionally recursively on all child entities if recursive flag is set). Most often used where multiple scripts are used to simulate an array of structures.</comment>
+      </function>
+      <function name="FindAllScripts">
+        <usage>table entity:FindAllScripts(ScriptAsset templateRefScript, bool recursive)</usage>
+        <info returntype="table"><args><arg type="ScriptAsset" name="templateRefScript"/><arg type="bool" name="recursive"/></args></info>
+        <comment>Find all scripts of the given script asset on this entity (and optionally recursively on all child entities if recursive flag is set). Most often used where multiple scripts are used to simulate an array of structures.</comment>
+      </function>
+      <function name="FindWidget">
+        <usage>Widget entity:FindWidget(string widgetName)</usage>
+        <info returntype="Widget"><args><arg type="string" name="widgetName"/></args></info>
+        <comment>This is alternative to entity.widgetName which is the preferred way of getting a widget.</comment>
+      </function>
+      <function name="FindWidget">
+        <usage>Widget entity:FindWidget(string widgetName, bool recursive)</usage>
+        <info returntype="Widget"><args><arg type="string" name="widgetName"/><arg type="bool" name="recursive"/></args></info>
+        <comment>This is alternative to entity.widgetName which is the preferred way of getting a widget. This can be recursive to find the widget on any child entities.</comment>
+      </function>
+      <function name="FindWidget">
+        <usage>Widget entity:FindWidget(WidgetAsset widget)</usage>
+        <info returntype="Widget"><args><arg type="WidgetAsset" name="widget"/></args></info>
+        <comment>Find a widget by its widget asset.</comment>
+      </function>
+      <function name="FindWidget">
+        <usage>Widget entity:FindWidget(WidgetAsset widget, bool recursive)</usage>
+        <info returntype="Widget"><args><arg type="WidgetAsset" name="widget"/><arg type="bool" name="recursive"/></args></info>
+        <comment>Find a widget by its widget asset. This can be recursive to find the widget on any child entities.</comment>
+      </function>
+      <function name="IsLocalReady" serveronly="true">
+        <usage>bool entity:IsLocalReady()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment>When called with an Entity that is owned by a particular client this sees if that Entity has been inited on that client (by calling LocalInit).</comment>
+      </function>
+      <function name="SendTelemetry" deprecated="true">
+        <usage>entity:SendTelemetry(string type, table parametersTable)</usage>
+        <info><args><arg type="string" name="type"/><arg type="table" name="parametersTable"/></args></info>
+        <comment>Send an type of telemetry event to the telemetry server with the given parametersTable for later analysis. Deprecated and will be removed - see Analytics.SendTelemetry</comment>
+      </function>
+      <function name="PlayTimeline">
+        <usage>number entity:PlayTimeline(table timelineArray)</usage>
+        <info returntype="number"><args><arg type="table" name="timelineArray"/></args></info>
+        <comment>Play a timeline from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayTimeline">
+        <usage>number entity:PlayTimeline(... args)</usage>
+        <info returntype="number"><args><arg type="..." name="args"/></args></info>
+        <comment>Play a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayTimelineLoop">
+        <usage>entity:PlayTimelineLoop(table timelineArray)</usage>
+        <info><args><arg type="table" name="timelineArray"/></args></info>
+        <comment>Loop a timeline from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayTimelineLoop">
+        <usage>entity:PlayTimelineLoop(... args)</usage>
+        <info><args><arg type="..." name="args"/></args></info>
+        <comment>Loop a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayTimelinePingPong">
+        <usage>entity:PlayTimelinePingPong(table timelineArray)</usage>
+        <info><args><arg type="table" name="timelineArray"/></args></info>
+        <comment>Loop a timeline back and forth from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayTimelinePingPong">
+        <usage>entity:PlayTimelinePingPong(... args)</usage>
+        <info><args><arg type="..." name="args"/></args></info>
+        <comment>Loop a timeline back and forth Play a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayRelativeTimeline">
+        <usage>number entity:PlayRelativeTimeline(table timelineArray)</usage>
+        <info returntype="number"><args><arg type="table" name="timelineArray"/></args></info>
+        <comment>Play a timeline, relative to an entity's parent transform, from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayRelativeTimeline">
+        <usage>number entity:PlayRelativeTimeline(... args)</usage>
+        <info returntype="number"><args><arg type="..." name="args"/></args></info>
+        <comment>Play a timeline, relative to an entity's parent transform, from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayRelativeTimelineLoop">
+        <usage>number entity:PlayRelativeTimelineLoop(table timelineArray)</usage>
+        <info returntype="number"><args><arg type="table" name="timelineArray"/></args></info>
+        <comment>Loop a timeline, relative to an entity's parent transform, from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayRelativeTimelineLoop">
+        <usage>number entity:PlayRelativeTimelineLoop(... args)</usage>
+        <info returntype="number"><args><arg type="..." name="args"/></args></info>
+        <comment>Loop a timeline, relative to an entity's parent transform, from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayRelativeTimelinePingPong">
+        <usage>number entity:PlayRelativeTimelinePingPong(table timelineArray)</usage>
+        <info returntype="number"><args><arg type="table" name="timelineArray"/></args></info>
+        <comment>Loop a timeline back and forth, relative to an entity's parent transform. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="PlayRelativeTimelinePingPong">
+        <usage>number entity:PlayRelativeTimelinePingPong(... args)</usage>
+        <info returntype="number"><args><arg type="..." name="args"/></args></info>
+        <comment>Loop a timeline back and forth, relative to an entity's parent transform, from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+      </function>
+      <function name="CancelTimeline">
+        <usage>entity:CancelTimeline()</usage>
+        <info><args></args></info>
+        <comment>Cancel any running timeline</comment>
+      </function>
+      <function name="GetTemplate">
+        <usage>Template entity:GetTemplate()</usage>
+        <info returntype="Template"><args></args></info>
+        <comment>Given an entity, get the Template it is an instance of (if there is one). Warning - this will return the template even if lots of things have been adjusted on the instance.</comment>
+      </function>
+      <function name="GetVelocity">
+        <usage>Vector entity:GetVelocity()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get Velocity. Centimeters per second.</comment>
+      </function>
+      <function name="SetVelocity">
+        <usage>entity:SetVelocity(Vector velocity)</usage>
+        <info><args><arg type="Vector" name="velocity"/></args></info>
+        <comment>Set Velocity. Centimeters per second.</comment>
+      </function>
+      <function name="GetAngularVelocity">
+        <usage>Rotation entity:GetAngularVelocity()</usage>
+        <info returntype="Rotation"><args></args></info>
+        <comment>Get AngularVelocity. Degrees per second.</comment>
+      </function>
+      <function name="SetAngularVelocity">
+        <usage>entity:SetAngularVelocity(Rotation angularVelocity)</usage>
+        <info><args><arg type="Rotation" name="angularVelocity"/></args></info>
+        <comment>Set AngularVelocity. Degrees per second.</comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="visible">
+        <usage>bool visible</usage>
+        <comment>Set whether any physical aspect of the Entity (generally a mesh or a light) is visible within the world.</comment>
+      </parameter>
+      <parameter name="onInteract">
+        <usage>Event onInteract</usage>
+        <comment>Called when this entity is interacted with by a player, with the player Character and the HitResult passed as arguments, as well as the Entity from which the onInteract event was sent. An alternative to listening for OnInteract in a script on the entity.</comment>
+      </parameter>
+      <parameter name="onDestroy">
+        <usage>Event onDestroy</usage>
+        <comment>Called when this entity is destroyed, with the Entity which sent the event passed as an argument. An alternative to listening for OnDestroy in a script on the entity.</comment>
+      </parameter>
+    </parameters>
+    <overrides>
+      <override name="index">
+        <usage>object entity.var</usage>
+        <comment>Get a script or widget from the Entity by name, or a mesh, light, etc component on this entity. ie entity.myScript returns a script called myScript, entity.theHud returns a widget named theHud, entity.mesh returns the Mesh of this Entity, entity.light returns the property bag for a light component...</comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="Event">
+    <comment></comment>
+    <functions>
+      <function name="Send">
+        <usage>eventProperty:Send(... varArgs)</usage>
+        <info><args><arg type="..." name="varArgs"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="Listen">
+        <usage>eventProperty:Listen(Script listenerScriptComponent, string functionName)</usage>
+        <info><args><arg type="Script" name="listenerScriptComponent"/><arg type="string" name="functionName"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="HasBindings">
+        <usage>bool eventProperty:HasBindings()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment>Return true if this Event is bound to anything, even if its something like "every instance of a script" which would actually resolve to no bindings.</comment>
+      </function>
+      <function name="GetAllBindings">
+        <usage>table eventProperty:GetAllBindings()</usage>
+        <info returntype="table"><args></args></info>
+        <comment>Get a table where each element is a table containing a 'script' variable and a 'function' variable, describing each call that is bound by this event.</comment>
+      </function>
+    </functions>
+    <overrides>
+      <override name="to_string">
+        <usage>string tostring(Event var)</usage>
+        <comment></comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="GameStorage">
+    <comment></comment>
+    <functions>
+      <function name="GetCounter" serveronly="true">
+        <usage>GameStorage.GetCounter(string counterName, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="counterName"/><arg type="callback" name="callback"/></args></info>
+        <comment>Get the value of a global counter for this game. Global counters are shared between all servers running the game and saved between sessions. The value is returned by calling the callback function with the value as an argument. Global counters are always whole (integer) numbers.</comment>
+      </function>
+      <function name="UpdateCounter" serveronly="true">
+        <usage>GameStorage.UpdateCounter(string counterName, unhandled/int64 increment, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="counterName"/><arg type="unhandled/int64" name="increment"/><arg type="callback" name="callback"/></args></info>
+        <comment>Update the value of a global counter for this game by adding increment to the existing value. Global counters are shared between all servers running the game and saved between sessions. The new incremented value is returned by calling the callback function with the value as an argument. Global counters are always whole (integer) numbers.</comment>
+      </function>
+      <function name="UpdateCounter" serveronly="true">
+        <usage>GameStorage.UpdateCounter(string counterName, unhandled/int64 increment)</usage>
+        <info static="true"><args><arg type="string" name="counterName"/><arg type="unhandled/int64" name="increment"/></args></info>
+        <comment>Update the value of a global counter for this game by adding increment to the existing value. Global counters are shared between all servers running the game and saved between sessions. Global counters are always whole (integer) numbers.</comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="Handle">
+    <comment></comment>
+    <overrides>
+      <override name="to_string">
+        <usage>string tostring(Handle var)</usage>
+        <comment></comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="HitResult">
+    <comment>A HitResult is used by the World Raycast function to give details about where the collision happened (GetPosition) and what the normal vector of the collision is (GetNormal).</comment>
+    <functions>
+      <function name="GetPosition">
+        <usage>Vector hitResult:GetPosition()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get position of hit in world space</comment>
+      </function>
+      <function name="GetRelativePosition">
+        <usage>Vector hitResult:GetRelativePosition()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get position of hit relative to the Entity hit</comment>
+      </function>
+      <function name="GetNormal">
+        <usage>Vector hitResult:GetNormal()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get normal direction of hit in world space</comment>
+      </function>
+      <function name="GetRelativeNormal">
+        <usage>Vector hitResult:GetRelativeNormal()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get normal direction of the hit relative to the rotation of the Entity hit</comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="Leaderboards">
+    <comment></comment>
+    <functions>
+      <function name="GetNearbyValues">
+        <usage>Leaderboards.GetNearbyValues(string leaderboardId, number numValues, User user, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="leaderboardId"/><arg type="number" name="numValues"/><arg type="User" name="user"/><arg type="callback" name="callback"/></args></info>
+        <comment>Gets nearby leaderboard values on the specified leaderboard for the specified user, centered on the user where possible. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</comment>
+      </function>
+      <function name="GetTopValues">
+        <usage>Leaderboards.GetTopValues(string leaderboardId, number numValues, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="leaderboardId"/><arg type="number" name="numValues"/><arg type="callback" name="callback"/></args></info>
+        <comment>Gets the top ranking values from the specified leaderboard. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</comment>
+      </function>
+      <function name="GetMetadata" deprecated="true">
+        <usage>Leaderboards.GetMetadata(callback callback)</usage>
+        <info static="true"><args><arg type="callback" name="callback"/></args></info>
+        <comment>See Leaderboards.GetAllMetadata Gets the metadata of every leaderboard associated with this game. Results are as a parameter to the callback function. Callback function parameter is a table of results, each result contains id, displayName, displayIndex, resetTime, isPeriodic, isAscending & scoreType.</comment>
+      </function>
+      <function name="GetMetadata">
+        <usage>Leaderboards.GetMetadata(string leaderboardId, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="leaderboardId"/><arg type="callback" name="callback"/></args></info>
+        <comment>Gets the metadata of a single named leaderboard for this game. Results are as a parameter to the callback function. Callback function parameter is a table containing id, displayName, displayIndex, resetTime, isPeriodic, isAscending & scoreType.</comment>
+      </function>
+      <function name="GetAllMetadata">
+        <usage>Leaderboards.GetAllMetadata(callback callback)</usage>
+        <info static="true"><args><arg type="callback" name="callback"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GetNearbyValuesForGame">
+        <usage>Leaderboards.GetNearbyValuesForGame(string gameId, string leaderboardId, number numValues, User user, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="gameId"/><arg type="string" name="leaderboardId"/><arg type="number" name="numValues"/><arg type="User" name="user"/><arg type="callback" name="callback"/></args></info>
+        <comment>Gets nearby leaderboard values for the specified GameId. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</comment>
+      </function>
+      <function name="GetTopValuesForGame">
+        <usage>Leaderboards.GetTopValuesForGame(string gameId, string leaderboardId, number numValues, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="gameId"/><arg type="string" name="leaderboardId"/><arg type="number" name="numValues"/><arg type="callback" name="callback"/></args></info>
+        <comment>Gets the top ranking values for the specified GameId Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</comment>
+      </function>
+      <function name="GetMetadataForGame" deprecated="true">
+        <usage>Leaderboards.GetMetadataForGame(string gameId, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="gameId"/><arg type="callback" name="callback"/></args></info>
+        <comment>See Leaderboards.GetAllMetadataForGame Gets the metadata of every leaderboard associated with the specified GameId. Results are as a parameter to the callback function. Callback function parameter is a table of results, each result contains id, displayName, displayIndex, resetTime, isPeriodic, isAscending & scoreType.</comment>
+      </function>
+      <function name="GetMetadataForGame">
+        <usage>Leaderboards.GetMetadataForGame(string gameId, string leaderboardId, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="gameId"/><arg type="string" name="leaderboardId"/><arg type="callback" name="callback"/></args></info>
+        <comment>Gets the metadata of a single named leaderboard associated with the specified GameId. Results are as a parameter to the callback function. Callback function parameter is a table containing id, displayName, displayIndex, resetTime, isPeriodic, isAscending & scoreType.</comment>
+      </function>
+      <function name="GetAllMetadataForGame">
+        <usage>Leaderboards.GetAllMetadataForGame(string gameId, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="gameId"/><arg type="callback" name="callback"/></args></info>
+        <comment>Gets the metadata of every leaderboard associated with the specified GameId. Results are as a parameter to the callback function. Callback function parameter is a table of results, each result contains id, displayName, displayIndex, resetTime, isPeriodic, isAscending & scoreType.</comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="Light">
+    <comment>An Entity can have a single physical representation. Light is used to represent either a point or spot source of light in the scene. It can change color, intensity and other settings. Light derives from Entity so if you have a Light you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Light) to see if a particular entity variable is a Light type entity.</comment>
+    <parameters>
+      <parameter name="color">
+        <usage>Color color</usage>
+        <comment>Set color of light.</comment>
+      </parameter>
+      <parameter name="intensity">
+        <usage>number intensity</usage>
+        <comment>Set intensity of light (units?)</comment>
+      </parameter>
+      <parameter name="innerAngle">
+        <usage>number innerAngle</usage>
+        <comment>Set inner angle of a spot light (units?)</comment>
+      </parameter>
+      <parameter name="outerAngle">
+        <usage>number outerAngle</usage>
+        <comment>Set outer angle of a spot light (units?)</comment>
+      </parameter>
+      <parameter name="attenuation">
+        <usage>number attenuation</usage>
+        <comment>Set attenuation of the light (units?)</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+  <apidoc name="Locator">
+    <comment>Locator is a physical entity which doesn't render anything but can have its position and rotation queried. It can be used as a start location for spawning (see SpawnPlayer) Locator derives from Entity so if you have a Locator you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Locator) to see if a particular entity variable is a Locator type entity.</comment>
+  </apidoc>
+  <apidoc name="Vector">
+    <comment>Vector</comment>
+    <functions>
+      <function name="New">
+        <usage>Vector Vector.New(number x, number y, number z)</usage>
+        <info returntype="Vector" static="true"><args><arg type="number" name="x"/><arg type="number" name="y"/><arg type="number" name="z"/></args></info>
+        <comment>Construct a new Vector with the given x, y and z components, where z is generally up.</comment>
+      </function>
+      <function name="Normalize">
+        <usage>Vector vec:Normalize()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Return a normalized Vector (where the length is 1.0)</comment>
+      </function>
+      <function name="Length">
+        <usage>number vec:Length()</usage>
+        <info returntype="number"><args></args></info>
+        <comment>Return the length of the given Vector.</comment>
+      </function>
+      <function name="SquaredLength">
+        <usage>number vec:SquaredLength()</usage>
+        <info returntype="number"><args></args></info>
+        <comment>Return the square of the length of the given Vector.</comment>
+      </function>
+      <function name="Distance">
+        <usage>number Vector.Distance(Vector vec1, Vector vec2)</usage>
+        <info returntype="number" static="true"><args><arg type="Vector" name="vec1"/><arg type="Vector" name="vec2"/></args></info>
+        <comment>Return the distance between two Vector values.</comment>
+      </function>
+      <function name="SquaredDistance">
+        <usage>number Vector.SquaredDistance(Vector vec1, Vector vec2)</usage>
+        <info returntype="number" static="true"><args><arg type="Vector" name="vec1"/><arg type="Vector" name="vec2"/></args></info>
+        <comment>Return the square of the distance of two Vector values.</comment>
+      </function>
+      <function name="Cross">
+        <usage>Vector Vector.Cross(Vector vec1, Vector vec2)</usage>
+        <info returntype="Vector" static="true"><args><arg type="Vector" name="vec1"/><arg type="Vector" name="vec2"/></args></info>
+        <comment>Return the cross product of two Vector values.</comment>
+      </function>
+      <function name="Dot">
+        <usage>number Vector.Dot(Vector vec1, Vector vec2)</usage>
+        <info returntype="number" static="true"><args><arg type="Vector" name="vec1"/><arg type="Vector" name="vec2"/></args></info>
+        <comment>Return the dot product of two Vector values.</comment>
+      </function>
+      <function name="Lerp">
+        <usage>Vector Vector.Lerp(Vector vec1, Vector vec2, number alpha)</usage>
+        <info returntype="Vector" static="true"><args><arg type="Vector" name="vec1"/><arg type="Vector" name="vec2"/><arg type="number" name="alpha"/></args></info>
+        <comment>Linearly interpolate between vec1 and vec2 by the fraction alpha, where alpha is normally in the range [0,1]</comment>
+      </function>
+      <function name="Abs">
+        <usage>Vector vec:Abs()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Return a Vector constructed from the absolute (ie positive or zero) x, y and z components of the given Vector.</comment>
+      </function>
+      <function name="Ceil">
+        <usage>Vector vec:Ceil()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Returns a Vector constructed from the ceiling (ie next integer value) x, y and z components of the given Vector.</comment>
+      </function>
+      <function name="Floor">
+        <usage>Vector vec:Floor()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Returns a Vector constructed from the floor (ie integer value below) x, y and z components of the given Vector.</comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="x">
+        <usage>float x</usage>
+        <comment>X component of 3D vector</comment>
+      </parameter>
+      <parameter name="y">
+        <usage>float y</usage>
+        <comment>Y component of 3D vector</comment>
+      </parameter>
+      <parameter name="z">
+        <usage>float z</usage>
+        <comment>Z component of 3D vector</comment>
+      </parameter>
+    </parameters>
+    <constants>
+      <constant name="Zero">
+        <usage>Vector Vector.Zero</usage>
+        <comment>Zero vector (0, 0, 0)</comment>
+      </constant>
+    </constants>
+    <overrides>
+      <override name="addition">
+        <usage>operator +</usage>
+        <comment>Add two Vector values together and return a new Vector of the result</comment>
+      </override>
+      <override name="subtraction">
+        <usage>operator -</usage>
+        <comment>Subtract two Vector values and return a new Vector of the result</comment>
+      </override>
+      <override name="unary_minus">
+        <usage>unary_minus</usage>
+        <comment>Negate a Vector value and return the result</comment>
+      </override>
+      <override name="multiplication">
+        <usage>operator *</usage>
+        <comment></comment>
+      </override>
+      <override name="division">
+        <usage>operator /</usage>
+        <comment></comment>
+      </override>
+      <override name="to_string">
+        <usage>string tostring(Vector var)</usage>
+        <comment>Convert to a string</comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="Vector2D">
+    <comment>Vector2D</comment>
+    <functions>
+      <function name="New">
+        <usage>Vector2D Vector2D.New(number x, number y)</usage>
+        <info returntype="Vector2D" static="true"><args><arg type="number" name="x"/><arg type="number" name="y"/></args></info>
+        <comment>Construct a new two dimensional Vector2D with the given x and y components.</comment>
+      </function>
+      <function name="Normalize">
+        <usage>Vector2D vec:Normalize()</usage>
+        <info returntype="Vector2D"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="Length">
+        <usage>number vec:Length()</usage>
+        <info returntype="number"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="SquaredLength">
+        <usage>number vec:SquaredLength()</usage>
+        <info returntype="number"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="Distance">
+        <usage>number Vector2D.Distance(Vector2D vec1, Vector2D vec2)</usage>
+        <info returntype="number" static="true"><args><arg type="Vector2D" name="vec1"/><arg type="Vector2D" name="vec2"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="SquaredDistance">
+        <usage>number Vector2D.SquaredDistance(Vector2D vec1, Vector2D vec2)</usage>
+        <info returntype="number" static="true"><args><arg type="Vector2D" name="vec1"/><arg type="Vector2D" name="vec2"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="Dot">
+        <usage>number Vector2D.Dot(Vector2D vec1, Vector2D vec2)</usage>
+        <info returntype="number" static="true"><args><arg type="Vector2D" name="vec1"/><arg type="Vector2D" name="vec2"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="Lerp">
+        <usage>Vector2D Vector2D.Lerp(Vector2D vec1, Vector2D vec2, number alpha)</usage>
+        <info returntype="Vector2D" static="true"><args><arg type="Vector2D" name="vec1"/><arg type="Vector2D" name="vec2"/><arg type="number" name="alpha"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="Abs">
+        <usage>Vector2D vec:Abs()</usage>
+        <info returntype="Vector2D"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="Ceil">
+        <usage>Vector2D vec:Ceil()</usage>
+        <info returntype="Vector2D"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="Floor">
+        <usage>Vector2D vec:Floor()</usage>
+        <info returntype="Vector2D"><args></args></info>
+        <comment></comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="x">
+        <usage>float x</usage>
+        <comment>X component of 2D vector</comment>
+      </parameter>
+      <parameter name="y">
+        <usage>float y</usage>
+        <comment>Y component of 2D vector</comment>
+      </parameter>
+    </parameters>
+    <constants>
+      <constant name="Zero">
+        <usage>Vector Vector2D.Zero</usage>
+        <comment>Zero vector (0, 0)</comment>
+      </constant>
+    </constants>
+    <overrides>
+      <override name="addition">
+        <usage>operator +</usage>
+        <comment></comment>
+      </override>
+      <override name="subtraction">
+        <usage>operator -</usage>
+        <comment></comment>
+      </override>
+      <override name="unary_minus">
+        <usage>unary_minus</usage>
+        <comment></comment>
+      </override>
+      <override name="multiplication">
+        <usage>operator *</usage>
+        <comment></comment>
+      </override>
+      <override name="division">
+        <usage>operator /</usage>
+        <comment></comment>
+      </override>
+      <override name="to_string">
+        <usage>string tostring(Vector2D var)</usage>
+        <comment></comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="Rotation">
+    <comment>Rotation</comment>
+    <functions>
+      <function name="New">
+        <usage>Rotation Rotation.New(number pitch, number yaw, number roll)</usage>
+        <info returntype="Rotation" static="true"><args><arg type="number" name="pitch"/><arg type="number" name="yaw"/><arg type="number" name="roll"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="FromVector">
+        <usage>Rotation Rotation.FromVector(Vector vector)</usage>
+        <info returntype="Rotation" static="true"><args><arg type="Vector" name="vector"/></args></info>
+        <comment>Make a rotation from a vector</comment>
+      </function>
+      <function name="Lerp">
+        <usage>Rotation Rotation.Lerp(Rotation rot1, Rotation rot2, number alpha)</usage>
+        <info returntype="Rotation" static="true"><args><arg type="Rotation" name="rot1"/><arg type="Rotation" name="rot2"/><arg type="number" name="alpha"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="RotateVector">
+        <usage>Vector rotation:RotateVector(Vector vector)</usage>
+        <info returntype="Vector"><args><arg type="Vector" name="vector"/></args></info>
+        <comment>Rotate a given vector by a rotation.</comment>
+      </function>
+      <function name="UnrotateVector">
+        <usage>Vector rotation:UnrotateVector(Vector vector)</usage>
+        <info returntype="Vector"><args><arg type="Vector" name="vector"/></args></info>
+        <comment>Unrotate a given vector by this rotation - the opposite of Rotation.RotateVector.</comment>
+      </function>
+      <function name="Inverse">
+        <usage>Rotation rotation:Inverse()</usage>
+        <info returntype="Rotation"><args></args></info>
+        <comment>Get the inverse of this rotation.</comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="pitch">
+        <usage>float pitch</usage>
+        <comment>Pitch component of Rotation</comment>
+      </parameter>
+      <parameter name="yaw">
+        <usage>float yaw</usage>
+        <comment>Yaw component of Rotation</comment>
+      </parameter>
+      <parameter name="roll">
+        <usage>float roll</usage>
+        <comment>Roll component of Rotation</comment>
+      </parameter>
+    </parameters>
+    <constants>
+      <constant name="Zero">
+        <usage>Rotation Rotation.Zero</usage>
+        <comment>Zero rotation on each axis (0, 0, 0)</comment>
+      </constant>
+    </constants>
+    <overrides>
+      <override name="addition">
+        <usage>operator +</usage>
+        <comment></comment>
+      </override>
+      <override name="subtraction">
+        <usage>operator -</usage>
+        <comment></comment>
+      </override>
+      <override name="multiplication">
+        <usage>operator *</usage>
+        <comment></comment>
+      </override>
+      <override name="to_string">
+        <usage>string tostring(Rotation var)</usage>
+        <comment></comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="Mesh">
+    <comment>An Entity can have a single physical representation. Mesh is for 3D objects that exist in the scene. They can be collided with and recieve damage when hit. Mesh derives from Entity so if you have a Mesh you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Mesh) to see if a particular entity variable is a Mesh type entity.</comment>
+    <functions>
+      <function name="PlayAnimation">
+        <usage>mesh:PlayAnimation(string animationName)</usage>
+        <info><args><arg type="string" name="animationName"/></args></info>
+        <comment>Play a named animation on this mesh, once.</comment>
+      </function>
+      <function name="PlayAnimation" supported="false">
+        <usage>mesh:PlayAnimation(string animationName, bool looping)</usage>
+        <info><args><arg type="string" name="animationName"/><arg type="bool" name="looping"/></args></info>
+        <comment>Play a named animation on this mesh, optionally looping.</comment>
+      </function>
+      <function name="PlayAnimationLooping">
+        <usage>mesh:PlayAnimationLooping(string animationName)</usage>
+        <info><args><arg type="string" name="animationName"/></args></info>
+        <comment>Play a named animation on this mesh, repeatedly.</comment>
+      </function>
+      <function name="PlayAnimationClient">
+        <usage>mesh:PlayAnimationClient(string animationName)</usage>
+        <info><args><arg type="string" name="animationName"/></args></info>
+        <comment>Play a named animation on this mesh, once, for this client only</comment>
+      </function>
+      <function name="PlayAnimationClient" supported="false">
+        <usage>mesh:PlayAnimationClient(string animationName, bool looping)</usage>
+        <info><args><arg type="string" name="animationName"/><arg type="bool" name="looping"/></args></info>
+        <comment>Play a named animation on this mesh, optionally looping, for this client only</comment>
+      </function>
+      <function name="PlayAnimationLoopingClient">
+        <usage>mesh:PlayAnimationLoopingClient(string animationName)</usage>
+        <info><args><arg type="string" name="animationName"/></args></info>
+        <comment>Play a named animation on this mesh, repeatedly, for this client only</comment>
+      </function>
+      <function name="GetAnimationNames">
+        <usage>table mesh:GetAnimationNames()</usage>
+        <info returntype="table"><args></args></info>
+        <comment>Get a table of animation names that you can play on this mesh with PlayAnimation.</comment>
+      </function>
+      <function name="CreateThruster">
+        <usage>Thruster mesh:CreateThruster()</usage>
+        <info returntype="Thruster"><args></args></info>
+        <comment>Add a thruster to an entity</comment>
+      </function>
+      <function name="CreateRelativeThruster">
+        <usage>Thruster mesh:CreateRelativeThruster()</usage>
+        <info returntype="Thruster"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="DestroyThruster">
+        <usage>mesh:DestroyThruster(Thruster handle)</usage>
+        <info><args><arg type="Thruster" name="handle"/></args></info>
+        <comment>Destroy a thruster</comment>
+      </function>
+      <function name="AddImpulse">
+        <usage>mesh:AddImpulse(Vector impulse)</usage>
+        <info><args><arg type="Vector" name="impulse"/></args></info>
+        <comment>Add Impulse. An integral of force over a time interval. Newton seconds.</comment>
+      </function>
+      <function name="AddAngularImpulse">
+        <usage>mesh:AddAngularImpulse(Rotation angularImpulse)</usage>
+        <info><args><arg type="Rotation" name="angularImpulse"/></args></info>
+        <comment>Add Angular Impulse. An integral of torque over a time interval. Newton seconds.</comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="collisionEnabled">
+        <usage>bool collisionEnabled</usage>
+        <comment>Turn on or off collision (ie calling entry point OnCollision).</comment>
+      </parameter>
+      <parameter name="damageEnabled">
+        <usage>bool damageEnabled</usage>
+        <comment>Turn on or off damage (ie calling of entry point OnDamaged).</comment>
+      </parameter>
+      <parameter name="physicsEnabled">
+        <usage>bool physicsEnabled</usage>
+        <comment>Turn on or off physics.</comment>
+      </parameter>
+      <parameter name="gravityEnabled">
+        <usage>bool gravityEnabled</usage>
+        <comment>Turn on or off physics.</comment>
+      </parameter>
+      <parameter name="onCollision">
+        <usage>Event onCollision</usage>
+        <comment>Called when this entity is collided with by a player Character with the Character passed as an argument, as well as the mesh Entity from which the onCollision event was triggered. An alternative to listening for OnCollision in a script on the entity.</comment>
+      </parameter>
+      <parameter name="onDamage">
+        <usage>Event onDamage</usage>
+        <comment>Called when this entity is damaged with the amount of damage, the entity causing the damage and a HitResult structure, as well as the mesh Entity from which the onDamage event was sent. An alternative to listening for OnDamage in a script on the entity.</comment>
+      </parameter>
+      <parameter name="mesh">
+        <usage>mesh mesh</usage>
+        <comment>Get or change the mesh</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+  <apidoc name="Thruster">
+    <comment>Thruster</comment>
+    <functions>
+      <function name="SetForce">
+        <usage>handle:SetForce(Vector force)</usage>
+        <info><args><arg type="Vector" name="force"/></args></info>
+        <comment>Set the Force of the thruster, either in world space or relative space depending on the type of thruster.</comment>
+      </function>
+      <function name="SetTorque">
+        <usage>handle:SetTorque(Rotation torque)</usage>
+        <info><args><arg type="Rotation" name="torque"/></args></info>
+        <comment>Set the torque, or rotation force, of the thruster.</comment>
+      </function>
+      <function name="SetPosition">
+        <usage>handle:SetPosition(Vector position)</usage>
+        <info><args><arg type="Vector" name="position"/></args></info>
+        <comment>Set the position of the thruster. A force that is not applied at the center of mass will also apply some torque.</comment>
+      </function>
+      <function name="SetAutoDestroy">
+        <usage>handle:SetAutoDestroy(number lifeTime)</usage>
+        <info><args><arg type="number" name="lifeTime"/></args></info>
+        <comment>When set the thruster will be destroyed after the lifetime is up.</comment>
+      </function>
+      <function name="SetIgnoreMass">
+        <usage>handle:SetIgnoreMass(bool ignoreMass)</usage>
+        <info><args><arg type="bool" name="ignoreMass"/></args></info>
+        <comment>When true this will turn the force or torque in to accelerational changes, ignoring the mass of the object.</comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="Properties">
+    <comment>The Properties structure holds the values that have been set on an instance of a script (accessed with self.properties and defined in the script by returning a Properties table within the script's table).</comment>
+    <overrides>
+      <override name="new_index">
+        <usage>properties.var = object value</usage>
+        <comment>Set a named property to a new value</comment>
+      </override>
+      <override name="index">
+        <usage>object properties.var</usage>
+        <comment>Get the value of a property</comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="PropertyArray">
+    <comment></comment>
+    <overrides>
+      <override name="new_index">
+        <usage>propertyArray.var = object value</usage>
+        <comment>Set a array element to a new value</comment>
+      </override>
+      <override name="index">
+        <usage>object propertyArray.var</usage>
+        <comment>Get the value of an array element</comment>
+      </override>
+      <override name="length">
+        <usage>length</usage>
+        <comment>Get the length of the array</comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="Script">
+    <comment>ScriptComponent is the base class for all user created scripts. Within a script function it is accessed through the self local variable.</comment>
+    <functions>
+      <function name="GetProperties">
+        <usage>unhandled/UPZPropertyBag scriptComponent:GetProperties()</usage>
+        <info returntype="unhandled/UPZPropertyBag"><args></args></info>
+        <comment>Alternative to self.properties, this gets the bag of values produced from the property editor for this script on this Entity. The properties are defined by the static Properties table on the table returned by the Lua script.</comment>
+      </function>
+      <function name="RevertClientProperty" clientonly="true">
+        <usage>scriptComponent:RevertClientProperty(string propertyName)</usage>
+        <info><args><arg type="string" name="propertyName"/></args></info>
+        <comment>Revert a property that's been changed on the client back to the server's value for it</comment>
+      </function>
+      <function name="GetEntity">
+        <usage>Entity scriptComponent:GetEntity()</usage>
+        <info returntype="Entity"><args></args></info>
+        <comment>Returns the Entity that the script is attached to.</comment>
+      </function>
+      <function name="GetScriptAsset">
+        <usage>ScriptAsset scriptComponent:GetScriptAsset()</usage>
+        <info returntype="ScriptAsset"><args></args></info>
+        <comment>Returns the ScriptAsset this is an instance of.</comment>
+      </function>
+      <function name="ListenForEvent">
+        <usage>scriptComponent:ListenForEvent(string eventName, Script listenerScriptComponent)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="Script" name="listenerScriptComponent"/></args></info>
+        <comment>Tell this script that listenerScriptComponent wants to be informed when it sounds eventName using SendEventToListeners. eventName will be called on the listenerScriptComponent script.</comment>
+      </function>
+      <function name="ListenForEvent">
+        <usage>scriptComponent:ListenForEvent(string eventName, Script listenerScriptComponent, string functionName)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="Script" name="listenerScriptComponent"/><arg type="string" name="functionName"/></args></info>
+        <comment>Tell this script that listenerScriptComponent wants to be informed when it sounds eventName using SendEventToListeners. functionName will be called on the listenerScriptComponent script.</comment>
+      </function>
+      <function name="SendEventToListeners">
+        <usage>scriptComponent:SendEventToListeners(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Call eventName on any scripts that have registered for it using ListenForEvent with the given args. If called on the server do it only on the server, if called on a client do it only on that client.</comment>
+      </function>
+      <function name="Schedule">
+        <usage>Handle scriptComponent:Schedule(callback function)</usage>
+        <info returntype="Handle"><args><arg type="callback" name="function"/></args></info>
+        <comment>Pass this a function to do that function in a thread. Can use globals like Wait to control flow as the function will be re-entrant. Returns a Handle which can be passed to Cancel</comment>
+      </function>
+      <function name="Cancel">
+        <usage>scriptComponent:Cancel(Handle handle)</usage>
+        <info><args><arg type="Handle" name="handle"/></args></info>
+        <comment>Cancel a scheduled task if its running.</comment>
+      </function>
+      <function name="SetSaveData" serveronly="true">
+        <usage>scriptComponent:SetSaveData(table saveTable)</usage>
+        <info><args><arg type="table" name="saveTable"/></args></info>
+        <comment>Set the save data for this script to the table supplied. The script must be owned by a User or Player.</comment>
+      </function>
+      <function name="GetSaveData" deprecated="true" serveronly="true">
+        <usage>scriptComponent:GetSaveData(callback callback)</usage>
+        <info><args><arg type="callback" name="callback"/></args></info>
+        <comment>Get the save data previously written out with SetSaveData on this script. This function is asynchronous and will call the callback function when its finished with the save data as an argument.</comment>
+      </function>
+      <function name="GetSaveData" serveronly="true">
+        <usage>object scriptComponent:GetSaveData()</usage>
+        <info returntype="object"><args></args></info>
+        <comment>Get the save data previously written out with SetSaveData on this script. This function returns the save data immediately.</comment>
+      </function>
+      <function name="SendToScript">
+        <usage>scriptComponent:SendToScript(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Call eventName on this script if it exists, with the given args.</comment>
+      </function>
+      <function name="SendToAllClients" serveronly="true">
+        <usage>scriptComponent:SendToAllClients(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Call eventName on this script on all clients currently connected to the server with the given args. Note, this function call can not guarantee that entities are all in a ready state on the client at the time of call, and might therefore miss events during construction.</comment>
+      </function>
+      <function name="SendToServer" localonly="true">
+        <usage>scriptComponent:SendToServer(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Call eventName on this script on the server.</comment>
+      </function>
+      <function name="SendToLocal" serveronly="true">
+        <usage>scriptComponent:SendToLocal(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Call eventName on this script on the client that owns the Player or User this script is attached to.</comment>
+      </function>
+    </functions>
+    <entrypoints>
+      <entrypoint name="OnInteract" serveronly="true">
+        <usage>function Script:OnInteract(Entity player, HitResult hitResult) ... end</usage>
+        <info static="true"><args><arg type="Entity" name="player"/><arg type="HitResult" name="hitResult"/></args></info>
+        <comment>Called when a player interacts with an entity on all scripts of the entity.</comment>
+      </entrypoint>
+      <entrypoint name="OnCollision" serveronly="true">
+        <usage>function Script:OnCollision(Entity collidingPlayerOrEntity) ... end</usage>
+        <info static="true"><args><arg type="Entity" name="collidingPlayerOrEntity"/></args></info>
+        <comment>Called when a player collides with an entity on all scripts of the entity. Also calls this function on the player's scripts with the entity as the argument.</comment>
+      </entrypoint>
+      <entrypoint name="OnDamage" serveronly="true">
+        <usage>function Script:OnDamage(number damageAmount, Entity damageCauser, HitResult hitResult) ... end</usage>
+        <info static="true"><args><arg type="number" name="damageAmount"/><arg type="Entity" name="damageCauser"/><arg type="HitResult" name="hitResult"/></args></info>
+        <comment>Called when an entity is damaged on all scripts of the entity. TODO: work out what gets passed in here for radial damage instead of the HitResult.</comment>
+      </entrypoint>
+      <entrypoint name="Init" serveronly="true">
+        <usage>function Script:Init() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called to initialize a script on the server.</comment>
+      </entrypoint>
+      <entrypoint name="ClientInit" clientonly="true">
+        <usage>function Script:ClientInit() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called to initialize a script on the client.</comment>
+      </entrypoint>
+      <entrypoint name="LocalInit" localonly="true">
+        <usage>function Script:LocalInit() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called to initialize a script on the client that controls this entity (eg player, user, etc...)</comment>
+      </entrypoint>
+      <entrypoint name="OnTick" serveronly="true">
+        <usage>function Script:OnTick(number deltaTimeSeconds) ... end</usage>
+        <info static="true"><args><arg type="number" name="deltaTimeSeconds"/></args></info>
+        <comment>Called each frame on the server.</comment>
+      </entrypoint>
+      <entrypoint name="ClientOnTick" clientonly="true">
+        <usage>function Script:ClientOnTick(number deltaTimeSeconds) ... end</usage>
+        <info static="true"><args><arg type="number" name="deltaTimeSeconds"/></args></info>
+        <comment>Called each frame on the client.</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnTick" localonly="true">
+        <usage>function Script:LocalOnTick(number deltaTimeSeconds) ... end</usage>
+        <info static="true"><args><arg type="number" name="deltaTimeSeconds"/></args></info>
+        <comment>Called each frame on the client that controls this entity (eg player, user, etc...)</comment>
+      </entrypoint>
+      <entrypoint name="OnUserLogin" serveronly="true">
+        <usage>function Script:OnUserLogin(User user) ... end</usage>
+        <info static="true"><args><arg type="User" name="user"/></args></info>
+        <comment>Called when a new user joins the game.</comment>
+      </entrypoint>
+      <entrypoint name="OnUserLogout" serveronly="true">
+        <usage>function Script:OnUserLogout(User user) ... end</usage>
+        <info static="true"><args><arg type="User" name="user"/></args></info>
+        <comment>Called when a new user leaves the game.</comment>
+      </entrypoint>
+      <entrypoint name="OnDeathPlaneTrigger" serveronly="true">
+        <usage>function Script:OnDeathPlaneTrigger() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called by the game on a Player when the Player is below the death plane setting</comment>
+      </entrypoint>
+      <entrypoint name="OnTriggerEnter" serveronly="true">
+        <usage>function Script:OnTriggerEnter(Entity other) ... end</usage>
+        <info static="true"><args><arg type="Entity" name="other"/></args></info>
+        <comment>Called by a trigger component when an entity enters the trigger volume</comment>
+      </entrypoint>
+      <entrypoint name="OnTriggerExit" serveronly="true">
+        <usage>function Script:OnTriggerExit(Entity other) ... end</usage>
+        <info static="true"><args><arg type="Entity" name="other"/></args></info>
+        <comment>Called by a trigger component when an entity exits the trigger volume</comment>
+      </entrypoint>
+      <entrypoint name="OnButtonPressed" serveronly="true">
+        <usage>function Script:OnButtonPressed(string buttonName) ... end</usage>
+        <info static="true"><args><arg type="string" name="buttonName"/></args></info>
+        <comment>Called on player and user scripts when a particular button is pressed, giving the string name of the button</comment>
+      </entrypoint>
+      <entrypoint name="OnButtonReleased" serveronly="true">
+        <usage>function Script:OnButtonReleased(string buttonName) ... end</usage>
+        <info static="true"><args><arg type="string" name="buttonName"/></args></info>
+        <comment>Called on player and user scripts when a particular button is released, giving the string name of the button</comment>
+      </entrypoint>
+      <entrypoint name="OnIronSightStart" serveronly="true">
+        <usage>function Script:OnIronSightStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character goes in to Iron Sight mode</comment>
+      </entrypoint>
+      <entrypoint name="OnIronSightStop" serveronly="true">
+        <usage>function Script:OnIronSightStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops Iron Sight mode</comment>
+      </entrypoint>
+      <entrypoint name="OnSprintStart" serveronly="true">
+        <usage>function Script:OnSprintStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character starts sprinting</comment>
+      </entrypoint>
+      <entrypoint name="OnSprintStop" serveronly="true">
+        <usage>function Script:OnSprintStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops sprinting</comment>
+      </entrypoint>
+      <entrypoint name="OnCrouch" serveronly="true">
+        <usage>function Script:OnCrouch() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character crouches</comment>
+      </entrypoint>
+      <entrypoint name="OnStand" serveronly="true">
+        <usage>function Script:OnStand() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stands from crouch</comment>
+      </entrypoint>
+      <entrypoint name="OnJump" serveronly="true">
+        <usage>function Script:OnJump() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called on the player when a jump action happened</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnButtonPressed" localonly="true">
+        <usage>function Script:LocalOnButtonPressed(string buttonName) ... end</usage>
+        <info static="true"><args><arg type="string" name="buttonName"/></args></info>
+        <comment>Called locally on player and user scripts when a particular button is pressed, giving the string name of the button</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnButtonReleased" localonly="true">
+        <usage>function Script:LocalOnButtonReleased(string buttonIndex) ... end</usage>
+        <info static="true"><args><arg type="string" name="buttonIndex"/></args></info>
+        <comment>Called locally on player and user scripts when a particular button is released, giving the string name of the button</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnIronSightStart" localonly="true">
+        <usage>function Script:LocalOnIronSightStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character goes in to Iron Sight mode</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnIronSightStop" localonly="true">
+        <usage>function Script:LocalOnIronSightStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops Iron Sight mode</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnSprintStart" localonly="true">
+        <usage>function Script:LocalOnSprintStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character starts sprinting</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnSprintStop" localonly="true">
+        <usage>function Script:LocalOnSprintStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops sprinting</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnCrouch" localonly="true">
+        <usage>function Script:LocalOnCrouch() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character crouches</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnStand" localonly="true">
+        <usage>function Script:LocalOnStand() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stands from crouch</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnJump" localonly="true">
+        <usage>function Script:LocalOnJump() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called on the player when a jump action happened</comment>
+      </entrypoint>
+      <entrypoint name="OnHotbarChanged" serveronly="true">
+        <usage>function Script:OnHotbarChanged(number hotbarIndex) ... end</usage>
+        <info static="true"><args><arg type="number" name="hotbarIndex"/></args></info>
+        <comment>Called on server when the user's hotbar index changes, either by using the previous and next buttons or using the hotbar keys on a keyboard. Calls function on all user and player scripts.</comment>
+      </entrypoint>
+      <entrypoint name="OnChatMessage">
+        <usage>function Script:OnChatMessage() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when a quick chat message is triggered by the user</comment>
+      </entrypoint>
+      <entrypoint name="OnDestroy">
+        <usage>function Script:OnDestroy() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called on the server when an entity is destroyed</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnMantleStart">
+        <usage>function Script:LocalOnMantleStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character starts to mantle up to a platform</comment>
+      </entrypoint>
+      <entrypoint name="OnMantleStart">
+        <usage>function Script:OnMantleStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character starts to mantle up to a platform</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnMantleStop">
+        <usage>function Script:LocalOnMantleStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops to mantling up to a platform</comment>
+      </entrypoint>
+      <entrypoint name="OnMantleStop">
+        <usage>function Script:OnMantleStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops to mantling up to a platform</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnSlideStart">
+        <usage>function Script:LocalOnSlideStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character starts to slide</comment>
+      </entrypoint>
+      <entrypoint name="OnSlideStart">
+        <usage>function Script:OnSlideStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character starts to slide</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnSlideStop">
+        <usage>function Script:LocalOnSlideStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops sliding</comment>
+      </entrypoint>
+      <entrypoint name="OnSlideStop">
+        <usage>function Script:OnSlideStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops sliding</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnRollStart">
+        <usage>function Script:LocalOnRollStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character starts to roll</comment>
+      </entrypoint>
+      <entrypoint name="OnRollStart">
+        <usage>function Script:OnRollStart() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character starts to roll</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnRollStop">
+        <usage>function Script:LocalOnRollStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops rolling</comment>
+      </entrypoint>
+      <entrypoint name="OnRollStop">
+        <usage>function Script:OnRollStop() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character stops rolling</comment>
+      </entrypoint>
+    </entrypoints>
+  </apidoc>
+  <apidoc name="Sound">
+    <comment>An Entity can have a single physical representation. Sound can be turned on and off with active (which is distinct to entity visible flag). Sound derives from Entity so if you have a Sound you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Sound) to see if a particular entity variable is a Sound type entity.</comment>
+    <parameters>
+      <parameter name="active">
+        <usage>bool active</usage>
+        <comment>Set whether the sound is playing or not.</comment>
+      </parameter>
+      <parameter name="sound">
+        <usage>SoundAsset sound</usage>
+        <comment>Set the SoundAsset that this entity plays</comment>
+      </parameter>
+      <parameter name="volume">
+        <usage>number volume</usage>
+        <comment>Set the volume of the sound (0 = Silent, 1 = Full volume)</comment>
+      </parameter>
+      <parameter name="pitch">
+        <usage>number pitch</usage>
+        <comment>Set the pitch of the sound (1 = Default pitch, 0.125 = 8 times slower, 2 = 2 times faster)</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+  <apidoc name="Text">
+    <comment></comment>
+    <functions>
+      <function name="Format">
+        <usage>Text format:Format(... varArgs)</usage>
+        <info returntype="Text"><args><arg type="..." name="varArgs"/></args></info>
+        <comment>Format a string using the passed in arguments list (in which case replaces {1} with the first one, {2} with the second, etc) or a table (in which case the string keys are replaced with their values). If run on the client this will localise all the Text values involved to the client language where translations are available, if run on the server it will use the native language of each Text value. (Note: Currently entering localised text into text properties is not supported by the editor)</comment>
+      </function>
+      <function name="Format">
+        <usage>Text Text.Format(string format, ... varArgs)</usage>
+        <info returntype="Text" static="true"><args><arg type="string" name="format"/><arg type="..." name="varArgs"/></args></info>
+        <comment>Same as the normal Text:Format function but uses a Lua string as the format specifier, this is unwise as it means there is no opportunity to localize it but useful for simply combining a localised string with a number for example. (Note: Currently entering localised text into text properties is not supported by the editor)</comment>
+      </function>
+      <function name="FormatTime">
+        <usage>Text format:FormatTime(number time)</usage>
+        <info returntype="Text"><args><arg type="number" name="time"/></args></info>
+        <comment>Format a time into a Text value using the following expansions, {hh} - hour component of passed in time, {mm} - minute component of passed in time, {ss} - seconds component of passed in time, {ms} - milisecond component of passed in time. If run on the client the format Text variable will be localized to the client language where translations are available, if run on the server it won't. (Note: Currently entering localised text into text properties is not supported by the editor)</comment>
+      </function>
+      <function name="FormatTime">
+        <usage>Text Text.FormatTime(string format, number time)</usage>
+        <info returntype="Text" static="true"><args><arg type="string" name="format"/><arg type="number" name="time"/></args></info>
+        <comment>Same as the normal Text:FormatTime function but uses a Lua string as the format specifier. This means the actual time format will not be localisable into client languages. (Note: Currently entering localised text into text properties is not supported by the editor)</comment>
+      </function>
+    </functions>
+    <overrides>
+      <override name="to_string">
+        <usage>string tostring(Text var)</usage>
+        <comment>Note: tostring() will lose any non-ASCII characters from the local version of the text</comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="Trigger">
+    <comment>Trigger is an invisible volume that detects when entities enter and exit. Trigger derives from Entity so if you have a Trigger you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Trigger) to see if a particular entity variable is a Trigger type entity.</comment>
+    <functions>
+      <function name="IsOverlapping">
+        <usage>bool triggerComponent:IsOverlapping(Entity entity)</usage>
+        <info returntype="bool"><args><arg type="Entity" name="entity"/></args></info>
+        <comment>Returns whether a passed in entity is currently within the trigger</comment>
+      </function>
+      <function name="IsInside">
+        <usage>bool triggerComponent:IsInside(Vector worldPosition)</usage>
+        <info returntype="bool"><args><arg type="Vector" name="worldPosition"/></args></info>
+        <comment>Returns whether the point given (world space) is within the bounds of the trigger (whether the trigger is active or not)</comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="playersOnly">
+        <usage>bool playersOnly</usage>
+        <comment>Set whether the trigger should only overlap players or all entities.</comment>
+      </parameter>
+      <parameter name="size">
+        <usage>vector size</usage>
+        <comment>The size of the trigger box</comment>
+      </parameter>
+      <parameter name="active">
+        <usage>boolean active</usage>
+        <comment>The trigger box is active</comment>
+      </parameter>
+      <parameter name="interactable">
+        <usage>boolean interactable</usage>
+        <comment>The trigger box is active</comment>
+      </parameter>
+      <parameter name="onTriggerEnter">
+        <usage>Event onTriggerEnter</usage>
+        <comment>Called when this trigger volume is entered by a valid entity, with the Entity passed as an argument, as well as the trigger Entity from which the onTriggerEnter event is sent. An alternative to listening for OnTriggerEnter in a script on the entity.</comment>
+      </parameter>
+      <parameter name="onTriggerExit">
+        <usage>Event onTriggerExit</usage>
+        <comment>Called when this trigger volume is exited by a valid entity, with the Entity passed as an argument, as well as the trigger Entity from which the onTriggerExit event is sent. An alternative to listening for OnTriggerExit in a script on the entity.</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+  <apidoc name="WidgetBindings">
+    <comment></comment>
+    <functions>
+      <function name="CallFunction">
+        <usage>widgetBindings:CallFunction(string function, ... args)</usage>
+        <info><args><arg type="string" name="function"/><arg type="..." name="args"/></args></info>
+        <comment></comment>
+      </function>
+    </functions>
+    <overrides>
+      <override name="new_index">
+        <usage>widgetBindings.var = object value</usage>
+        <comment></comment>
+      </override>
+      <override name="index">
+        <usage>object widgetBindings.var</usage>
+        <comment></comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="Widget">
+    <comment></comment>
+    <functions>
+      <function name="Show">
+        <usage>widget:Show()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="Hide">
+        <usage>widget:Hide()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="CallFunction">
+        <usage>widget:CallFunction(string function, ... args)</usage>
+        <info><args><arg type="string" name="function"/><arg type="..." name="args"/></args></info>
+        <comment></comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="js">
+        <usage>WidgetBindings js</usage>
+        <comment></comment>
+      </parameter>
+      <parameter name="visible">
+        <usage>bool visible</usage>
+        <comment>Set or get the visibility of this widget</comment>
+      </parameter>
+    </parameters>
+    <overrides>
+      <override name="index">
+        <usage>object widget.var</usage>
+        <comment></comment>
+      </override>
+      <override name="new_index">
+        <usage>widget.var = object value</usage>
+        <comment></comment>
+      </override>
+    </overrides>
+  </apidoc>
+  <apidoc name="User">
+    <comment>A User is a type of entity which provides information about a real person connected to the game. You can get all the User entities from the World (GetUsers or ForEachUser). You can also get a User from a Character (which gives the User who is controlling that Character). User derives from Entity so if you have a User you can do any of these functions as well as the functions in Entity. You can do entity:IsA(User) to see if a particular entity variable is a User type entity.</comment>
+    <functions>
+      <function name="GetUsername">
+        <usage>Text user:GetUsername()</usage>
+        <info returntype="Text"><args></args></info>
+        <comment>Get the display name of the User.</comment>
+      </function>
+      <function name="GetPlayerCardIcon">
+        <usage>string user:GetPlayerCardIcon()</usage>
+        <info returntype="string"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="SpawnPlayer" serveronly="true">
+        <usage>Character user:SpawnPlayer(Template playerTemplate)</usage>
+        <info returntype="Character"><args><arg type="Template" name="playerTemplate"/></args></info>
+        <comment>Spawn a player Entity for this User using the supplied template asset.</comment>
+      </function>
+      <function name="SpawnPlayer" serveronly="true">
+        <usage>Character user:SpawnPlayer(Template playerTemplate, Locator locatorEntity)</usage>
+        <info returntype="Character"><args><arg type="Template" name="playerTemplate"/><arg type="Locator" name="locatorEntity"/></args></info>
+        <comment>Spawn a player Entity for this User using the supplied template asset, at the position and rotation of the locatorEntity.</comment>
+      </function>
+      <function name="SpawnPlayer" serveronly="true">
+        <usage>Character user:SpawnPlayer(Template playerTemplate, Vector position, Rotation rotation)</usage>
+        <info returntype="Character"><args><arg type="Template" name="playerTemplate"/><arg type="Vector" name="position"/><arg type="Rotation" name="rotation"/></args></info>
+        <comment>Spawn a player Entity for this User using the supplied template asset, at the given position and rotation.</comment>
+      </function>
+      <function name="SpawnPlayerWithEffect" serveronly="true">
+        <usage>Character user:SpawnPlayerWithEffect(Template playerTemplate, callback onEffectEnded)</usage>
+        <info returntype="Character"><args><arg type="Template" name="playerTemplate"/><arg type="callback" name="onEffectEnded"/></args></info>
+        <comment>Spawn a player Entity for this User using the supplied template asset and trigger the spawn effect with callback</comment>
+      </function>
+      <function name="SpawnPlayerWithEffect" serveronly="true">
+        <usage>Character user:SpawnPlayerWithEffect(Template playerTemplate, Locator locatorEntity, callback onEffectEnded)</usage>
+        <info returntype="Character"><args><arg type="Template" name="playerTemplate"/><arg type="Locator" name="locatorEntity"/><arg type="callback" name="onEffectEnded"/></args></info>
+        <comment>Spawn a player Entity for this User using the supplied template asset, at the position of the spawnPoint (which can be any Entity with a 'playerstart' component) and trigger the spawn effect with callback</comment>
+      </function>
+      <function name="SpawnPlayerWithEffect" serveronly="true">
+        <usage>Character user:SpawnPlayerWithEffect(Template playerTemplate, Vector position, Rotation rotation, callback onEffectEnded)</usage>
+        <info returntype="Character"><args><arg type="Template" name="playerTemplate"/><arg type="Vector" name="position"/><arg type="Rotation" name="rotation"/><arg type="callback" name="onEffectEnded"/></args></info>
+        <comment>Spawn a player Entity for this User using the supplied template asset, at the given position and trigger the spawn effect</comment>
+      </function>
+      <function name="SpawnPlayerWithEffect" serveronly="true">
+        <usage>Character user:SpawnPlayerWithEffect(Template playerTemplate)</usage>
+        <info returntype="Character"><args><arg type="Template" name="playerTemplate"/></args></info>
+        <comment>Spawn a player Entity for this User using the supplied template asset and trigger the spawn effect with callback</comment>
+      </function>
+      <function name="SpawnPlayerWithEffect" serveronly="true">
+        <usage>Character user:SpawnPlayerWithEffect(Template playerTemplate, Locator locatorEntity)</usage>
+        <info returntype="Character"><args><arg type="Template" name="playerTemplate"/><arg type="Locator" name="locatorEntity"/></args></info>
+        <comment>Spawn a player Entity for this User using the supplied template asset, at the position of the spawnPoint (which can be any Entity with a 'playerstart' component) and trigger the spawn effect.</comment>
+      </function>
+      <function name="SpawnPlayerWithEffect" serveronly="true">
+        <usage>Character user:SpawnPlayerWithEffect(Template playerTemplate, Vector position, Rotation rotation)</usage>
+        <info returntype="Character"><args><arg type="Template" name="playerTemplate"/><arg type="Vector" name="position"/><arg type="Rotation" name="rotation"/></args></info>
+        <comment>Spawn a player Entity for this User using the supplied template asset, at the given position and trigger the spawn effect</comment>
+      </function>
+      <function name="DespawnPlayer" serveronly="true">
+        <usage>user:DespawnPlayer()</usage>
+        <info><args></args></info>
+        <comment>Despawn a player</comment>
+      </function>
+      <function name="DespawnPlayerWithEffect" serveronly="true">
+        <usage>user:DespawnPlayerWithEffect(callback onEffectEnded)</usage>
+        <info><args><arg type="callback" name="onEffectEnded"/></args></info>
+        <comment>Despawn a player and trigger the despawn effect with callback when it finishes</comment>
+      </function>
+      <function name="DespawnPlayerWithEffect" serveronly="true">
+        <usage>user:DespawnPlayerWithEffect()</usage>
+        <info><args></args></info>
+        <comment>Despawn a player and trigger the despawn effect</comment>
+      </function>
+      <function name="GetPlayer">
+        <usage>Entity user:GetPlayer()</usage>
+        <info returntype="Entity"><args></args></info>
+        <comment>Get the Entity (if there is one) that has been spawned for the User. For now this is always a Character entity.</comment>
+      </function>
+      <function name="SetCamera" serveronly="true">
+        <usage>user:SetCamera(Entity cameraEntity)</usage>
+        <info><args><arg type="Entity" name="cameraEntity"/></args></info>
+        <comment>Set camera view of this User to the given cameraEntity (which can be either a Camera entity or a Character entity).</comment>
+      </function>
+      <function name="SetCamera" serveronly="true">
+        <usage>user:SetCamera(Entity cameraEntity, number transitionTime)</usage>
+        <info><args><arg type="Entity" name="cameraEntity"/><arg type="number" name="transitionTime"/></args></info>
+        <comment>Set camera view of this User to the given cameraEntity (which can be either a Camera entity or a Character entity). Transitions the camera over a given time from the previous one.</comment>
+      </function>
+      <function name="GetCamera">
+        <usage>Camera user:GetCamera()</usage>
+        <info returntype="Camera"><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="GetCameraLookAtPos">
+        <usage>Vector user:GetCameraLookAtPos()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get the point the camera is looking at</comment>
+      </function>
+      <function name="GetCameraLookAt">
+        <usage>Vector,Vector user:GetCameraLookAt()</usage>
+        <info returntype="Vector,Vector"><args></args></info>
+        <comment>Return two values, the position of the camera and a point the camera is facing at (where it collides with the scene).</comment>
+      </function>
+      <function name="LeaveGame" serveronly="true" localonly="true">
+        <usage>user:LeaveGame()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="LeaveGame" serveronly="true">
+        <usage>user:LeaveGame(callback travelFailedCallback)</usage>
+        <info><args><arg type="callback" name="travelFailedCallback"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GoToGame" serveronly="true" localonly="true">
+        <usage>user:GoToGame(string gameId)</usage>
+        <info><args><arg type="string" name="gameId"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GoToGame" serveronly="true">
+        <usage>user:GoToGame(string gameId, callback travelFailedCallback)</usage>
+        <info><args><arg type="string" name="gameId"/><arg type="callback" name="travelFailedCallback"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GoToWorld" serveronly="true" localonly="true">
+        <usage>user:GoToWorld(WorldAsset worldAsset)</usage>
+        <info><args><arg type="WorldAsset" name="worldAsset"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GoToWorld" serveronly="true">
+        <usage>user:GoToWorld(WorldAsset worldAsset, callback travelFailedCallback)</usage>
+        <info><args><arg type="WorldAsset" name="worldAsset"/><arg type="callback" name="travelFailedCallback"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="ShowCursor" deprecated="true">
+        <usage>user:ShowCursor(bool showCursor)</usage>
+        <info><args><arg type="bool" name="showCursor"/></args></info>
+        <comment>Turn the cursor on or off</comment>
+      </function>
+      <function name="ProjectPositionToScreen">
+        <usage>Vector2D user:ProjectPositionToScreen(Vector worldLocation)</usage>
+        <info returntype="Vector2D"><args><arg type="Vector" name="worldLocation"/></args></info>
+        <comment>Converts a position in world space to a screen space co-ordinate Returned values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) local user = self:GetEntity():GetUser() local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0)) Printf("Screen pos: {1}", screenPos) end</comment>
+      </function>
+      <function name="PlayVibrationEffect">
+        <usage>user:PlayVibrationEffect(VibrationEffectAsset vibrationEffect)</usage>
+        <info><args><arg type="VibrationEffectAsset" name="vibrationEffect"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="PlayManualVibration">
+        <usage>user:PlayManualVibration(number intensity, number duration, bool affectSmallMotors, bool affectLargeMotors)</usage>
+        <info><args><arg type="number" name="intensity"/><arg type="number" name="duration"/><arg type="bool" name="affectSmallMotors"/><arg type="bool" name="affectLargeMotors"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="SetMoveOverride">
+        <usage>user:SetMoveOverride(Vector2D scale, Vector2D add)</usage>
+        <info><args><arg type="Vector2D" name="scale"/><arg type="Vector2D" name="add"/></args></info>
+        <comment>Set a scale on the user's actual move input and an addition 2D vector to add to it. Used for example to auto-walk a player forward but scaling the real input down to zero and adding an additional value.</comment>
+      </function>
+      <function name="SetLookOverride">
+        <usage>user:SetLookOverride(Vector2D scale, Vector2D add)</usage>
+        <info><args><arg type="Vector2D" name="scale"/><arg type="Vector2D" name="add"/></args></info>
+        <comment>Set a scale on the user's actual look input and an addition 2D vector to add to it. Used for example to auto-look a player at a particular point by scaling the real input down to zero and adding an additional value.</comment>
+      </function>
+      <function name="SetLeaderboardValue">
+        <usage>user:SetLeaderboardValue(string leaderboardId, number value, callback callback)</usage>
+        <info><args><arg type="string" name="leaderboardId"/><arg type="number" name="value"/><arg type="callback" name="callback"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="SetLeaderboardValue">
+        <usage>user:SetLeaderboardValue(string leaderboardId, number value)</usage>
+        <info><args><arg type="string" name="leaderboardId"/><arg type="number" name="value"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GetLeaderboardValue">
+        <usage>user:GetLeaderboardValue(string leaderboardId, callback callback)</usage>
+        <info><args><arg type="string" name="leaderboardId"/><arg type="callback" name="callback"/></args></info>
+        <comment>Gets the highest ranking value on the specified leaderboard for this user. Results are returned as parameters to the callback function. Callback function parameters are Score & Rank</comment>
+      </function>
+      <function name="AddToLeaderboardValue" serveronly="true">
+        <usage>user:AddToLeaderboardValue(string leaderboardId, number increment, callback callback)</usage>
+        <info><args><arg type="string" name="leaderboardId"/><arg type="number" name="increment"/><arg type="callback" name="callback"/></args></info>
+        <comment>Add a number to the leaderboard value on the specified leaderboard for this user. Results are returned as parameters to the callback function. Callback function parameter is the new score</comment>
+      </function>
+      <function name="AddToLeaderboardValue" serveronly="true">
+        <usage>user:AddToLeaderboardValue(string leaderboardId, number increment)</usage>
+        <info><args><arg type="string" name="leaderboardId"/><arg type="number" name="increment"/></args></info>
+        <comment>Add a number to the leaderboard value on the specified leaderboard for this user.</comment>
+      </function>
+      <function name="GetChallengeProgress">
+        <usage>number user:GetChallengeProgress(string challengeId)</usage>
+        <info returntype="number"><args><arg type="string" name="challengeId"/></args></info>
+        <comment>Gets the current progress on an active challenge</comment>
+      </function>
+      <function name="SendChallengeEvent" serveronly="true">
+        <usage>user:SendChallengeEvent(string eventName, table eventParametersTable)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="table" name="eventParametersTable"/></args></info>
+        <comment>Sends a Challenge event for this user. Takes a lua table of parameter to value pairs that are conditionally checked against the Challenge definition. Usage example: function MyUserScript:OnSomeAction(someValue1, someValue2) self:GetUser():SendChallengeEvent("SomeEvent", {someParameter1 = someValue1, someParameter2 = someValue2}) end</comment>
+      </function>
+      <function name="SendChallengeEvent" serveronly="true">
+        <usage>user:SendChallengeEvent(string eventName)</usage>
+        <info><args><arg type="string" name="eventName"/></args></info>
+        <comment>Sends a Challenge event for this user.</comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="showDefaultCrosshair">
+        <usage>bool showDefaultCrosshair</usage>
+        <comment>Show the default crosshair</comment>
+      </parameter>
+      <parameter name="useHotbar">
+        <usage>bool useHotbar</usage>
+        <comment>Use hotbar inputs, using the next and previous item buttons on controller and the hotbar buttons on keyboard</comment>
+      </parameter>
+      <parameter name="hotbarMax">
+        <usage>int hotbarMax</usage>
+        <comment>Number of slots in the hotbar, this is a wrap point for next and previous item buttons</comment>
+      </parameter>
+      <parameter name="hotbarIndex">
+        <usage>int hotbarIndex</usage>
+        <comment>The current (1-based) hotbar index for this user</comment>
+      </parameter>
+      <parameter name="voiceChannel">
+        <usage>int voiceChannel</usage>
+        <comment>The current voice channel for this user (1 - 32)</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+  <apidoc name="VoxelMesh">
+    <comment>An Entity can have a single physical representation. Voxels represents a voxel mesh which is edited to a start state in the editor and can be changed during gameplay. Voxels derives from Entity so if you have a Voxels you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Voxels) to see if a particular entity variable is a Voxels type entity.</comment>
+    <functions>
+      <function name="SetVoxel" serveronly="true">
+        <usage>voxelComponent:SetVoxel(Vector pos, VoxelAsset voxelAsset)</usage>
+        <info><args><arg type="Vector" name="pos"/><arg type="VoxelAsset" name="voxelAsset"/></args></info>
+        <comment>Change a single voxel in world space.</comment>
+      </function>
+      <function name="SetVoxelBox" serveronly="true">
+        <usage>voxelComponent:SetVoxelBox(Vector pos, Vector dimensions, VoxelAsset voxelAsset)</usage>
+        <info><args><arg type="Vector" name="pos"/><arg type="Vector" name="dimensions"/><arg type="VoxelAsset" name="voxelAsset"/></args></info>
+        <comment>Change a cuboid of voxels with given dimensions in world units (centimeters). 1 voxel = 25cm.</comment>
+      </function>
+      <function name="SetVoxelBox" serveronly="true">
+        <usage>voxelComponent:SetVoxelBox(Vector pos, number halfSize, VoxelAsset voxelAsset)</usage>
+        <info><args><arg type="Vector" name="pos"/><arg type="number" name="halfSize"/><arg type="VoxelAsset" name="voxelAsset"/></args></info>
+        <comment>Change a cube of voxels with a given half-size in world units (centimeters) for each axis. 1 voxel = 25cm.</comment>
+      </function>
+      <function name="SetVoxelSphere" serveronly="true">
+        <usage>voxelComponent:SetVoxelSphere(Vector pos, Vector dimensions, VoxelAsset voxelAsset)</usage>
+        <info><args><arg type="Vector" name="pos"/><arg type="Vector" name="dimensions"/><arg type="VoxelAsset" name="voxelAsset"/></args></info>
+        <comment>Change an elipsoid of voxels with given dimensions in world units (centimeters). 1 voxel = 25cm.</comment>
+      </function>
+      <function name="SetVoxelSphere" serveronly="true">
+        <usage>voxelComponent:SetVoxelSphere(Vector pos, number radius, VoxelAsset voxelAsset)</usage>
+        <info><args><arg type="Vector" name="pos"/><arg type="number" name="radius"/><arg type="VoxelAsset" name="voxelAsset"/></args></info>
+        <comment>Change a sphere of voxels with a given radius in world units (centimeters). 1 voxel = 25cm.</comment>
+      </function>
+      <function name="ResetVoxels" serveronly="true">
+        <usage>voxelComponent:ResetVoxels()</usage>
+        <info><args></args></info>
+        <comment>Reset any SetVoxel...() calls that have been done during play, returning the voxel prop to its starting state (ie as it was in the editor).</comment>
+      </function>
+      <function name="CreateThruster">
+        <usage>Thruster voxels:CreateThruster()</usage>
+        <info returntype="Thruster"><args></args></info>
+        <comment>Add a thruster to an entity</comment>
+      </function>
+      <function name="CreateRelativeThruster">
+        <usage>Thruster voxels:CreateRelativeThruster()</usage>
+        <info returntype="Thruster"><args></args></info>
+        <comment>Add a thruster to an entity</comment>
+      </function>
+      <function name="DestroyThruster">
+        <usage>voxels:DestroyThruster(Thruster handle)</usage>
+        <info><args><arg type="Thruster" name="handle"/></args></info>
+        <comment>Destroy a thruster</comment>
+      </function>
+      <function name="AddImpulse">
+        <usage>voxels:AddImpulse(Vector impulse)</usage>
+        <info><args><arg type="Vector" name="impulse"/></args></info>
+        <comment>Add Impulse. An integral of force over a time interval. Newton seconds.</comment>
+      </function>
+      <function name="AddAngularImpulse">
+        <usage>voxels:AddAngularImpulse(Rotation angularImpulse)</usage>
+        <info><args><arg type="Rotation" name="angularImpulse"/></args></info>
+        <comment>Add an angular impulse. An integral of torque over a time interval. Newton seconds.</comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="mesh">
+        <usage>voxelmesh mesh</usage>
+        <comment>Get or change the voxel mesh asset</comment>
+      </parameter>
+      <parameter name="collisionEnabled">
+        <usage>bool collisionEnabled</usage>
+        <comment>Turn on or off collision (ie calling entry point OnCollision).</comment>
+      </parameter>
+      <parameter name="damageEnabled">
+        <usage>bool damageEnabled</usage>
+        <comment>Turn on or off damage (ie calling of entry point OnDamaged).</comment>
+      </parameter>
+      <parameter name="physicsEnabled">
+        <usage>bool physicsEnabled</usage>
+        <comment>Turn on or off physics.</comment>
+      </parameter>
+      <parameter name="gravityEnabled">
+        <usage>bool gravityEnabled</usage>
+        <comment>Turn on or off physics.</comment>
+      </parameter>
+      <parameter name="onCollision">
+        <usage>Event onCollision</usage>
+        <comment>Called when this entity is collided with by a player Character with the Character passed as an argument, as well as the voxel mesh Entity from which the onCollision event was sent. An alternative to listening for OnCollision in a script on the entity.</comment>
+      </parameter>
+      <parameter name="onDamage">
+        <usage>Event onDamage</usage>
+        <comment>Called when this entity is damaged with the amount of damage, the entity causing the damage and a HitResult structure, as well as the voxel mesh Entity from which the onDamage event was sent. An alternative to listening for OnDamage in a script on the entity.</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+  <apidoc name="World">
+    <comment>Functions that effect everything within the current world.</comment>
+    <functions>
+      <function name="RevertClientProperty" clientonly="true">
+        <usage>world:RevertClientProperty(string propertyName)</usage>
+        <info><args><arg type="string" name="propertyName"/></args></info>
+        <comment>Revert a property that's been changed on the client back to the server's value for it</comment>
+      </function>
+      <function name="Raycast">
+        <usage>world:Raycast(Vector start, Vector end, Entity entityToIgnore, callback collisionCallback)</usage>
+        <info><args><arg type="Vector" name="start"/><arg type="Vector" name="end"/><arg type="Entity" name="entityToIgnore"/><arg type="callback" name="collisionCallback"/></args></info>
+        <comment>Send a ray (line) from start position to end position, and call the collisionCallback with the entity that was hit and a HitResult structure if any Entity is hit along the way. Pass an entityToIgnore to tell it not to hit that one (for example ignore the player when doing a ray from a gun the player is holding).</comment>
+      </function>
+      <function name="Raycast">
+        <usage>world:Raycast(Vector start, Vector end, table entitiesToIgnoreTable, callback collisionCallback)</usage>
+        <info><args><arg type="Vector" name="start"/><arg type="Vector" name="end"/><arg type="table" name="entitiesToIgnoreTable"/><arg type="callback" name="collisionCallback"/></args></info>
+        <comment>Send a ray (line) from start position to end position, and call the collisionCallback with the entity that was hit and a HitResult structure if any Entity is hit along the way. Pass an array of entities to ignore.</comment>
+      </function>
+      <function name="Find">
+        <usage>Entity world:Find(string name)</usage>
+        <info returntype="Entity"><args><arg type="string" name="name"/></args></info>
+        <comment>Find a named Entity within the world. Generally an entity type property which is filled in in the editor is a better option.</comment>
+      </function>
+      <function name="FindAll">
+        <usage>table world:FindAll()</usage>
+        <info returntype="table"><args></args></info>
+        <comment>Return all entities in the world. Can be very slow.</comment>
+      </function>
+      <function name="FindAll">
+        <usage>table world:FindAll(table derivedType)</usage>
+        <info returntype="table"><args><arg type="table" name="derivedType"/></args></info>
+        <comment>Return all entities in the world of the given type (Light, Mesh, etc). Can be very slow.</comment>
+      </function>
+      <function name="FindAllScripts">
+        <usage>table world:FindAllScripts(string scriptName)</usage>
+        <info returntype="table"><args><arg type="string" name="scriptName"/></args></info>
+        <comment>Find all scripts named scriptName recursively in the world. Most often used where multiple scripts are used to simulate an array of structures.</comment>
+      </function>
+      <function name="FindAllScripts">
+        <usage>table world:FindAllScripts(ScriptAsset templateRefScript)</usage>
+        <info returntype="table"><args><arg type="ScriptAsset" name="templateRefScript"/></args></info>
+        <comment>Find all scripts matching the script asset recursively in the world. Most often used where multiple scripts are used to simulate an array of structures.</comment>
+      </function>
+      <function name="FindScript">
+        <usage>Script world:FindScript(string scriptName)</usage>
+        <info returntype="Script"><args><arg type="string" name="scriptName"/></args></info>
+        <comment>Find any entity with a script named scriptName recursively in the world, returns the script if found.</comment>
+      </function>
+      <function name="FindScript">
+        <usage>Script world:FindScript(ScriptAsset templateRefScript)</usage>
+        <info returntype="Script"><args><arg type="ScriptAsset" name="templateRefScript"/></args></info>
+        <comment>Find any entity with a script matching the script asset recursively in the world, returns the script if found.</comment>
+      </function>
+      <function name="FindTemplate">
+        <usage>Template world:FindTemplate(string name)</usage>
+        <info returntype="Template"><args><arg type="string" name="name"/></args></info>
+        <comment>Find a Template in the world by name. Returns nil if not found</comment>
+      </function>
+      <function name="GetLocalUser" clientonly="true">
+        <usage>User world:GetLocalUser()</usage>
+        <info returntype="User"><args></args></info>
+        <comment>Get the User that this client is owned by.</comment>
+      </function>
+      <function name="GetUsers">
+        <usage>table world:GetUsers()</usage>
+        <info returntype="table"><args></args></info>
+        <comment>Get a table containing all the User entities within the current world. This works on the server or the client however the client version of the table might lag behind the server version.</comment>
+      </function>
+      <function name="ForEachUser">
+        <usage>world:ForEachUser(callback callback, ... args)</usage>
+        <info><args><arg type="callback" name="callback"/><arg type="..." name="args"/></args></info>
+        <comment>Call the given callback for each User with the User as the argument</comment>
+      </function>
+      <function name="ApplyPointDamage" serveronly="true">
+        <usage>world:ApplyPointDamage(number baseDamage, Vector rayStart, Vector direction, Entity fromEntity)</usage>
+        <info><args><arg type="number" name="baseDamage"/><arg type="Vector" name="rayStart"/><arg type="Vector" name="direction"/><arg type="Entity" name="fromEntity"/></args></info>
+        <comment>Applies point damage to the first Entity that intersects the given ray.</comment>
+      </function>
+      <function name="ApplyPointDamage" serveronly="true">
+        <usage>world:ApplyPointDamage(number baseDamage, Vector rayStart, Vector direction, Entity fromEntity, table damageModifiers)</usage>
+        <info><args><arg type="number" name="baseDamage"/><arg type="Vector" name="rayStart"/><arg type="Vector" name="direction"/><arg type="Entity" name="fromEntity"/><arg type="table" name="damageModifiers"/></args></info>
+        <comment>Applies point damage to the first Entity that intersects the given ray. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</comment>
+      </function>
+      <function name="ApplyRadialDamage" serveronly="true">
+        <usage>world:ApplyRadialDamage(number baseDamage, Vector origin, number radius, number falloff, Entity fromEntity)</usage>
+        <info><args><arg type="number" name="baseDamage"/><arg type="Vector" name="origin"/><arg type="number" name="radius"/><arg type="number" name="falloff"/><arg type="Entity" name="fromEntity"/></args></info>
+        <comment>Applies radial damage to all Entities within a radius of an origin.</comment>
+      </function>
+      <function name="ApplyRadialDamage" serveronly="true">
+        <usage>world:ApplyRadialDamage(number baseDamage, Vector origin, number radius, number falloff, Entity fromEntity, table damageModifiers)</usage>
+        <info><args><arg type="number" name="baseDamage"/><arg type="Vector" name="origin"/><arg type="number" name="radius"/><arg type="number" name="falloff"/><arg type="Entity" name="fromEntity"/><arg type="table" name="damageModifiers"/></args></info>
+        <comment>Applies radial damage to all Entities within a radius of an origin. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</comment>
+      </function>
+      <function name="SetVoxelProperties">
+        <usage>world:SetVoxelProperties(table voxelPropertiesTable)</usage>
+        <info><args><arg type="table" name="voxelPropertiesTable"/></args></info>
+        <comment>Set the voxel properties of the world. VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset, healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time.</comment>
+      </function>
+      <function name="SetVoxelProperties">
+        <usage>world:SetVoxelProperties(table voxelPropertiesTable, number defaultMaxHealth, number defaultHealTime)</usage>
+        <info><args><arg type="table" name="voxelPropertiesTable"/><arg type="number" name="defaultMaxHealth"/><arg type="number" name="defaultHealTime"/></args></info>
+        <comment>Set the voxel properties of the world. VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset, healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time, these can be modified in this version of the function.</comment>
+      </function>
+      <function name="GetTimeOfDay">
+        <usage>number world:GetTimeOfDay()</usage>
+        <info returntype="number"><args></args></info>
+        <comment>Get the time of day (see SetTimeOfTime for what the return value means)</comment>
+      </function>
+      <function name="Spawn" serveronly="true">
+        <usage>Entity world:Spawn(Template templateAsset, Vector position, Rotation rotation)</usage>
+        <info returntype="Entity"><args><arg type="Template" name="templateAsset"/><arg type="Vector" name="position"/><arg type="Rotation" name="rotation"/></args></info>
+        <comment>Spawn a new Entity from the template pointed at by templateAsset, at the given position and rotation.</comment>
+      </function>
+      <function name="Spawn" serveronly="true">
+        <usage>Entity world:Spawn(Template templateAsset, Locator locatorEntity)</usage>
+        <info returntype="Entity"><args><arg type="Template" name="templateAsset"/><arg type="Locator" name="locatorEntity"/></args></info>
+        <comment>Spawn a new Entity from the template pointed at by templateAsset, at the given locator's position and rotation.</comment>
+      </function>
+      <function name="BroadcastToScripts">
+        <usage>world:BroadcastToScripts(string eventName, ... args)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="..." name="args"/></args></info>
+        <comment>Try calling eventName on all scripts of all Entities within the World. When called on the server it sends to server scripts only, if called on the client it will send to client scripts only.</comment>
+      </function>
+      <function name="GetServerTime">
+        <usage>number world:GetServerTime()</usage>
+        <info returntype="number"><args></args></info>
+        <comment>Get server up time in seconds (can be called on client or server)</comment>
+      </function>
+      <function name="GetUTCTime">
+        <usage>number world:GetUTCTime()</usage>
+        <info returntype="number"><args></args></info>
+        <comment>Gets unit time (number of seconds that have elapsed since Jan 1 1970). This has an issue that it will start to overflow 32-bits in 2038.</comment>
+      </function>
+      <function name="GetGames">
+        <usage>world:GetGames(string railName, callback callback)</usage>
+        <info><args><arg type="string" name="railName"/><arg type="callback" name="callback"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GetGames">
+        <usage>world:GetGames(table railNamesTable, callback callback)</usage>
+        <info><args><arg type="table" name="railNamesTable"/><arg type="callback" name="callback"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="GetActiveChallenges">
+        <usage>table world:GetActiveChallenges()</usage>
+        <info returntype="table"><args></args></info>
+        <comment>Gets the current active challenges Example result table: result = {} result[1] = {id = ChallengeId, name = LocalisedName, icon = IconUrl, count = TotalCountToComplete} result[2] = {id...</comment>
+      </function>
+    </functions>
+    <parameters>
+      <parameter name="startTime">
+        <usage>number startTime</usage>
+        <comment>Start time of day from 0.0 (midnight) - 0.5 (midday) - 1.0 (next midnight)</comment>
+      </parameter>
+      <parameter name="dayLength">
+        <usage>number dayLength</usage>
+        <comment>Length of virtual 'day' in real-time seconds</comment>
+      </parameter>
+      <parameter name="sunDirection">
+        <usage>number sunDirection</usage>
+        <comment>Angle of sun in degrees. Controls whether the sun rises from west to east, north to south, etc.</comment>
+      </parameter>
+      <parameter name="sunColor">
+        <usage>Color sunColor</usage>
+        <comment>Color of the sun</comment>
+      </parameter>
+      <parameter name="sunIntensity">
+        <usage>number sunIntensity</usage>
+        <comment>Intensity of the sun</comment>
+      </parameter>
+      <parameter name="heightFogStartDistance">
+        <usage>number heightFogStartDistance</usage>
+        <comment>Height fog start distance</comment>
+      </parameter>
+      <parameter name="heightFogFalloff">
+        <usage>number heightFogFalloff</usage>
+        <comment>Height fog falloff</comment>
+      </parameter>
+      <parameter name="heightFogDensity">
+        <usage>number heightFogDensity</usage>
+        <comment>Height fog density</comment>
+      </parameter>
+      <parameter name="heightFogColor">
+        <usage>Color heightFogColor</usage>
+        <comment>Color of the height fog</comment>
+      </parameter>
+      <parameter name="skyLightIntensity">
+        <usage>number skyLightIntensity</usage>
+        <comment>Intensity of the ambient light</comment>
+      </parameter>
+      <parameter name="skyLightColor">
+        <usage>Color skyLightColor</usage>
+        <comment>Color of the ambient light</comment>
+      </parameter>
+      <parameter name="postProcess">
+        <usage>PostProcessAsset postProcess</usage>
+        <comment>Post Process effect</comment>
+      </parameter>
+      <parameter name="colorGrading">
+        <usage>ColorGradingAsset colorGrading</usage>
+        <comment>Color Grading effect</comment>
+      </parameter>
+      <parameter name="skydome">
+        <usage>SkydomeAsset skydome</usage>
+        <comment>Skydome asset</comment>
+      </parameter>
+      <parameter name="innerHorizon">
+        <usage>HorizonAsset innerHorizon</usage>
+        <comment>Inner Horizon asset</comment>
+      </parameter>
+      <parameter name="outerHorizon">
+        <usage>HorizonAsset outerHorizon</usage>
+        <comment>Outer Horizon asset</comment>
+      </parameter>
+      <parameter name="skyMesh">
+        <usage>SkyMeshAsset skyMesh</usage>
+        <comment>Sky Mesh asset</comment>
+      </parameter>
+      <parameter name="deathPlaneActive">
+        <usage>bool deathPlaneActive</usage>
+        <comment>Set whether the death plane is active or not</comment>
+      </parameter>
+      <parameter name="deathPlaneZ">
+        <usage>number deathPlaneZ</usage>
+        <comment>Height of the death plane, when active the game will send OnFellToDeath to any Player who falls below this, automatically putting the Player back to where they spawned if the event is not responded to by any scripts.</comment>
+      </parameter>
+    </parameters>
+  </apidoc>
+</apidocs>

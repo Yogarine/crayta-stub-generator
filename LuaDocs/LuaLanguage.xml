@@ -1,0 +1,119 @@
+<apidocs version="CL-45982-B-5520"> 
+	<apidoc name="math">
+		<functions>
+			<function name="ceil"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="floor"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="tan"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="log10"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="randomseed"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="cos"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="sinh"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="random"><info returntype="number" static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="max"><info static="true"><args><arg name="x"></arg><arg name="args" type="..."></arg></args></info></function>
+			<function name="min"><info static="true"><args><arg name="x"></arg><arg name="args" type="..."></arg></args></info></function>
+			<function name="atan2"><info static="true"><args><arg name="y"></arg><arg name="x"></arg></args></info></function>
+			<function name="ldexp"><info static="true"><args><arg name="m"></arg><arg name="e"></arg></args></info></function>
+			<function name="sqrt"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="deg"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="atan"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="fmod"><info static="true"><args><arg name="x"></arg><arg name="y"></arg></args></info></function>
+			<function name="acos"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="pow"><info static="true"><args><arg name="x"></arg><arg name="y"></arg></args></info></function>
+			<function name="abs"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="sin"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="frexp"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="log"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="tanh"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="exp"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="modf"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="cosh"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="asin"><info static="true"><args><arg name="x"></arg></args></info></function>
+			<function name="rad"><info static="true"><args><arg name="x"></arg></args></info></function>
+		</functions>
+	</apidoc>
+	<apidoc name="table">
+		<functions>
+			<function name="maxn"><info static="true"><args><arg name="table"></arg></args></info></function>
+			<function name="sort"><info static="true"><args><arg name="table"></arg></args></info></function>
+			<function name="sort"><info static="true"><args><arg name="table"></arg><arg name="comp"></arg></args></info></function>
+			<function name="remove"><info static="true"><args><arg name="table"></arg></args></info></function>
+			<function name="remove"><info static="true"><args><arg name="table"></arg><arg name="pos"></arg></args></info></function>
+			<function name="concat"><info static="true"><args><arg name="list"></arg></args></info></function>
+			<function name="concat"><info static="true"><args><arg name="list"></arg><arg name="sep"></arg></args></info></function>
+			<function name="concat"><info static="true"><args><arg name="list"></arg><arg name="sep"></arg><arg name="i"></arg></args></info></function>
+			<function name="concat"><info static="true"><args><arg name="list"></arg><arg name="sep"></arg><arg name="i"></arg><arg name="j"></arg></args></info></function>
+			<function name="insert"><info static="true"><args><arg name="list"></arg><arg name="value"></arg></args></info></function>
+			<function name="insert"><info static="true"><args><arg name="list"></arg><arg name="pos"></arg><arg name="value"></arg></args></info></function>
+			<!-- Lua 5.2: <function name="pack"><info static="true"><args><arg type="..."></arg></args></info></function>
+			<function name="unpack"><info static="true"><args><arg name="list"></arg></args></info></function>
+			<function name="unpack"><info static="true"><args><arg name="list"></arg><arg name="i"></arg></args></info></function>
+			<function name="unpack"><info static="true"><args><arg name="list"></arg><arg name="i"></arg><arg name="j"></arg></args></info></function>-->
+		</functions>
+	</apidoc>
+	<apidoc name="string">
+		<functions>
+			<function name="find"><info><args><arg name="pattern"></arg></args></info></function>
+			<function name="find"><info><args><arg name="pattern"></arg><arg name="init"></arg></args></info></function>
+			<function name="find"><info><args><arg name="pattern"></arg><arg name="init"></arg><arg name="plain"></arg></args></info></function>
+
+			<function name="format"><info><args><arg name="args" type="..."></arg></args></info></function>
+			<function name="rep"><info><args><arg name="n"></arg></args></info></function>
+			<function name="gsub"><info><args><arg name="pattern"></arg><arg name="repl"></arg></args></info></function>
+			<function name="gsub"><info><args><arg name="pattern"></arg><arg name="repl"></arg><arg name="n"></arg></args></info></function>
+			
+			<function name="len"></function>
+			<function name="gmatch"><info><args><arg name="pattern"></arg></args></info></function>
+			<function name="match"><info><args><arg name="pattern"></arg></args></info></function>
+			<function name="match"><info><args><arg name="pattern"></arg><arg name="init"></arg></args></info></function>
+			<function name="reverse"></function>
+			
+			<function name="byte"></function>
+			<function name="byte"><info><args><arg name="i"></arg></args></info></function>
+			<function name="byte"><info><args><arg name="i"></arg><arg name="j"></arg></args></info></function>
+			
+			<function name="char"><info static="true"><args><arg type="..."></arg></args></info></function>
+			
+			<function name="upper"><info returntype="string"></info></function>
+			<function name="lower"><info returntype="string"></info></function>
+			
+			<function name="sub"><info><args><arg name="i"></arg></args></info></function>
+			<function name="sub"><info><args><arg name="i"></arg><arg name="j"></arg></args></info></function>
+		</functions>
+	</apidoc>
+	<apidoc name="coroutine">
+		<functions>
+			<function name="wrap"><info static="true"><args><arg name="f"></arg></args></info></function>
+			<function name="yield"><info static="true"><args><arg type="..."></arg></args></info></function>
+			<function name="resume"><info static="true"><args><arg name="co"></arg></args></info></function>
+			<function name="resume"><info static="true"><args><arg name="val1"></arg><arg type="..."></arg></args></info></function>
+			<function name="isyieldable"><info static="true"></info></function>
+			<function name="running"><info static="true"></info></function>
+			<function name="create"><info static="true"><args><arg name="f"></arg></args></info></function>
+		</functions>
+	</apidoc>
+	<apidoc>
+		<functions>
+			<function name="tostring"><info><args><arg name="v"></arg></args></info></function>
+			<function name="tonumber"><info><args><arg name="e"></arg></args></info></function>
+			<function name="tonumber"><info><args><arg name="e"></arg><arg name="base"></arg></args></info></function>
+			<function name="rawget"><info><args><arg name="table"></arg><arg name="index"></arg></args></info></function>
+			<function name="ipairs"><info><args><arg name="t"></arg></args></info></function>
+			<function name="print"><info><args><arg type="..."></arg></args></info></function>
+			<function name="pcall"><info><args><arg name="f"></arg></args></info></function>
+			<function name="pcall"><info><args><arg name="f"></arg><arg name="arg1"></arg><arg type="..."></arg></args></info></function>
+			<function name="rawset"><info><args><arg name="table"></arg><arg name="index"></arg><arg name="value"></arg></args></info></function>
+			<function name="next"><info><args><arg name="table"></arg></args></info></function>
+			<function name="next"><info><args><arg name="table"></arg><arg name="index"></arg></args></info></function>
+			<function name="getmetatable"><info><args><arg name="object"></arg></args></info></function>
+			<function name="pairs"><info><args><arg name="t"></arg></args></info></function>
+			<function name="setmetatable"><info><args><arg name="table"></arg><arg name="metatable"></arg></args></info></function>
+			<function name="type"><info><args><arg name="v"></arg></args></info></function>
+			<function name="select"><info><args><arg name="index"></arg><arg type="..."></arg></args></info></function>
+			<function name="unpack"><info><args><arg name="index"></arg><arg type="..."></arg></args></info></function>
+			<function name="error"><info><args><arg name="message"></arg></args></info></function>
+			<function name="error"><info><args><arg name="message"></arg><arg name="level"></arg></args></info></function>
+			<function name="assert"><info><args><arg name="v"></arg></args></info></function>
+			<function name="assert"><info><args><arg name="v"></arg><arg type="message"></arg></args></info></function>
+		</functions>
+	</apidoc>
+</apidocs>

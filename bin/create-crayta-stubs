@@ -40,9 +40,11 @@ foreach ($options as $option) {
 
 $craytaStubGenerator = new CraytaStubGenerator();
 
-$target_dir = getcwd() . '/stubs';
+$target_dir = getcwd() . '/stubs/crayta';
 if (
-    dirname(CraytaStubGenerator::getStaticStubsDir(), 2) === dirname($target_dir)
+    dirname(CraytaStubGenerator::getStaticStubsDir(), 2) === dirname(
+        $target_dir
+    )
 ) {
     $copy_static_stubs = false;
     echo "NOT copying static stubs to not taint our stubs directory." . PHP_EOL;
