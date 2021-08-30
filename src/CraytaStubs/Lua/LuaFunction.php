@@ -54,6 +54,11 @@ class LuaFunction extends Variable
     protected $arguments = [];
 
     /**
+     * @var \Yogarine\CraytaStubs\Lua\LuaFunction[]
+     */
+    protected $overloadFunctions = [];
+
+    /**
      * LuaFunction constructor.
      *
      * @param  string  $type
@@ -77,19 +82,25 @@ class LuaFunction extends Variable
     }
 
     /**
+     * @param  \Yogarine\CraytaStubs\Lua\LuaFunction  $overloadFunction
+     */
+    public function addOverload(LuaFunction $overloadFunction)
+    {
+        $this->overloadFunctions[] = $overloadFunction;
+    }
+
+    /**
      * @param  string|null  $type
      * @return string|null
      */
     public function parseType(string $type = null)
     {
-        $type = parent::parseType($type);
-        $type = self::CUSTOM_RETURN_TYPES[$this->identifier] ?? $type;
-
-        return $type;
+        return self::CUSTOM_RETURN_TYPES[$this->identifier]
+            ?? parent::parseType($type);
     }
 
     /**
-     * @return array
+     * @return \Yogarine\CraytaStubs\Lua\Argument[]
      */
     public function getArguments(): array
     {
@@ -153,9 +164,7 @@ class LuaFunction extends Variable
     {
         $doc = [];
 
-        $overloads = self::OVERLOADS[$this->getSignature()]
-            ?? self::OVERLOADS[$this->getIdentifier()]
-            ?? [];
+        $overloads = $this->getOverloads();
 
         foreach ($overloads as $overload) {
             $doc[] = " @overload {$overload}";
@@ -202,6 +211,35 @@ class LuaFunction extends Variable
         $functionsTxt .= "\nend\n\n";
 
         return $functionsTxt;
+    }
+
+    private function getOverloads(): array
+    {
+        $overloads = self::OVERLOADS[$this->getSignature()]
+            ?? self::OVERLOADS[$this->getIdentifier()]
+            ?? [];
+
+        foreach ($this->overloadFunctions as $overloadFunction) {
+            $overloads[] = $overloadFunction->getOverloadSignature();
+        }
+
+        return $overloads;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOverloadSignature(): string
+    {
+        $arguments = [];
+        foreach ($this->getArguments() as $argument) {
+            $identifier = $argument->getIdentifier();
+            $type       = $argument->getType();
+
+            $arguments[] = "{$identifier}: {$type}";
+        }
+
+        return "fun(" . implode(', ', $arguments) . "): {$this->getType()}";
     }
 
     /**

@@ -117,7 +117,17 @@ class Module extends Variable
         $this->apiVersion      = $apiVersion;
         $this->constants       = $constants;
         $this->fields          = $fields;
-        $this->functions       = $functions;
+        $this->functions       = [];
+
+        foreach ($functions as $function) {
+            $functionIdentifier = $function->getIdentifier();
+
+            if (isset($this->functions[$functionIdentifier])) {
+                $this->functions[$functionIdentifier]->addOverload($function);
+            } else {
+                $this->functions[$functionIdentifier] = $function;
+            }
+        }
 
         foreach (
             self::EXTRA_FIELDS[$identifier] ?? [] as $fieldName => $fieldType
@@ -220,7 +230,13 @@ class Module extends Variable
      */
     public function addFunction(LuaFunction $function)
     {
-        $this->functions[] = $function;
+        $identifier = $function->getIdentifier();
+
+        if (isset($this->functions[$identifier])) {
+            $this->functions[$identifier]->addOverload($function);
+        } else {
+            $this->functions[$identifier] = $function;
+        }
 
         $localModuleIdentifier = $function->getLocalModuleIdentifier();
 

@@ -144,6 +144,7 @@ class Argument extends Variable
         'world:Raycast' => [
             'collisionCallback' =>
                 'fun(entity: Entity, hitResult: HitResult): void',
+            'entitiesToIgnoreTable' => 'Entity[]',
         ],
         'world:ForEachUser' => [
             'callback' => 'fun(user: User, ...): void',
