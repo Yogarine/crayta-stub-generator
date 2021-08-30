@@ -90,6 +90,9 @@ class Argument extends Variable
         'scriptComponent:GetSaveData' => [
             'callback' => 'fun(saveData: table): void',
         ],
+        'Script:OnActivityTriggered' => [
+            'display' => 'string',
+        ],
         'Script:OnButtonPressed' => [
             'buttonName' => 'ButtonName',
         ],
@@ -108,14 +111,32 @@ class Argument extends Variable
         'triggerComponent:RevertClientProperty' => [
             'propertyName' => 'string',
         ],
-        'user:GetLeaderboardValue' => [
-            'callback' => 'fun(score: number, rank: string): void',
-        ],
         'user:AddToLeaderboardValue' => [
             'callback' => 'fun(score: number): void',
         ],
+        'user:GetLeaderboardValue' => [
+            'callback' => 'fun(score: number, rank: string): void',
+        ],
+        'user:DespawnPlayerWithEffect' => [
+            'onEffectEnded' => 'fun(): void',
+        ],
+        'user:GoToGame' => [
+            'travelFailedCallback' => 'fun(): void',
+        ],
+        'user:GoToWorld' => [
+            'travelFailedCallback' => 'fun(): void',
+        ],
+        'user:LeaveGame' => [
+            'travelFailedCallback' => 'fun(): void',
+        ],
         'user:RevertClientProperty' => [
             'propertyName' => 'string',
+        ],
+        'user:SetLeaderboardValue' => [
+            'callback' => 'fun(): void',
+        ],
+        'user:SpawnPlayerWithEffect' => [
+            'onEffectEnded' => 'fun(): void',
         ],
         'voxelMesh:RevertClientProperty' => [
             'propertyName' => 'string',
@@ -185,8 +206,6 @@ class Argument extends Variable
     /**
      * @param  string|null  $type
      * @return string|null
-     *
-     * @noinspection PhpMissingReturnTypeInspection
      */
     public function parseType(string $type = null)
     {

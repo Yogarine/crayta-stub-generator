@@ -32,6 +32,7 @@ abstract class Variable
         'voxelComponent:' => 'voxelMesh:',
         'voxels:' => 'voxelMesh:',
         'trigger:' => 'triggerComponent:',
+        'characterToAttachTo:' => 'character:',
     ];
 
     const DEFAULT_LINE_LENGTH = 104;
@@ -67,11 +68,9 @@ abstract class Variable
         string $identifier,
         string $comment
     ) {
-        $identifier = str_replace(
-            array_keys(static::IDENTIFIER_REPLACE),
-            array_values(static::IDENTIFIER_REPLACE),
-            $identifier
-        );
+        $search     = array_keys(static::IDENTIFIER_REPLACE);
+        $replace    = array_values(static::IDENTIFIER_REPLACE);
+        $identifier = str_replace($search, $replace, $identifier);
         $identifier = trim($identifier);
 
         $this->identifier = $this->parseIdentifier($identifier);
@@ -82,8 +81,6 @@ abstract class Variable
     /**
      * @param  string|null  $type
      * @return string|null
-     *
-     * @noinspection PhpMissingReturnTypeInspection
      */
     public function parseType(string $type = null)
     {
@@ -145,8 +142,6 @@ abstract class Variable
 
     /**
      * @return string|null
-     *
-     * @noinspection PhpMissingReturnTypeInspection
      */
     public function getLocalModuleIdentifier()
     {
@@ -155,5 +150,14 @@ abstract class Variable
         }
 
         return null;
+    }
+
+    /**
+     * @param  string  $type
+     * @return bool
+     */
+    protected function isTableType(string $type): bool
+    {
+        return strrpos($type, ']') === (strlen($type) - 1);
     }
 }

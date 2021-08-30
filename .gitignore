@@ -2,6 +2,8 @@
 composer.phar
 /vendor/
 
+/output/
+
 # Stubs
 /stubs/*
 !/stubs/BooleanProperty.lua

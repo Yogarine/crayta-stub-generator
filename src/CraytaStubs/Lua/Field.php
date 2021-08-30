@@ -172,9 +172,9 @@ class Field extends Variable
         parent::__construct($type, $identifier, $comment);
 
         if (
-        ! isset(
-            self::SKIP_FIELDS[$module->getIdentifier()][$this->identifier]
-        )
+            ! isset(
+                self::SKIP_FIELDS[$module->getIdentifier()][$this->identifier]
+            )
         ) {
             $module->addField($this);
         }
@@ -183,8 +183,6 @@ class Field extends Variable
     /**
      * @param  string|null  $type
      * @return string|null
-     *
-     * @noinspection PhpMissingReturnTypeInspection
      */
     public function parseType(string $type = null)
     {
@@ -211,7 +209,7 @@ class Field extends Variable
      * @return string
      */
     public function getCommentDocBlock(
-        $lineLength = self::DEFAULT_LINE_LENGTH
+        int $lineLength = self::DEFAULT_LINE_LENGTH
     ): string {
         $field = str_pad(
                 $this->identifier,

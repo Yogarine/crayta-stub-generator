@@ -1,4 +1,4 @@
-<apidocs version="0.6.106.99988">
+<apidocs version="0.7.619.108548">
   <apidoc name="Globals">
     <comment></comment>
     <functions>
@@ -10,12 +10,12 @@
       <function name="Wait">
         <usage>number Wait(number time)</usage>
         <info returntype="number" static="true"><args><arg type="number" name="time"/></args></info>
-        <comment>Wait for at least given time interval in seconds then resume execution, and return the exact time taken which is = Time seconds. Only valid within a Schedule function</comment>
+        <comment>Wait for at least given time interval in seconds then resume execution, and return the exact time taken (which will be the next frame after time seconds). Only valid within a Schedule function</comment>
       </function>
       <function name="Wait">
         <usage>number Wait()</usage>
         <info returntype="number" static="true"><args></args></info>
-        <comment>Wait a single frame then resume execution, and return the time taken. Only valid within a Schedule function. Within a Schedule function this is how you implement a loop to make something happen every frame and give you a delta of time between the frames for smooth animation.</comment>
+        <comment>Wait a single frame then resume execution, and return the time taken. Only valid within a Schedule function.</comment>
       </function>
       <function name="print">
         <usage>print(... varArgs)</usage>
@@ -30,22 +30,17 @@
       <function name="printf">
         <usage>printf(string format, ... varArgs)</usage>
         <info static="true"><args><arg type="string" name="format"/><arg type="..." name="varArgs"/></args></info>
-        <comment>This print function replaces instances of {1} with the first argument passed in, {2} with the second etc (same as Printf).</comment>
+        <comment>This print function replaces instances of {1} in format with the first argument passed in, {2} with the second etc (same as Printf).</comment>
       </function>
       <function name="Printf">
         <usage>Printf(string format, ... varArgs)</usage>
         <info static="true"><args><arg type="string" name="format"/><arg type="..." name="varArgs"/></args></info>
-        <comment>This print function replaces instances of {1} with the first argument passed in, {2} with the second etc (same as printf).</comment>
+        <comment>This print function replaces instances of {1} in format with the first argument passed in, {2} with the second etc (same as printf).</comment>
       </function>
       <function name="FormatString">
         <usage>string FormatString(string format, ... varArgs)</usage>
         <info returntype="string" static="true"><args><arg type="string" name="format"/><arg type="..." name="varArgs"/></args></info>
-        <comment>Format a string using either {1}, {2}, etc or using named variables.</comment>
-      </function>
-      <function name="ScreenPrint" supported="false">
-        <usage>ScreenPrint(... varArgs)</usage>
-        <info static="true"><args><arg type="..." name="varArgs"/></args></info>
-        <comment></comment>
+        <comment>Format a string using either {1}, {2} as in Printf, etc or using named variables.</comment>
       </function>
       <function name="GetWorld">
         <usage>World GetWorld()</usage>
@@ -140,7 +135,7 @@
     </functions>
   </apidoc>
   <apidoc name="Asset">
-    <comment></comment>
+    <comment>Represents an asset within Crayta, usually assigned from a property.</comment>
     <functions>
       <function name="GetName">
         <usage>string asset:GetName()</usage>
@@ -153,9 +148,6 @@
         <comment>Get a string which when passed as the src attribute of an HTML img tag will display the icon from this mesh or voxel asset.</comment>
       </function>
     </functions>
-  </apidoc>
-  <apidoc name="VoxelAsset">
-    <comment></comment>
   </apidoc>
   <apidoc name="Template">
     <comment></comment>
@@ -171,13 +163,13 @@
         <comment></comment>
       </function>
       <function name="FindScriptProperties">
-        <usage>unhandled/UPZPropertyBag templateAsset:FindScriptProperties(string scriptName)</usage>
-        <info returntype="unhandled/UPZPropertyBag"><args><arg type="string" name="scriptName"/></args></info>
+        <usage>Properties templateAsset:FindScriptProperties(string scriptName)</usage>
+        <info returntype="Properties"><args><arg type="string" name="scriptName"/></args></info>
         <comment></comment>
       </function>
       <function name="FindScriptProperties">
-        <usage>unhandled/UPZPropertyBag templateAsset:FindScriptProperties(ScriptAsset script)</usage>
-        <info returntype="unhandled/UPZPropertyBag"><args><arg type="ScriptAsset" name="script"/></args></info>
+        <usage>Properties templateAsset:FindScriptProperties(ScriptAsset script)</usage>
+        <info returntype="Properties"><args><arg type="ScriptAsset" name="script"/></args></info>
         <comment></comment>
       </function>
       <function name="FindAllScriptProperties">
@@ -191,51 +183,6 @@
         <comment></comment>
       </function>
     </functions>
-  </apidoc>
-  <apidoc name="MeshAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="EffectAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="SoundAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="GripAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="VoxelMeshAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="PostProcessAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="ColorGradingAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="SkydomeAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="InnerHorizonAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="OuterHorizonAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="SkyMeshAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="WorldAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="ScriptAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="WidgetAsset">
-    <comment></comment>
-  </apidoc>
-  <apidoc name="VibrationEffectAsset">
-    <comment></comment>
   </apidoc>
   <apidoc name="Camera">
     <comment>Camera is a physical entity which provides a camera that a User can set with SetCamera. Camera derives from Entity so if you have a Camera you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Camera) to see if a particular entity variable is a Camera type entity.</comment>
@@ -497,9 +444,9 @@
     <comment>Entity is a physical item in the world, viewable in the world tree when editing the game. Entities contain any number of scripts and widgets, and can have a maximum of 1 "physical" component (mesh, light). Additionally there are two special types that derive from Entity (Player and User).</comment>
     <functions>
       <function name="IsValid">
-        <usage>bool entityOrNill:IsValid()</usage>
-        <info returntype="bool"><args></args></info>
-        <comment></comment>
+        <usage>bool Entity.IsValid(Entity entityOrNill)</usage>
+        <info returntype="bool" static="true"><args><arg type="Entity" name="entityOrNill"/></args></info>
+        <comment>Returns true if the parameter passed to it is a valid entity</comment>
       </function>
       <function name="IsA">
         <usage>bool entity:IsA(table derivedType)</usage>
@@ -724,7 +671,7 @@
       <function name="ApplyDamage">
         <usage>entity:ApplyDamage(number damageAmount, HitResult hitResult, Vector shootDirection, Entity fromEntity, table damageModifiers)</usage>
         <info><args><arg type="number" name="damageAmount"/><arg type="HitResult" name="hitResult"/><arg type="Vector" name="shootDirection"/><arg type="Entity" name="fromEntity"/><arg type="table" name="damageModifiers"/></args></info>
-        <comment>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a HitResult from a World Raycast function and a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</comment>
+        <comment>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a HitResult from a World Raycast function and a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; },                      { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; },                      &lt;script&gt;,                      &lt;script&gt;                   }</comment>
       </function>
       <function name="ApplyDamage">
         <usage>entity:ApplyDamage(number damageAmount, Vector shootDirection, Entity fromEntity)</usage>
@@ -734,7 +681,7 @@
       <function name="ApplyDamage">
         <usage>entity:ApplyDamage(number damageAmount, Vector shootDirection, Entity fromEntity, table damageModifiers)</usage>
         <info><args><arg type="number" name="damageAmount"/><arg type="Vector" name="shootDirection"/><arg type="Entity" name="fromEntity"/><arg type="table" name="damageModifiers"/></args></info>
-        <comment>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</comment>
+        <comment>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; },                      { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; },                      &lt;script&gt;,                      &lt;script&gt;                   }</comment>
       </function>
       <function name="GetParent">
         <usage>Entity entity:GetParent()</usage>
@@ -857,64 +804,34 @@
         <comment>Send an type of telemetry event to the telemetry server with the given parametersTable for later analysis. Deprecated and will be removed - see Analytics.SendTelemetry</comment>
       </function>
       <function name="PlayTimeline">
-        <usage>number entity:PlayTimeline(table timelineArray)</usage>
-        <info returntype="number"><args><arg type="table" name="timelineArray"/></args></info>
-        <comment>Play a timeline from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
-      </function>
-      <function name="PlayTimeline">
         <usage>number entity:PlayTimeline(... args)</usage>
         <info returntype="number"><args><arg type="..." name="args"/></args></info>
-        <comment>Play a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
-      </function>
-      <function name="PlayTimelineLoop">
-        <usage>entity:PlayTimelineLoop(table timelineArray)</usage>
-        <info><args><arg type="table" name="timelineArray"/></args></info>
-        <comment>Loop a timeline from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+        <comment>Play a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from EaseIn, EaseOut, EaseInOut, Linear (default) The easing types can also be set per axis, this is described in one of the examples.</comment>
       </function>
       <function name="PlayTimelineLoop">
         <usage>entity:PlayTimelineLoop(... args)</usage>
         <info><args><arg type="..." name="args"/></args></info>
-        <comment>Loop a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
-      </function>
-      <function name="PlayTimelinePingPong">
-        <usage>entity:PlayTimelinePingPong(table timelineArray)</usage>
-        <info><args><arg type="table" name="timelineArray"/></args></info>
-        <comment>Loop a timeline back and forth from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+        <comment>Loop a timeline from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</comment>
       </function>
       <function name="PlayTimelinePingPong">
         <usage>entity:PlayTimelinePingPong(... args)</usage>
         <info><args><arg type="..." name="args"/></args></info>
-        <comment>Loop a timeline back and forth Play a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
-      </function>
-      <function name="PlayRelativeTimeline">
-        <usage>number entity:PlayRelativeTimeline(table timelineArray)</usage>
-        <info returntype="number"><args><arg type="table" name="timelineArray"/></args></info>
-        <comment>Play a timeline, relative to an entity's parent transform, from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+        <comment>Loop a timeline back and forth from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</comment>
       </function>
       <function name="PlayRelativeTimeline">
         <usage>number entity:PlayRelativeTimeline(... args)</usage>
         <info returntype="number"><args><arg type="..." name="args"/></args></info>
-        <comment>Play a timeline, relative to an entity's parent transform, from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
-      </function>
-      <function name="PlayRelativeTimelineLoop">
-        <usage>number entity:PlayRelativeTimelineLoop(table timelineArray)</usage>
-        <info returntype="number"><args><arg type="table" name="timelineArray"/></args></info>
-        <comment>Loop a timeline, relative to an entity's parent transform, from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+        <comment>Play a timeline, relative to an entity's parent transform, from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</comment>
       </function>
       <function name="PlayRelativeTimelineLoop">
         <usage>number entity:PlayRelativeTimelineLoop(... args)</usage>
         <info returntype="number"><args><arg type="..." name="args"/></args></info>
-        <comment>Loop a timeline, relative to an entity's parent transform, from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
-      </function>
-      <function name="PlayRelativeTimelinePingPong">
-        <usage>number entity:PlayRelativeTimelinePingPong(table timelineArray)</usage>
-        <info returntype="number"><args><arg type="table" name="timelineArray"/></args></info>
-        <comment>Loop a timeline back and forth, relative to an entity's parent transform. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+        <comment>Loop a timeline, relative to an entity's parent transform, from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</comment>
       </function>
       <function name="PlayRelativeTimelinePingPong">
         <usage>number entity:PlayRelativeTimelinePingPong(... args)</usage>
         <info returntype="number"><args><arg type="..." name="args"/></args></info>
-        <comment>Loop a timeline back and forth, relative to an entity's parent transform, from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</comment>
+        <comment>Loop a timeline back and forth, relative to an entity's parent transform, from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</comment>
       </function>
       <function name="CancelTimeline">
         <usage>entity:CancelTimeline()</usage>
@@ -1008,13 +925,13 @@
         <comment>Get the value of a global counter for this game. Global counters are shared between all servers running the game and saved between sessions. The value is returned by calling the callback function with the value as an argument. Global counters are always whole (integer) numbers.</comment>
       </function>
       <function name="UpdateCounter" serveronly="true">
-        <usage>GameStorage.UpdateCounter(string counterName, unhandled/int64 increment, callback callback)</usage>
-        <info static="true"><args><arg type="string" name="counterName"/><arg type="unhandled/int64" name="increment"/><arg type="callback" name="callback"/></args></info>
+        <usage>GameStorage.UpdateCounter(string counterName, number increment, callback callback)</usage>
+        <info static="true"><args><arg type="string" name="counterName"/><arg type="number" name="increment"/><arg type="callback" name="callback"/></args></info>
         <comment>Update the value of a global counter for this game by adding increment to the existing value. Global counters are shared between all servers running the game and saved between sessions. The new incremented value is returned by calling the callback function with the value as an argument. Global counters are always whole (integer) numbers.</comment>
       </function>
       <function name="UpdateCounter" serveronly="true">
-        <usage>GameStorage.UpdateCounter(string counterName, unhandled/int64 increment)</usage>
-        <info static="true"><args><arg type="string" name="counterName"/><arg type="unhandled/int64" name="increment"/></args></info>
+        <usage>GameStorage.UpdateCounter(string counterName, number increment)</usage>
+        <info static="true"><args><arg type="string" name="counterName"/><arg type="number" name="increment"/></args></info>
         <comment>Update the value of a global counter for this game by adding increment to the existing value. Global counters are shared between all servers running the game and saved between sessions. Global counters are always whole (integer) numbers.</comment>
       </function>
     </functions>
@@ -1059,12 +976,12 @@
       <function name="GetNearbyValues">
         <usage>Leaderboards.GetNearbyValues(string leaderboardId, number numValues, User user, callback callback)</usage>
         <info static="true"><args><arg type="string" name="leaderboardId"/><arg type="number" name="numValues"/><arg type="User" name="user"/><arg type="callback" name="callback"/></args></info>
-        <comment>Gets nearby leaderboard values on the specified leaderboard for the specified user, centered on the user where possible. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</comment>
+        <comment>Gets nearby leaderboard values on the specified leaderboard for the specified user, centered on the user where possible. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon. May return cached results if used frequently.</comment>
       </function>
       <function name="GetTopValues">
         <usage>Leaderboards.GetTopValues(string leaderboardId, number numValues, callback callback)</usage>
         <info static="true"><args><arg type="string" name="leaderboardId"/><arg type="number" name="numValues"/><arg type="callback" name="callback"/></args></info>
-        <comment>Gets the top ranking values from the specified leaderboard. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</comment>
+        <comment>Gets the top ranking values from the specified leaderboard. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon. May return cached results if used frequently.</comment>
       </function>
       <function name="GetMetadata" deprecated="true">
         <usage>Leaderboards.GetMetadata(callback callback)</usage>
@@ -1084,12 +1001,12 @@
       <function name="GetNearbyValuesForGame">
         <usage>Leaderboards.GetNearbyValuesForGame(string gameId, string leaderboardId, number numValues, User user, callback callback)</usage>
         <info static="true"><args><arg type="string" name="gameId"/><arg type="string" name="leaderboardId"/><arg type="number" name="numValues"/><arg type="User" name="user"/><arg type="callback" name="callback"/></args></info>
-        <comment>Gets nearby leaderboard values for the specified GameId. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</comment>
+        <comment>Gets nearby leaderboard values for the specified GameId. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon. May return cached results if used frequently.</comment>
       </function>
       <function name="GetTopValuesForGame">
         <usage>Leaderboards.GetTopValuesForGame(string gameId, string leaderboardId, number numValues, callback callback)</usage>
         <info static="true"><args><arg type="string" name="gameId"/><arg type="string" name="leaderboardId"/><arg type="number" name="numValues"/><arg type="callback" name="callback"/></args></info>
-        <comment>Gets the top ranking values for the specified GameId Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</comment>
+        <comment>Gets the top ranking values for the specified GameId Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon. May return cached results if used frequently.</comment>
       </function>
       <function name="GetMetadataForGame" deprecated="true">
         <usage>Leaderboards.GetMetadataForGame(string gameId, callback callback)</usage>
@@ -1430,30 +1347,35 @@
         <info><args><arg type="string" name="animationName"/></args></info>
         <comment>Play a named animation on this mesh, once.</comment>
       </function>
-      <function name="PlayAnimation" supported="false">
+      <function name="PlayAnimation">
         <usage>mesh:PlayAnimation(string animationName, bool looping)</usage>
         <info><args><arg type="string" name="animationName"/><arg type="bool" name="looping"/></args></info>
         <comment>Play a named animation on this mesh, optionally looping.</comment>
+      </function>
+      <function name="PlayAnimation">
+        <usage>mesh:PlayAnimation(string animationName, table properties)</usage>
+        <info><args><arg type="string" name="animationName"/><arg type="table" name="properties"/></args></info>
+        <comment>Play a named animation on this mesh, optional table can contain named values looping and either playbackTime or playbackSpeed</comment>
       </function>
       <function name="PlayAnimationLooping">
         <usage>mesh:PlayAnimationLooping(string animationName)</usage>
         <info><args><arg type="string" name="animationName"/></args></info>
         <comment>Play a named animation on this mesh, repeatedly.</comment>
       </function>
-      <function name="PlayAnimationClient">
+      <function name="PlayAnimationClient" deprecated="true">
         <usage>mesh:PlayAnimationClient(string animationName)</usage>
         <info><args><arg type="string" name="animationName"/></args></info>
-        <comment>Play a named animation on this mesh, once, for this client only</comment>
+        <comment>Use PlayAnimation instead, works on client or server</comment>
       </function>
-      <function name="PlayAnimationClient" supported="false">
+      <function name="PlayAnimationClient" deprecated="true">
         <usage>mesh:PlayAnimationClient(string animationName, bool looping)</usage>
         <info><args><arg type="string" name="animationName"/><arg type="bool" name="looping"/></args></info>
-        <comment>Play a named animation on this mesh, optionally looping, for this client only</comment>
+        <comment>Use PlayAnimation instead, works on client or server</comment>
       </function>
-      <function name="PlayAnimationLoopingClient">
+      <function name="PlayAnimationLoopingClient" deprecated="true">
         <usage>mesh:PlayAnimationLoopingClient(string animationName)</usage>
         <info><args><arg type="string" name="animationName"/></args></info>
-        <comment>Play a named animation on this mesh, repeatedly, for this client only</comment>
+        <comment>Use PlayAnimation instead, works on client or server</comment>
       </function>
       <function name="GetAnimationNames">
         <usage>table mesh:GetAnimationNames()</usage>
@@ -1581,8 +1503,8 @@
     <comment>ScriptComponent is the base class for all user created scripts. Within a script function it is accessed through the self local variable.</comment>
     <functions>
       <function name="GetProperties">
-        <usage>unhandled/UPZPropertyBag scriptComponent:GetProperties()</usage>
-        <info returntype="unhandled/UPZPropertyBag"><args></args></info>
+        <usage>Properties scriptComponent:GetProperties()</usage>
+        <info returntype="Properties"><args></args></info>
         <comment>Alternative to self.properties, this gets the bag of values produced from the property editor for this script on this Entity. The properties are defined by the static Properties table on the table returned by the Lua script.</comment>
       </function>
       <function name="RevertClientProperty" clientonly="true">
@@ -1827,75 +1749,90 @@
         <info static="true"><args><arg type="number" name="hotbarIndex"/></args></info>
         <comment>Called on server when the user's hotbar index changes, either by using the previous and next buttons or using the hotbar keys on a keyboard. Calls function on all user and player scripts.</comment>
       </entrypoint>
-      <entrypoint name="OnChatMessage">
-        <usage>function Script:OnChatMessage() ... end</usage>
-        <info static="true"><args></args></info>
-        <comment>Called when a quick chat message is triggered by the user</comment>
+      <entrypoint name="OnChatMessage" clientonly="true">
+        <usage>function Script:OnChatMessage(User user, Text message) ... end</usage>
+        <info static="true"><args><arg type="User" name="user"/><arg type="Text" name="message"/></args></info>
+        <comment>Called when a quick chat message is triggered by a user</comment>
       </entrypoint>
-      <entrypoint name="OnDestroy">
+      <entrypoint name="OnDestroy" serveronly="true">
         <usage>function Script:OnDestroy() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called on the server when an entity is destroyed</comment>
       </entrypoint>
-      <entrypoint name="LocalOnMantleStart">
+      <entrypoint name="LocalOnMantleStart" localonly="true">
         <usage>function Script:LocalOnMantleStart() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character starts to mantle up to a platform</comment>
       </entrypoint>
-      <entrypoint name="OnMantleStart">
+      <entrypoint name="OnMantleStart" serveronly="true">
         <usage>function Script:OnMantleStart() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character starts to mantle up to a platform</comment>
       </entrypoint>
-      <entrypoint name="LocalOnMantleStop">
+      <entrypoint name="LocalOnMantleStop" localonly="true">
         <usage>function Script:LocalOnMantleStop() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character stops to mantling up to a platform</comment>
       </entrypoint>
-      <entrypoint name="OnMantleStop">
+      <entrypoint name="OnMantleStop" serveronly="true">
         <usage>function Script:OnMantleStop() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character stops to mantling up to a platform</comment>
       </entrypoint>
-      <entrypoint name="LocalOnSlideStart">
+      <entrypoint name="LocalOnSlideStart" localonly="true">
         <usage>function Script:LocalOnSlideStart() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character starts to slide</comment>
       </entrypoint>
-      <entrypoint name="OnSlideStart">
+      <entrypoint name="OnSlideStart" serveronly="true">
         <usage>function Script:OnSlideStart() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character starts to slide</comment>
       </entrypoint>
-      <entrypoint name="LocalOnSlideStop">
+      <entrypoint name="LocalOnSlideStop" localonly="true">
         <usage>function Script:LocalOnSlideStop() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character stops sliding</comment>
       </entrypoint>
-      <entrypoint name="OnSlideStop">
+      <entrypoint name="OnSlideStop" serveronly="true">
         <usage>function Script:OnSlideStop() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character stops sliding</comment>
       </entrypoint>
-      <entrypoint name="LocalOnRollStart">
+      <entrypoint name="LocalOnRollStart" localonly="true">
         <usage>function Script:LocalOnRollStart() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character starts to roll</comment>
       </entrypoint>
-      <entrypoint name="OnRollStart">
+      <entrypoint name="OnRollStart" serveronly="true">
         <usage>function Script:OnRollStart() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character starts to roll</comment>
       </entrypoint>
-      <entrypoint name="LocalOnRollStop">
+      <entrypoint name="LocalOnRollStop" localonly="true">
         <usage>function Script:LocalOnRollStop() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character stops rolling</comment>
       </entrypoint>
-      <entrypoint name="OnRollStop">
+      <entrypoint name="OnRollStop" serveronly="true">
         <usage>function Script:OnRollStop() ... end</usage>
         <info static="true"><args></args></info>
         <comment>Called when the character stops rolling</comment>
+      </entrypoint>
+      <entrypoint name="LocalOnSpawnEffectEnded" localonly="true">
+        <usage>function Script:LocalOnSpawnEffectEnded() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character spawn effect has ended</comment>
+      </entrypoint>
+      <entrypoint name="OnSpawnEffectEnded" serveronly="true">
+        <usage>function Script:OnSpawnEffectEnded() ... end</usage>
+        <info static="true"><args></args></info>
+        <comment>Called when the character spawn effect has ended</comment>
+      </entrypoint>
+      <entrypoint name="OnActivityTriggered">
+        <usage>function Script:OnActivityTriggered(string id, text display, string category) ... end</usage>
+        <info static="true"><args><arg type="string" name="id"/><arg type="text" name="display"/><arg type="string" name="category"/></args></info>
+        <comment>Called when an activity is triggered</comment>
       </entrypoint>
     </entrypoints>
   </apidoc>
@@ -2190,10 +2127,10 @@
         <info><args><arg type="bool" name="showCursor"/></args></info>
         <comment>Turn the cursor on or off</comment>
       </function>
-      <function name="ProjectPositionToScreen">
+      <function name="ProjectPositionToScreen" localonly="true">
         <usage>Vector2D user:ProjectPositionToScreen(Vector worldLocation)</usage>
         <info returntype="Vector2D"><args><arg type="Vector" name="worldLocation"/></args></info>
-        <comment>Converts a position in world space to a screen space co-ordinate Returned values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) local user = self:GetEntity():GetUser() local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0)) Printf("Screen pos: {1}", screenPos) end</comment>
+        <comment>Converts a position in world space to a screen space co-ordinate Returned values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user = self:GetEntity():GetUser() 	local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0)) 	Printf("Screen pos: {1}", screenPos) end</comment>
       </function>
       <function name="PlayVibrationEffect">
         <usage>user:PlayVibrationEffect(VibrationEffectAsset vibrationEffect)</usage>
@@ -2245,15 +2182,25 @@
         <info returntype="number"><args><arg type="string" name="challengeId"/></args></info>
         <comment>Gets the current progress on an active challenge</comment>
       </function>
-      <function name="SendChallengeEvent" serveronly="true">
+      <function name="SendChallengeEvent" deprecated="true" serveronly="true">
         <usage>user:SendChallengeEvent(string eventName, table eventParametersTable)</usage>
         <info><args><arg type="string" name="eventName"/><arg type="table" name="eventParametersTable"/></args></info>
-        <comment>Sends a Challenge event for this user. Takes a lua table of parameter to value pairs that are conditionally checked against the Challenge definition. Usage example: function MyUserScript:OnSomeAction(someValue1, someValue2) self:GetUser():SendChallengeEvent("SomeEvent", {someParameter1 = someValue1, someParameter2 = someValue2}) end</comment>
+        <comment>Please use SendGameEvent instead of this. SendGameEvent trigger Challenges and Activities</comment>
       </function>
-      <function name="SendChallengeEvent" serveronly="true">
+      <function name="SendChallengeEvent" deprecated="true" serveronly="true">
         <usage>user:SendChallengeEvent(string eventName)</usage>
         <info><args><arg type="string" name="eventName"/></args></info>
-        <comment>Sends a Challenge event for this user.</comment>
+        <comment>Please use SendGameEvent instead of this. SendGameEvent trigger Challenges and Activities</comment>
+      </function>
+      <function name="SendXPEvent" serveronly="true">
+        <usage>user:SendXPEvent(string eventName, table eventParametersTable)</usage>
+        <info><args><arg type="string" name="eventName"/><arg type="table" name="eventParametersTable"/></args></info>
+        <comment>Sends an event for this user that can be used by the Challenges and Activities systems. Takes a lua table of named parameters which are checked against the conditions inside each challenge and activity.</comment>
+      </function>
+      <function name="SendXPEvent" serveronly="true">
+        <usage>user:SendXPEvent(string eventName)</usage>
+        <info><args><arg type="string" name="eventName"/></args></info>
+        <comment>Sends an event for this user that can be used by the Challenges and Activities systems. This is the same as sending an empty parameter list in the other SendXPEvent overload.</comment>
       </function>
     </functions>
     <parameters>
@@ -2280,7 +2227,7 @@
     </parameters>
   </apidoc>
   <apidoc name="VoxelMesh">
-    <comment>An Entity can have a single physical representation. Voxels represents a voxel mesh which is edited to a start state in the editor and can be changed during gameplay. Voxels derives from Entity so if you have a Voxels you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Voxels) to see if a particular entity variable is a Voxels type entity.</comment>
+    <comment>An Entity can have a single physical representation. VoxelMesh represents a mesh made of voxels, created within the Crayta editor. VoxelMesh derives from Entity so if you have a VoxelMesh you can do any of these functions as well as the functions in Entity. You can do entity:IsA(VoxelMesh) to see if a particular entity variable is a VoxelMesh type entity.</comment>
     <functions>
       <function name="SetVoxel" serveronly="true">
         <usage>voxelComponent:SetVoxel(Vector pos, VoxelAsset voxelAsset)</usage>
@@ -2450,7 +2397,7 @@
       <function name="ApplyPointDamage" serveronly="true">
         <usage>world:ApplyPointDamage(number baseDamage, Vector rayStart, Vector direction, Entity fromEntity, table damageModifiers)</usage>
         <info><args><arg type="number" name="baseDamage"/><arg type="Vector" name="rayStart"/><arg type="Vector" name="direction"/><arg type="Entity" name="fromEntity"/><arg type="table" name="damageModifiers"/></args></info>
-        <comment>Applies point damage to the first Entity that intersects the given ray. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</comment>
+        <comment>Applies point damage to the first Entity that intersects the given ray. DamageModifiers is a table of { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; },                      { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; },                      &lt;script&gt;,                      &lt;script&gt;                   }</comment>
       </function>
       <function name="ApplyRadialDamage" serveronly="true">
         <usage>world:ApplyRadialDamage(number baseDamage, Vector origin, number radius, number falloff, Entity fromEntity)</usage>
@@ -2460,17 +2407,17 @@
       <function name="ApplyRadialDamage" serveronly="true">
         <usage>world:ApplyRadialDamage(number baseDamage, Vector origin, number radius, number falloff, Entity fromEntity, table damageModifiers)</usage>
         <info><args><arg type="number" name="baseDamage"/><arg type="Vector" name="origin"/><arg type="number" name="radius"/><arg type="number" name="falloff"/><arg type="Entity" name="fromEntity"/><arg type="table" name="damageModifiers"/></args></info>
-        <comment>Applies radial damage to all Entities within a radius of an origin. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</comment>
+        <comment>Applies radial damage to all Entities within a radius of an origin. DamageModifiers is a table of { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; },                      { voxel = &lt;voxelasset&gt;, damageMultiplier = &lt;number&gt; },                      &lt;script&gt;,                      &lt;script&gt;                   }</comment>
       </function>
       <function name="SetVoxelProperties">
         <usage>world:SetVoxelProperties(table voxelPropertiesTable)</usage>
         <info><args><arg type="table" name="voxelPropertiesTable"/></args></info>
-        <comment>Set the voxel properties of the world. VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset, healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time.</comment>
+        <comment>Set the voxel properties of the world. VoxelProperties is a table of { voxel = &lt;voxelasset&gt;, health = &lt;number&gt;, healTime = &lt;number&gt; } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = {                      { voxel = &lt;voxelasset&gt;, health = &lt;number&gt;, healTime = &lt;number&gt; },                      { voxel = &lt;voxelasset&gt;, health = &lt;number&gt; },                      { voxel = &lt;voxelasset&gt;, healTime = &lt;number&gt; },                      &lt;script&gt;,                      &lt;script&gt;                   } Defaults are 100 for health, 3.0 for heal time.</comment>
       </function>
       <function name="SetVoxelProperties">
         <usage>world:SetVoxelProperties(table voxelPropertiesTable, number defaultMaxHealth, number defaultHealTime)</usage>
         <info><args><arg type="table" name="voxelPropertiesTable"/><arg type="number" name="defaultMaxHealth"/><arg type="number" name="defaultHealTime"/></args></info>
-        <comment>Set the voxel properties of the world. VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset, healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time, these can be modified in this version of the function.</comment>
+        <comment>Set the voxel properties of the world. VoxelProperties is a table of { voxel = &lt;voxelasset&gt;, health = &lt;number&gt;, healTime = &lt;number&gt; } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = {                      { voxel = &lt;voxelasset&gt;, health = &lt;number&gt;, healTime = &lt;number&gt; },                      { voxel = &lt;voxelasset&gt;, health = &lt;number&gt; },                      { voxel = &lt;voxelasset&gt;, healTime = &lt;number&gt; },                      &lt;script&gt;,                      &lt;script&gt;                   } Defaults are 100 for health, 3.0 for heal time, these can be modified in this version of the function.</comment>
       </function>
       <function name="GetTimeOfDay">
         <usage>number world:GetTimeOfDay()</usage>
@@ -2515,7 +2462,7 @@
       <function name="GetActiveChallenges">
         <usage>table world:GetActiveChallenges()</usage>
         <info returntype="table"><args></args></info>
-        <comment>Gets the current active challenges Example result table: result = {} result[1] = {id = ChallengeId, name = LocalisedName, icon = IconUrl, count = TotalCountToComplete} result[2] = {id...</comment>
+        <comment>Gets the current active challenges Example result table: result = {} result[1] = {id = &lt;ChallengeId&gt;, name = &lt;LocalisedName&gt;, icon = &lt;IconUrl&gt;, count = &lt;TotalCountToComplete&gt;} result[2] = {id...</comment>
       </function>
     </functions>
     <parameters>

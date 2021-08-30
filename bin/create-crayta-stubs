@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 use Yogarine\CraytaStubs\CraytaStubGenerator;
 
+// Make sure this script also works when run from the vendor dir.
 if (file_exists(__DIR__ . '/../../../autoload.php')) {
     /** @noinspection PhpIncludeInspection */
     require_once __DIR__ . '/../../../autoload.php';
@@ -12,19 +13,25 @@ if (file_exists(__DIR__ . '/../../../autoload.php')) {
     require_once __DIR__ . '/../vendor/autoload.php';
 }
 
-$copy_static_stubs = true;
+$copy_static_stubs = null;
 
 $options = getopt(
-    'hS',
+    'hsS',
     [
         'help',
+        'static-stubs',
         'skip-static-stubs',
     ],
     $rest_index
 );
 
-foreach ($options as $option) {
+foreach ($options as $option => $value) {
     switch ($option) {
+        case 'static-stubs':
+        case 's':
+            $copy_static_stubs = true;
+            break;
+
         case 'skip-static-stubs':
         case 'S':
             $copy_static_stubs = false;
@@ -40,20 +47,28 @@ foreach ($options as $option) {
 
 $craytaStubGenerator = new CraytaStubGenerator();
 
-$target_dir = getcwd() . '/stubs/crayta';
-if (
-    dirname(CraytaStubGenerator::getStaticStubsDir(), 2) === dirname(
-        $target_dir
-    )
-) {
+$cwd = getcwd();
+
+// If we're running in the project dir, use the dev output dir as target.
+if (null === $copy_static_stubs && dirname(__DIR__) === $cwd) {
+    $target_dir        = CraytaStubGenerator::getDevStubsDir('crayta');
     $copy_static_stubs = false;
-    echo "NOT copying static stubs to not taint our stubs directory." . PHP_EOL;
+} else {
+    $target_dir = implode(DIRECTORY_SEPARATOR, [$cwd, 'stubs', 'crayta']);
+}
+$target_dir_dir = dirname($target_dir);
+
+// Sanity check to prevent overriding our static stubs dir.
+if (dirname(CraytaStubGenerator::getStaticStubsDir(), 2) === $target_dir_dir) {
+    $copy_static_stubs = false;
 }
 
-if ($copy_static_stubs) {
+if ($copy_static_stubs ?? true) {
     echo "Copying static Crayta stubs to '{$target_dir}'...";
     $craytaStubGenerator->copyStaticStubs($target_dir);
     echo " Done!" . PHP_EOL;
+} else {
+    echo "NOT copying static stubs to not taint our stubs directory." . PHP_EOL;
 }
 
 echo "Generating Crayta stubs in {$target_dir}...";
@@ -74,9 +89,10 @@ function print_usage()
 {
     global $argv;
 
-    echo "Usage:  {$argv[0]} [--skip-static-stubs]" . PHP_EOL
+    echo "Usage:  {$argv[0]} [--static-stubs] [--skip-static-stubs]" . PHP_EOL
         . "        {$argv[0]} --help" . PHP_EOL
         . PHP_EOL
+        . "  -s --static-stubs             Copy static stubs normally" . PHP_EOL
         . "  -S --skip-static-stubs        Skip copying static stubs" . PHP_EOL
         . "  -h --help                     Show this help text" . PHP_EOL
         . PHP_EOL;

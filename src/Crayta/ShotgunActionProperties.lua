@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------
---- @shape ShotgunActionProperties<T : string> : AnimationProperties
+--- @shape ShotgunActionProperties<T : string> : AnimationProperties<ShotgunReloadActionEvents>
 --- @field events ShotgunReloadActionEvents
 --------------------------------------------------------------------------------------------------------
 local ShotgunReloadActionProperties = {}

@@ -144,8 +144,6 @@ class Module extends Variable
 
     /**
      * @return string|null
-     *
-     * @noinspection PhpMissingReturnTypeInspection
      */
     public function getLocalModuleIdentifier()
     {

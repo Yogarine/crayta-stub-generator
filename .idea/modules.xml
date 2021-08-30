@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/crayta-stubs.iml" filepath="$PROJECT_DIR$/.idea/crayta-stubs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stubs/.idea/stubs.iml" filepath="$PROJECT_DIR$/stubs/.idea/stubs.iml" />
     </modules>
   </component>
 </project>

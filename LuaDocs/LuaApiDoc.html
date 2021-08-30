@@ -285,29 +285,13 @@ div.api div.api-comment {
 </style>
 </head>
 <body>
-<div class='version' id='version'>Version: <span class='version-number'>0.6.106.99988</span></div>
+<div class='version' id='version'>Version: <span class='version-number'>0.7.619.108548</span></div>
 <div class='toc'>
 <span class='toc-item'><p id='buttonGlobals' class='toc-text'>Globals</p></span>
 <span class='toc-item'><p id='buttonmath' class='toc-text'>math</p></span>
 <span class='toc-item'><p id='buttonAnalytics' class='toc-text'>Analytics</p></span>
 <span class='toc-item'><p id='buttonAsset' class='toc-text'>Asset</p></span>
-<span class='toc-item'><p id='buttonVoxelAsset' class='toc-text'>VoxelAsset</p></span>
 <span class='toc-item'><p id='buttonTemplate' class='toc-text'>Template</p></span>
-<span class='toc-item'><p id='buttonMeshAsset' class='toc-text'>MeshAsset</p></span>
-<span class='toc-item'><p id='buttonEffectAsset' class='toc-text'>EffectAsset</p></span>
-<span class='toc-item'><p id='buttonSoundAsset' class='toc-text'>SoundAsset</p></span>
-<span class='toc-item'><p id='buttonGripAsset' class='toc-text'>GripAsset</p></span>
-<span class='toc-item'><p id='buttonVoxelMeshAsset' class='toc-text'>VoxelMeshAsset</p></span>
-<span class='toc-item'><p id='buttonPostProcessAsset' class='toc-text'>PostProcessAsset</p></span>
-<span class='toc-item'><p id='buttonColorGradingAsset' class='toc-text'>ColorGradingAsset</p></span>
-<span class='toc-item'><p id='buttonSkydomeAsset' class='toc-text'>SkydomeAsset</p></span>
-<span class='toc-item'><p id='buttonInnerHorizonAsset' class='toc-text'>InnerHorizonAsset</p></span>
-<span class='toc-item'><p id='buttonOuterHorizonAsset' class='toc-text'>OuterHorizonAsset</p></span>
-<span class='toc-item'><p id='buttonSkyMeshAsset' class='toc-text'>SkyMeshAsset</p></span>
-<span class='toc-item'><p id='buttonWorldAsset' class='toc-text'>WorldAsset</p></span>
-<span class='toc-item'><p id='buttonScriptAsset' class='toc-text'>ScriptAsset</p></span>
-<span class='toc-item'><p id='buttonWidgetAsset' class='toc-text'>WidgetAsset</p></span>
-<span class='toc-item'><p id='buttonVibrationEffectAsset' class='toc-text'>VibrationEffectAsset</p></span>
 <span class='toc-item'><p id='buttonCamera' class='toc-text'>Camera</p></span>
 <span class='toc-item'><p id='buttonCharacter' class='toc-text'>Character</p></span>
 <span class='toc-item'><p id='buttonColor' class='toc-text'>Color</p></span>
@@ -350,42 +334,37 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>Wait</span>
       <span class='api-function-usage'><span class='type'>number</span> Wait(<span class='type'>number</span> time)</span>
-      <span class='api-function-comment'>Wait for at least given time interval in seconds then resume execution, and return the exact time taken which is = Time seconds. Only valid within a Schedule function</span>
+      <span class='api-function-comment'>Wait for at least given time interval in seconds then resume execution, and return the exact time taken (which will be the next frame after `time` seconds). Only valid within a `Schedule` function</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>Wait</span>
       <span class='api-function-usage'><span class='type'>number</span> Wait()</span>
-      <span class='api-function-comment'>Wait a single frame then resume execution, and return the time taken. Only valid within a Schedule function. Within a Schedule function this is how you implement a loop to make something happen every frame and give you a delta of time between the frames for smooth animation.</span>
+      <span class='api-function-comment'>Wait a single frame then resume execution, and return the time taken. Only valid within a `Schedule` function.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>print</span>
       <span class='api-function-usage'>print(<span class='type'>...</span> varArgs)</span>
-      <span class='api-function-comment'>Standard print function (same as Print), takes a comma separated list of arguments and prints out their string representation.</span>
+      <span class='api-function-comment'>Standard print function (same as `Print`), takes a comma separated list of arguments and prints out their string representation.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>Print</span>
       <span class='api-function-usage'>Print(<span class='type'>...</span> varArgs)</span>
-      <span class='api-function-comment'>Standard print function (same as print), takes a comma separated list of arguments and prints out their string representation.</span>
+      <span class='api-function-comment'>Standard print function (same as `print`), takes a comma separated list of arguments and prints out their string representation.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>printf</span>
       <span class='api-function-usage'>printf(<span class='type'>string</span> format, <span class='type'>...</span> varArgs)</span>
-      <span class='api-function-comment'>This print function replaces instances of {1} with the first argument passed in, {2} with the second etc (same as Printf).</span>
+      <span class='api-function-comment'>This print function replaces instances of {1} in `format` with the first argument passed in, {2} with the second etc (same as `Printf`).</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>Printf</span>
       <span class='api-function-usage'>Printf(<span class='type'>string</span> format, <span class='type'>...</span> varArgs)</span>
-      <span class='api-function-comment'>This print function replaces instances of {1} with the first argument passed in, {2} with the second etc (same as printf).</span>
+      <span class='api-function-comment'>This print function replaces instances of {1} in `format` with the first argument passed in, {2} with the second etc (same as `printf`).</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>FormatString</span>
       <span class='api-function-usage'><span class='type'>string</span> FormatString(<span class='type'>string</span> format, <span class='type'>...</span> varArgs)</span>
-      <span class='api-function-comment'>Format a string using either {1}, {2}, etc or using named variables.</span>
-    </div>
-    <div class='api-function deprecated'>
-      <span class='api-function-name'>ScreenPrint</span>
-      <span class='api-function-usage'>ScreenPrint(<span class='type'>...</span> varArgs)</span>
-      <span class='api-function-comment'><span class='comment-bold'>Unsupported</span> </span>
+      <span class='api-function-comment'>Format a string using either {1}, {2} as in `Printf`, etc or using named variables.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>GetWorld</span>
@@ -486,7 +465,7 @@ div.api div.api-comment {
 <div class='api' id='sectionAsset'>
   <button class='top-link'>Back to top</button>
   <div class='api-name'>Asset</div>
-  <div class='api-comment'></div>
+  <div class='api-comment'>Represents an asset within Crayta, usually assigned from a property.</div>
   <div class='section-title'>Functions</div><div class='api-functions'>
     <div class='api-function'>
       <span class='api-function-name'>GetName</span>
@@ -499,11 +478,6 @@ div.api div.api-comment {
       <span class='api-function-comment'>Get a string which when passed as the src attribute of an HTML img tag will display the icon from this mesh or voxel asset.</span>
     </div>
   </div>
-</div>
-<div class='api' id='sectionVoxelAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>VoxelAsset</div>
-  <div class='api-comment'></div>
 </div>
 <div class='api' id='sectionTemplate'>
   <button class='top-link'>Back to top</button>
@@ -522,12 +496,12 @@ div.api div.api-comment {
     </div>
     <div class='api-function'>
       <span class='api-function-name'>FindScriptProperties</span>
-      <span class='api-function-usage'><span class='type'>unhandled/UPZPropertyBag</span> templateAsset:FindScriptProperties(<span class='type'>string</span> scriptName)</span>
+      <span class='api-function-usage'><span class='type'>Properties</span> templateAsset:FindScriptProperties(<span class='type'>string</span> scriptName)</span>
       <span class='api-function-comment'></span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>FindScriptProperties</span>
-      <span class='api-function-usage'><span class='type'>unhandled/UPZPropertyBag</span> templateAsset:FindScriptProperties(<span class='type'>ScriptAsset</span> script)</span>
+      <span class='api-function-usage'><span class='type'>Properties</span> templateAsset:FindScriptProperties(<span class='type'>ScriptAsset</span> script)</span>
       <span class='api-function-comment'></span>
     </div>
     <div class='api-function'>
@@ -541,81 +515,6 @@ div.api div.api-comment {
       <span class='api-function-comment'></span>
     </div>
   </div>
-</div>
-<div class='api' id='sectionMeshAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>MeshAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionEffectAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>EffectAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionSoundAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>SoundAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionGripAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>GripAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionVoxelMeshAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>VoxelMeshAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionPostProcessAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>PostProcessAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionColorGradingAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>ColorGradingAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionSkydomeAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>SkydomeAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionInnerHorizonAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>InnerHorizonAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionOuterHorizonAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>OuterHorizonAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionSkyMeshAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>SkyMeshAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionWorldAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>WorldAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionScriptAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>ScriptAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionWidgetAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>WidgetAsset</div>
-  <div class='api-comment'></div>
-</div>
-<div class='api' id='sectionVibrationEffectAsset'>
-  <button class='top-link'>Back to top</button>
-  <div class='api-name'>VibrationEffectAsset</div>
-  <div class='api-comment'></div>
 </div>
 <div class='api' id='sectionCamera'>
   <button class='top-link'>Back to top</button>
@@ -918,8 +817,8 @@ div.api div.api-comment {
   <div class='section-title'>Functions</div><div class='api-functions'>
     <div class='api-function'>
       <span class='api-function-name'>IsValid</span>
-      <span class='api-function-usage'><span class='type'>bool</span> entityOrNill:IsValid()</span>
-      <span class='api-function-comment'></span>
+      <span class='api-function-usage'><span class='type'>bool</span> Entity.IsValid(<span class='type'>Entity</span> entityOrNill)</span>
+      <span class='api-function-comment'>Returns true if the parameter passed to it is a valid entity</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>IsA</span>
@@ -1144,7 +1043,7 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>ApplyDamage</span>
       <span class='api-function-usage'>entity:ApplyDamage(<span class='type'>number</span> damageAmount, <span class='type'>HitResult</span> hitResult, <span class='type'>Vector</span> shootDirection, <span class='type'>Entity</span> fromEntity, <span class='type'>table</span> damageModifiers)</span>
-      <span class='api-function-comment'>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a HitResult from a World Raycast function and a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</span>
+      <span class='api-function-comment'>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a HitResult from a World Raycast function and a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel = voxelasset, damageMultiplier = number },                      { voxel = voxelasset, damageMultiplier = number },                      script,                      script                   }</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>ApplyDamage</span>
@@ -1154,7 +1053,7 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>ApplyDamage</span>
       <span class='api-function-usage'>entity:ApplyDamage(<span class='type'>number</span> damageAmount, <span class='type'>Vector</span> shootDirection, <span class='type'>Entity</span> fromEntity, <span class='type'>table</span> damageModifiers)</span>
-      <span class='api-function-comment'>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</span>
+      <span class='api-function-comment'>Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override that), also pass a shootDirection Vector and fromEntity which will be passed to the OnDamage function. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel = voxelasset, damageMultiplier = number },                      { voxel = voxelasset, damageMultiplier = number },                      script,                      script                   }</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>GetParent</span>
@@ -1278,63 +1177,33 @@ div.api div.api-comment {
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayTimeline</span>
-      <span class='api-function-usage'><span class='type'>number</span> entity:PlayTimeline(<span class='type'>table</span> timelineArray)</span>
-      <span class='api-function-comment'>Play a timeline from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
-    </div>
-    <div class='api-function'>
-      <span class='api-function-name'>PlayTimeline</span>
       <span class='api-function-usage'><span class='type'>number</span> entity:PlayTimeline(<span class='type'>...</span> args)</span>
-      <span class='api-function-comment'>Play a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
-    </div>
-    <div class='api-function'>
-      <span class='api-function-name'>PlayTimelineLoop</span>
-      <span class='api-function-usage'>entity:PlayTimelineLoop(<span class='type'>table</span> timelineArray)</span>
-      <span class='api-function-comment'>Loop a timeline from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
+      <span class='api-function-comment'>Play a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a `Vector` and/or `Rotation`. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from `EaseIn`, `EaseOut`, `EaseInOut`, `Linear` (default) The easing types can also be set per axis, this is described in one of the examples.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayTimelineLoop</span>
       <span class='api-function-usage'>entity:PlayTimelineLoop(<span class='type'>...</span> args)</span>
-      <span class='api-function-comment'>Loop a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
-    </div>
-    <div class='api-function'>
-      <span class='api-function-name'>PlayTimelinePingPong</span>
-      <span class='api-function-usage'>entity:PlayTimelinePingPong(<span class='type'>table</span> timelineArray)</span>
-      <span class='api-function-comment'>Loop a timeline back and forth from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
+      <span class='api-function-comment'>Loop a timeline from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayTimelinePingPong</span>
       <span class='api-function-usage'>entity:PlayTimelinePingPong(<span class='type'>...</span> args)</span>
-      <span class='api-function-comment'>Loop a timeline back and forth Play a timeline from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
-    </div>
-    <div class='api-function'>
-      <span class='api-function-name'>PlayRelativeTimeline</span>
-      <span class='api-function-usage'><span class='type'>number</span> entity:PlayRelativeTimeline(<span class='type'>table</span> timelineArray)</span>
-      <span class='api-function-comment'>Play a timeline, relative to an entity's parent transform, from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
+      <span class='api-function-comment'>Loop a timeline back and forth from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayRelativeTimeline</span>
       <span class='api-function-usage'><span class='type'>number</span> entity:PlayRelativeTimeline(<span class='type'>...</span> args)</span>
-      <span class='api-function-comment'>Play a timeline, relative to an entity's parent transform, from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
-    </div>
-    <div class='api-function'>
-      <span class='api-function-name'>PlayRelativeTimelineLoop</span>
-      <span class='api-function-usage'><span class='type'>number</span> entity:PlayRelativeTimelineLoop(<span class='type'>table</span> timelineArray)</span>
-      <span class='api-function-comment'>Loop a timeline, relative to an entity's parent transform, from an array of values. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
+      <span class='api-function-comment'>Play a timeline, relative to an entity's parent transform, from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayRelativeTimelineLoop</span>
       <span class='api-function-usage'><span class='type'>number</span> entity:PlayRelativeTimelineLoop(<span class='type'>...</span> args)</span>
-      <span class='api-function-comment'>Loop a timeline, relative to an entity's parent transform, from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
-    </div>
-    <div class='api-function'>
-      <span class='api-function-name'>PlayRelativeTimelinePingPong</span>
-      <span class='api-function-usage'><span class='type'>number</span> entity:PlayRelativeTimelinePingPong(<span class='type'>table</span> timelineArray)</span>
-      <span class='api-function-comment'>Loop a timeline back and forth, relative to an entity's parent transform. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
+      <span class='api-function-comment'>Loop a timeline, relative to an entity's parent transform, from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayRelativeTimelinePingPong</span>
       <span class='api-function-usage'><span class='type'>number</span> entity:PlayRelativeTimelinePingPong(<span class='type'>...</span> args)</span>
-      <span class='api-function-comment'>Loop a timeline back and forth, relative to an entity's parent transform, from variable args. Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An optional easing type can be given for each key, which describes how to interpolate between the previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)</span>
+      <span class='api-function-comment'>Loop a timeline back and forth, relative to an entity's parent transform, from variable args. See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>CancelTimeline</span>
@@ -1438,12 +1307,12 @@ div.api div.api-comment {
     </div>
     <div class='api-function'>
       <span class='api-function-name'>UpdateCounter</span>
-      <span class='api-function-usage'>GameStorage.UpdateCounter(<span class='type'>string</span> counterName, <span class='type'>unhandled/int64</span> increment, <span class='type'>callback</span> callback)</span>
+      <span class='api-function-usage'>GameStorage.UpdateCounter(<span class='type'>string</span> counterName, <span class='type'>number</span> increment, <span class='type'>callback</span> callback)</span>
       <span class='api-function-comment'><span class='comment-bold'>Server</span> Update the value of a global counter for this game by adding increment to the existing value. Global counters are shared between all servers running the game and saved between sessions. The new incremented value is returned by calling the callback function with the value as an argument. Global counters are always whole (integer) numbers.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>UpdateCounter</span>
-      <span class='api-function-usage'>GameStorage.UpdateCounter(<span class='type'>string</span> counterName, <span class='type'>unhandled/int64</span> increment)</span>
+      <span class='api-function-usage'>GameStorage.UpdateCounter(<span class='type'>string</span> counterName, <span class='type'>number</span> increment)</span>
       <span class='api-function-comment'><span class='comment-bold'>Server</span> Update the value of a global counter for this game by adding increment to the existing value. Global counters are shared between all servers running the game and saved between sessions. Global counters are always whole (integer) numbers.</span>
     </div>
   </div>
@@ -1495,12 +1364,12 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>GetNearbyValues</span>
       <span class='api-function-usage'>Leaderboards.GetNearbyValues(<span class='type'>string</span> leaderboardId, <span class='type'>number</span> numValues, <span class='type'>User</span> user, <span class='type'>callback</span> callback)</span>
-      <span class='api-function-comment'>Gets nearby leaderboard values on the specified leaderboard for the specified user, centered on the user where possible. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</span>
+      <span class='api-function-comment'>Gets nearby leaderboard values on the specified leaderboard for the specified user, centered on the user where possible. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon. May return cached results if used frequently.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>GetTopValues</span>
       <span class='api-function-usage'>Leaderboards.GetTopValues(<span class='type'>string</span> leaderboardId, <span class='type'>number</span> numValues, <span class='type'>callback</span> callback)</span>
-      <span class='api-function-comment'>Gets the top ranking values from the specified leaderboard. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</span>
+      <span class='api-function-comment'>Gets the top ranking values from the specified leaderboard. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon. May return cached results if used frequently.</span>
     </div>
     <div class='api-function deprecated'>
       <span class='api-function-name'>GetMetadata</span>
@@ -1520,12 +1389,12 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>GetNearbyValuesForGame</span>
       <span class='api-function-usage'>Leaderboards.GetNearbyValuesForGame(<span class='type'>string</span> gameId, <span class='type'>string</span> leaderboardId, <span class='type'>number</span> numValues, <span class='type'>User</span> user, <span class='type'>callback</span> callback)</span>
-      <span class='api-function-comment'>Gets nearby leaderboard values for the specified GameId. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</span>
+      <span class='api-function-comment'>Gets nearby leaderboard values for the specified GameId. Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon. May return cached results if used frequently.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>GetTopValuesForGame</span>
       <span class='api-function-usage'>Leaderboards.GetTopValuesForGame(<span class='type'>string</span> gameId, <span class='type'>string</span> leaderboardId, <span class='type'>number</span> numValues, <span class='type'>callback</span> callback)</span>
-      <span class='api-function-comment'>Gets the top ranking values for the specified GameId Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon</span>
+      <span class='api-function-comment'>Gets the top ranking values for the specified GameId Results are returned as a parameter to the callback function. Callback function parameter is a table of results, each result contains name, score, rank & icon. May return cached results if used frequently.</span>
     </div>
     <div class='api-function deprecated'>
       <span class='api-function-name'>GetMetadataForGame</span>
@@ -1910,30 +1779,35 @@ div.api div.api-comment {
       <span class='api-function-usage'>mesh:PlayAnimation(<span class='type'>string</span> animationName)</span>
       <span class='api-function-comment'>Play a named animation on this mesh, once.</span>
     </div>
-    <div class='api-function deprecated'>
+    <div class='api-function'>
       <span class='api-function-name'>PlayAnimation</span>
       <span class='api-function-usage'>mesh:PlayAnimation(<span class='type'>string</span> animationName, <span class='type'>bool</span> looping)</span>
-      <span class='api-function-comment'><span class='comment-bold'>Unsupported</span> Play a named animation on this mesh, optionally looping.</span>
+      <span class='api-function-comment'>Play a named animation on this mesh, optionally looping.</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>PlayAnimation</span>
+      <span class='api-function-usage'>mesh:PlayAnimation(<span class='type'>string</span> animationName, <span class='type'>table</span> properties)</span>
+      <span class='api-function-comment'>Play a named animation on this mesh, optional table can contain named values `looping` and either `playbackTime` or `playbackSpeed`</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayAnimationLooping</span>
       <span class='api-function-usage'>mesh:PlayAnimationLooping(<span class='type'>string</span> animationName)</span>
       <span class='api-function-comment'>Play a named animation on this mesh, repeatedly.</span>
     </div>
-    <div class='api-function'>
+    <div class='api-function deprecated'>
       <span class='api-function-name'>PlayAnimationClient</span>
       <span class='api-function-usage'>mesh:PlayAnimationClient(<span class='type'>string</span> animationName)</span>
-      <span class='api-function-comment'>Play a named animation on this mesh, once, for this client only</span>
+      <span class='api-function-comment'><span class='comment-bold'>DEPRECATED</span> Use PlayAnimation instead, works on client or server</span>
     </div>
     <div class='api-function deprecated'>
       <span class='api-function-name'>PlayAnimationClient</span>
       <span class='api-function-usage'>mesh:PlayAnimationClient(<span class='type'>string</span> animationName, <span class='type'>bool</span> looping)</span>
-      <span class='api-function-comment'><span class='comment-bold'>Unsupported</span> Play a named animation on this mesh, optionally looping, for this client only</span>
+      <span class='api-function-comment'><span class='comment-bold'>DEPRECATED</span> Use PlayAnimation instead, works on client or server</span>
     </div>
-    <div class='api-function'>
+    <div class='api-function deprecated'>
       <span class='api-function-name'>PlayAnimationLoopingClient</span>
       <span class='api-function-usage'>mesh:PlayAnimationLoopingClient(<span class='type'>string</span> animationName)</span>
-      <span class='api-function-comment'>Play a named animation on this mesh, repeatedly, for this client only</span>
+      <span class='api-function-comment'><span class='comment-bold'>DEPRECATED</span> Use PlayAnimation instead, works on client or server</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>GetAnimationNames</span>
@@ -2082,7 +1956,7 @@ div.api div.api-comment {
   <div class='section-title'>Functions</div><div class='api-functions'>
     <div class='api-function'>
       <span class='api-function-name'>GetProperties</span>
-      <span class='api-function-usage'><span class='type'>unhandled/UPZPropertyBag</span> scriptComponent:GetProperties()</span>
+      <span class='api-function-usage'><span class='type'>Properties</span> scriptComponent:GetProperties()</span>
       <span class='api-function-comment'>Alternative to self.properties, this gets the bag of values produced from the property editor for this script on this Entity. The properties are defined by the static Properties table on the table returned by the Lua script.</span>
     </div>
     <div class='api-function'>
@@ -2329,73 +2203,88 @@ div.api div.api-comment {
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>OnChatMessage</span>
-      <span class='api-entrypoint-usage'>function Script:OnChatMessage() ... end</span>
-      <span class='api-entrypoint-comment'>Called when a quick chat message is triggered by the user</span>
+      <span class='api-entrypoint-usage'>function Script:OnChatMessage(<span class='type'>User</span> user, <span class='type'>Text</span> message) ... end</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Client</span> Called when a quick chat message is triggered by a user</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>OnDestroy</span>
       <span class='api-entrypoint-usage'>function Script:OnDestroy() ... end</span>
-      <span class='api-entrypoint-comment'>Called on the server when an entity is destroyed</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called on the server when an entity is destroyed</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>LocalOnMantleStart</span>
       <span class='api-entrypoint-usage'>function Script:LocalOnMantleStart() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character starts to mantle up to a platform</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Local</span> Called when the character starts to mantle up to a platform</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>OnMantleStart</span>
       <span class='api-entrypoint-usage'>function Script:OnMantleStart() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character starts to mantle up to a platform</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called when the character starts to mantle up to a platform</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>LocalOnMantleStop</span>
       <span class='api-entrypoint-usage'>function Script:LocalOnMantleStop() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character stops to mantling up to a platform</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Local</span> Called when the character stops to mantling up to a platform</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>OnMantleStop</span>
       <span class='api-entrypoint-usage'>function Script:OnMantleStop() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character stops to mantling up to a platform</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called when the character stops to mantling up to a platform</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>LocalOnSlideStart</span>
       <span class='api-entrypoint-usage'>function Script:LocalOnSlideStart() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character starts to slide</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Local</span> Called when the character starts to slide</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>OnSlideStart</span>
       <span class='api-entrypoint-usage'>function Script:OnSlideStart() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character starts to slide</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called when the character starts to slide</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>LocalOnSlideStop</span>
       <span class='api-entrypoint-usage'>function Script:LocalOnSlideStop() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character stops sliding</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Local</span> Called when the character stops sliding</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>OnSlideStop</span>
       <span class='api-entrypoint-usage'>function Script:OnSlideStop() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character stops sliding</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called when the character stops sliding</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>LocalOnRollStart</span>
       <span class='api-entrypoint-usage'>function Script:LocalOnRollStart() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character starts to roll</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Local</span> Called when the character starts to roll</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>OnRollStart</span>
       <span class='api-entrypoint-usage'>function Script:OnRollStart() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character starts to roll</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called when the character starts to roll</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>LocalOnRollStop</span>
       <span class='api-entrypoint-usage'>function Script:LocalOnRollStop() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character stops rolling</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Local</span> Called when the character stops rolling</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>OnRollStop</span>
       <span class='api-entrypoint-usage'>function Script:OnRollStop() ... end</span>
-      <span class='api-entrypoint-comment'>Called when the character stops rolling</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called when the character stops rolling</span>
+    </div>
+    <div class='api-entrypoint'>
+      <span class='api-entrypoint-name'>LocalOnSpawnEffectEnded</span>
+      <span class='api-entrypoint-usage'>function Script:LocalOnSpawnEffectEnded() ... end</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Local</span> Called when the character spawn effect has ended</span>
+    </div>
+    <div class='api-entrypoint'>
+      <span class='api-entrypoint-name'>OnSpawnEffectEnded</span>
+      <span class='api-entrypoint-usage'>function Script:OnSpawnEffectEnded() ... end</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called when the character spawn effect has ended</span>
+    </div>
+    <div class='api-entrypoint'>
+      <span class='api-entrypoint-name'>OnActivityTriggered</span>
+      <span class='api-entrypoint-usage'>function Script:OnActivityTriggered(<span class='type'>string</span> id, <span class='type'>text</span> display, <span class='type'>string</span> category) ... end</span>
+      <span class='api-entrypoint-comment'>Called when an activity is triggered</span>
     </div>
   </div>
 </div>
@@ -2722,7 +2611,7 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>ProjectPositionToScreen</span>
       <span class='api-function-usage'><span class='type'>Vector2D</span> user:ProjectPositionToScreen(<span class='type'>Vector</span> worldLocation)</span>
-      <span class='api-function-comment'>Converts a position in world space to a screen space co-ordinate Returned values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) local user = self:GetEntity():GetUser() local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0)) Printf("Screen pos: {1}", screenPos) end</span>
+      <span class='api-function-comment'><span class='comment-bold'>Local</span> Converts a position in world space to a screen space co-ordinate Returned values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user = self:GetEntity():GetUser() 	local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0)) 	Printf("Screen pos: {1}", screenPos) end</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayVibrationEffect</span>
@@ -2774,15 +2663,25 @@ div.api div.api-comment {
       <span class='api-function-usage'><span class='type'>number</span> user:GetChallengeProgress(<span class='type'>string</span> challengeId)</span>
       <span class='api-function-comment'>Gets the current progress on an active challenge</span>
     </div>
-    <div class='api-function'>
+    <div class='api-function deprecated'>
       <span class='api-function-name'>SendChallengeEvent</span>
       <span class='api-function-usage'>user:SendChallengeEvent(<span class='type'>string</span> eventName, <span class='type'>table</span> eventParametersTable)</span>
-      <span class='api-function-comment'><span class='comment-bold'>Server</span> Sends a Challenge event for this user. Takes a lua table of parameter to value pairs that are conditionally checked against the Challenge definition. Usage example: function MyUserScript:OnSomeAction(someValue1, someValue2) self:GetUser():SendChallengeEvent("SomeEvent", {someParameter1 = someValue1, someParameter2 = someValue2}) end</span>
+      <span class='api-function-comment'><span class='comment-bold'>DEPRECATED</span> <span class='comment-bold'>Server</span> Please use SendGameEvent instead of this. SendGameEvent trigger Challenges and Activities</span>
     </div>
-    <div class='api-function'>
+    <div class='api-function deprecated'>
       <span class='api-function-name'>SendChallengeEvent</span>
       <span class='api-function-usage'>user:SendChallengeEvent(<span class='type'>string</span> eventName)</span>
-      <span class='api-function-comment'><span class='comment-bold'>Server</span> Sends a Challenge event for this user.</span>
+      <span class='api-function-comment'><span class='comment-bold'>DEPRECATED</span> <span class='comment-bold'>Server</span> Please use SendGameEvent instead of this. SendGameEvent trigger Challenges and Activities</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>SendXPEvent</span>
+      <span class='api-function-usage'>user:SendXPEvent(<span class='type'>string</span> eventName, <span class='type'>table</span> eventParametersTable)</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> Sends an event for this user that can be used by the Challenges and Activities systems. Takes a lua table of named parameters which are checked against the conditions inside each challenge and activity.</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>SendXPEvent</span>
+      <span class='api-function-usage'>user:SendXPEvent(<span class='type'>string</span> eventName)</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> Sends an event for this user that can be used by the Challenges and Activities systems. This is the same as sending an empty parameter list in the other SendXPEvent overload.</span>
     </div>
   </div>
   <div class='section-title'>Variables</div><div class='api-parameters'>
@@ -2816,7 +2715,7 @@ div.api div.api-comment {
 <div class='api' id='sectionVoxelMesh'>
   <button class='top-link'>Back to top</button>
   <div class='api-name'>VoxelMesh</div>
-  <div class='api-comment'>An Entity can have a single physical representation. Voxels represents a voxel mesh which is edited to a start state in the editor and can be changed during gameplay. Voxels derives from Entity so if you have a Voxels you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Voxels) to see if a particular entity variable is a Voxels type entity.</div>
+  <div class='api-comment'>An Entity can have a single physical representation. VoxelMesh represents a mesh made of voxels, created within the Crayta editor. VoxelMesh derives from Entity so if you have a VoxelMesh you can do any of these functions as well as the functions in Entity. You can do entity:IsA(VoxelMesh) to see if a particular entity variable is a VoxelMesh type entity.</div>
   <div class='section-title'>Functions</div><div class='api-functions'>
     <div class='api-function'>
       <span class='api-function-name'>SetVoxel</span>
@@ -2995,7 +2894,7 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>ApplyPointDamage</span>
       <span class='api-function-usage'>world:ApplyPointDamage(<span class='type'>number</span> baseDamage, <span class='type'>Vector</span> rayStart, <span class='type'>Vector</span> direction, <span class='type'>Entity</span> fromEntity, <span class='type'>table</span> damageModifiers)</span>
-      <span class='api-function-comment'><span class='comment-bold'>Server</span> Applies point damage to the first Entity that intersects the given ray. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> Applies point damage to the first Entity that intersects the given ray. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel = voxelasset, damageMultiplier = number },                      { voxel = voxelasset, damageMultiplier = number },                      script,                      script                   }</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>ApplyRadialDamage</span>
@@ -3005,17 +2904,17 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>ApplyRadialDamage</span>
       <span class='api-function-usage'>world:ApplyRadialDamage(<span class='type'>number</span> baseDamage, <span class='type'>Vector</span> origin, <span class='type'>number</span> radius, <span class='type'>number</span> falloff, <span class='type'>Entity</span> fromEntity, <span class='type'>table</span> damageModifiers)</span>
-      <span class='api-function-comment'><span class='comment-bold'>Server</span> Applies radial damage to all Entities within a radius of an origin. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> Applies radial damage to all Entities within a radius of an origin. DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel = voxelasset, damageMultiplier = number },                      { voxel = voxelasset, damageMultiplier = number },                      script,                      script                   }</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>SetVoxelProperties</span>
       <span class='api-function-usage'>world:SetVoxelProperties(<span class='type'>table</span> voxelPropertiesTable)</span>
-      <span class='api-function-comment'>Set the voxel properties of the world. VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset, healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time.</span>
+      <span class='api-function-comment'>Set the voxel properties of the world. VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = {                      { voxel = voxelasset, health = number, healTime = number },                      { voxel = voxelasset, health = number },                      { voxel = voxelasset, healTime = number },                      script,                      script                   } Defaults are 100 for health, 3.0 for heal time.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>SetVoxelProperties</span>
       <span class='api-function-usage'>world:SetVoxelProperties(<span class='type'>table</span> voxelPropertiesTable, <span class='type'>number</span> defaultMaxHealth, <span class='type'>number</span> defaultHealTime)</span>
-      <span class='api-function-comment'>Set the voxel properties of the world. VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset, healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time, these can be modified in this version of the function.</span>
+      <span class='api-function-comment'>Set the voxel properties of the world. VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables, and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel", type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime", type = "number", editor = "seconds", default = 3 }. voxelProperties = {                      { voxel = voxelasset, health = number, healTime = number },                      { voxel = voxelasset, health = number },                      { voxel = voxelasset, healTime = number },                      script,                      script                   } Defaults are 100 for health, 3.0 for heal time, these can be modified in this version of the function.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>GetTimeOfDay</span>

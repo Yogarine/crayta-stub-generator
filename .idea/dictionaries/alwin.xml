@@ -5,11 +5,14 @@
       <w>apidocs</w>
       <w>copysign</w>
       <w>crosshair</w>
+      <w>despawn</w>
+      <w>elipsoid</w>
       <w>garside</w>
       <w>hotbar</w>
       <w>interactable</w>
       <w>lerp</w>
       <w>localonly</w>
+      <w>playerstart</w>
       <w>returntype</w>
       <w>serveronly</w>
       <w>vibrationeffectasset</w>

@@ -30,6 +30,9 @@ class LuaFunction extends Variable
     const CUSTOM_RETURN_TYPES = [
         'scriptComponent:GetProperties' => 'Properties',
         'scriptComponent:GetEntity' => 'T',
+        'entity:FindScriptProperty' => 'PropertyValue',
+        'entity:FindAllScripts' => 'Script<Entity>[]',
+        'world:FindAllScripts' => 'Script<Entity>[]',
     ];
 
     const OVERLOADS = [
@@ -76,8 +79,6 @@ class LuaFunction extends Variable
     /**
      * @param  string|null  $type
      * @return string|null
-     *
-     * @noinspection PhpMissingReturnTypeInspection
      */
     public function parseType(string $type = null)
     {
@@ -193,7 +194,7 @@ class LuaFunction extends Variable
             $types = explode(',', $this->type);
             // Ugly way to get an array with the appropriate amount of returns.
             foreach ($types as $key => $type) {
-                $types[$key] = 'nil';
+                $types[$key] = $this->getTypeReturnValue($type);
             }
             $functionsTxt .= "\n\treturn " . implode(', ', $types);
         }
@@ -201,5 +202,18 @@ class LuaFunction extends Variable
         $functionsTxt .= "\nend\n\n";
 
         return $functionsTxt;
+    }
+
+    /**
+     * @param  string  $type
+     * @return string
+     */
+    private function getTypeReturnValue(string $type): string
+    {
+        if ($this->isTableType($type)) {
+            return '{}';
+        }
+
+        return 'nil';
     }
 }

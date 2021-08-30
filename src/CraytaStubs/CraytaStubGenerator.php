@@ -49,6 +49,26 @@ class CraytaStubGenerator
     }
 
     /**
+     * Returns the path to directory containing the static Crayta stubs.
+     *
+     * @param  string|null  $subPath
+     * @return string  Absolute path to static Crayta stubs.
+     */
+    public static function getDevStubsDir(string $subPath = null): string
+    {
+        $parts = [
+            realpath(dirname(__DIR__, 2)),
+            'output',
+        ];
+
+        if ($subPath) {
+            $parts[] = $subPath;
+        }
+
+        return implode(DIRECTORY_SEPARATOR, $parts);
+    }
+
+    /**
      * Copy static Crayta stubs over to the provided target directory.
      *
      * @param  string  $targetDir
@@ -192,7 +212,6 @@ class CraytaStubGenerator
 
         foreach ($xPath->query('info', $node) as $infoNode) {
             $returnType = $xPath->evaluate('string(@returntype)', $infoNode);
-            $static     = $xPath->evaluate('string(@static)', $infoNode) === 'true';
 
             if ($returnType) {
                 $type = $returnType;
@@ -226,7 +245,7 @@ class CraytaStubGenerator
             '/^'
             . '(?:(?<assignment>[a-z_][a-z0-9_.]*\s*=)\s*)?'
             . '(?:(?<type>[a-z_][a-z0-9_,\/]*)\s+)?'
-            . '(?<identifier>(?:[+\-*\/]|[a-z_][a-z0-9_:.]*))'
+            . '(?<identifier>[+\-*\/]|[a-z_][a-z0-9_:.]*)'
             . '(?:\('
             . '(?<arguments>[^)]+)?'
             . '\).*)?'
@@ -243,12 +262,10 @@ class CraytaStubGenerator
         $identifier = $matches['assignment'] ?: $matches['identifier'];
 
         $arguments = [];
-        if ($matches['arguments']) {
+        if (isset($matches['arguments'])) {
             $argumentsMatched = preg_match_all(
-                '/'
-                . '(?:(?<argumentType>(?:\.{3}|[a-z_][a-z0-9\/_]*))\s+)?'
-                . '(?<argumentName>[a-z_][a-z0-9_.]*)(?:,\s*)?'
-                . '/i',
+                '/(?:(?<argumentType>\.{3}|[a-z_][a-z0-9\/_]*)\s+)?'
+                . '(?<argumentName>[a-z_][a-z0-9_.]*)(?:,\s*)?/i',
                 $matches['arguments'],
                 $argumentsMatches,
                 PREG_SET_ORDER
@@ -258,7 +275,7 @@ class CraytaStubGenerator
                 throw new RuntimeException("Unable to parse arguments '{$matches['arguments']}'");
             }
 
-            foreach ($argumentsMatches as $key => $argumentSet) {
+            foreach ($argumentsMatches as $argumentSet) {
                 $argumentType = $argumentSet['argumentType'] ?: 'any';
                 $argumentName = $argumentSet['argumentName'];
                 $argumentName = trim($argumentName, ", \t\n\r\0\x0B");
