@@ -58,7 +58,7 @@ class CraytaStubGenerator
     {
         $parts = [
             realpath(dirname(__DIR__, 2)),
-            'output',
+            'stubs',
         ];
 
         if ($subPath) {
