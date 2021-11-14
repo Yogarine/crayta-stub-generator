@@ -1,4 +1,4 @@
-<apidocs version="0.7.619.108548">
+<apidocs version="0.d5.9.111485">
   <apidoc name="Globals">
     <comment></comment>
     <functions>
@@ -84,6 +84,9 @@
       </function>
     </functions>
   </apidoc>
+  <apidoc name="AnalyticsHandle">
+    <comment></comment>
+  </apidoc>
   <apidoc name="Analytics">
     <comment></comment>
     <functions>
@@ -98,18 +101,18 @@
         <comment>Send an type of telemetry event to the telemetry server with the given parametersTable for later analysis. (Note: Currently specific telemetry analytics are not available to creators)</comment>
       </function>
       <function name="MatchStarted">
-        <usage>Handle Analytics.MatchStarted()</usage>
-        <info returntype="Handle"><args></args></info>
+        <usage>AnalyticsHandle Analytics.MatchStarted()</usage>
+        <info returntype="AnalyticsHandle"><args></args></info>
         <comment>Send a MatchStarted event for later analysis. It is up to the game to define what a match is, for example a single round of a game might be defined as a match. Returns a handle that can be passed to MatchEnded to define the match start and end. (Note: Currently specific telemetry analytics are not available to creators)</comment>
       </function>
       <function name="MatchEnded">
-        <usage>Analytics.MatchEnded(Handle matchHandle)</usage>
-        <info static="true"><args><arg type="Handle" name="matchHandle"/></args></info>
+        <usage>Analytics.MatchEnded(AnalyticsHandle matchHandle)</usage>
+        <info static="true"><args><arg type="AnalyticsHandle" name="matchHandle"/></args></info>
         <comment>Send a MatchEnded event for later analysis. (Note: Currently specific telemetry analytics are not available to creators)</comment>
       </function>
       <function name="MatchEnded">
-        <usage>Analytics.MatchEnded(Handle matchHandle, table userEntriesTable)</usage>
-        <info static="true"><args><arg type="Handle" name="matchHandle"/><arg type="table" name="userEntriesTable"/></args></info>
+        <usage>Analytics.MatchEnded(AnalyticsHandle matchHandle, table userEntriesTable)</usage>
+        <info static="true"><args><arg type="AnalyticsHandle" name="matchHandle"/><arg type="table" name="userEntriesTable"/></args></info>
         <comment>Send a MatchEnded event for later analysis. Takes a table with an entry per user with a 'user' and 'rank' value (Note: Currently specific telemetry analytics are not available to creators)</comment>
       </function>
       <function name="Attacked">
@@ -131,6 +134,51 @@
         <usage>Analytics.PlayerHealthCritical(Entity playerOrUser)</usage>
         <info static="true"><args><arg type="Entity" name="playerOrUser"/></args></info>
         <comment>Send a PlayerHealthCritical event for later analysis. When a players health is critically low. (Note: Currently specific telemetry analytics are not available to creators)</comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="AnimationHandle">
+    <comment></comment>
+    <functions>
+      <function name="IsPlaying">
+        <usage>bool handle:IsPlaying()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment>returns true if this animation is still playing</comment>
+      </function>
+      <function name="GetPlaybackSpeed">
+        <usage>number handle:GetPlaybackSpeed()</usage>
+        <info returntype="number"><args></args></info>
+        <comment>get the current playback speed of the animation</comment>
+      </function>
+      <function name="SetPlaybackSpeed">
+        <usage>handle:SetPlaybackSpeed(number value)</usage>
+        <info><args><arg type="number" name="value"/></args></info>
+        <comment>set the current playback speed of the animation</comment>
+      </function>
+      <function name="IsLooping">
+        <usage>bool handle:IsLooping()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment>get whether this animation is set to loop</comment>
+      </function>
+      <function name="SetLooping">
+        <usage>handle:SetLooping(bool value)</usage>
+        <info><args><arg type="bool" name="value"/></args></info>
+        <comment>set whether this animation should loop</comment>
+      </function>
+      <function name="Stop">
+        <usage>handle:Stop()</usage>
+        <info><args></args></info>
+        <comment>stops/cancels the animation on this mesh, this will invalidate this handle as the animation it relates to is no longer playing</comment>
+      </function>
+      <function name="SetProgress">
+        <usage>handle:SetProgress(number normalizedTime)</usage>
+        <info><args><arg type="number" name="normalizedTime"/></args></info>
+        <comment>Set the progress of the animation.  0.0 = the start of the animation, 0.5 = 50% of the way through the animation, 1.0 = the end of the animation, etc</comment>
+      </function>
+      <function name="GetProgress">
+        <usage>number handle:GetProgress()</usage>
+        <info returntype="number"><args></args></info>
+        <comment></comment>
       </function>
     </functions>
   </apidoc>
@@ -181,6 +229,21 @@
         <usage>table templateAsset:FindAllScriptProperties(ScriptAsset script)</usage>
         <info returntype="table"><args><arg type="ScriptAsset" name="script"/></args></info>
         <comment></comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="MeshAsset">
+    <comment></comment>
+    <functions>
+      <function name="GetAnimationNames">
+        <usage>table meshAsset:GetAnimationNames()</usage>
+        <info returntype="table"><args></args></info>
+        <comment>Get a table of animation names that you can play on a mesh with mesh:PlayAnimation.</comment>
+      </function>
+      <function name="GetAnimationLength">
+        <usage>number meshAsset:GetAnimationLength(string animationName)</usage>
+        <info returntype="number"><args><arg type="string" name="animationName"/></args></info>
+        <comment>Get the length of an animation in seconds</comment>
       </function>
     </functions>
   </apidoc>
@@ -296,6 +359,21 @@
         <info><args><arg type="number" name="intensity"/><arg type="number" name="duration"/><arg type="bool" name="affectSmallMotors"/><arg type="bool" name="affectLargeMotors"/></args></info>
         <comment></comment>
       </function>
+      <function name="AdjustAim">
+        <usage>AdjustAimHandle character:AdjustAim(... args)</usage>
+        <info returntype="AdjustAimHandle"><args><arg type="..." name="args"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="CancelAdjustAim">
+        <usage>character:CancelAdjustAim(AdjustAimHandle handle)</usage>
+        <info><args><arg type="AdjustAimHandle" name="handle"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="IsAdjustAimActive">
+        <usage>bool character:IsAdjustAimActive()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment></comment>
+      </function>
     </functions>
     <parameters>
       <parameter name="speedMultiplier">
@@ -309,6 +387,42 @@
       <parameter name="canSprint">
         <usage>bool canSprint</usage>
         <comment>Turn on or off ability to sprint</comment>
+      </parameter>
+      <parameter name="canRun">
+        <usage>bool canRun</usage>
+        <comment>Turn on or off ability to run</comment>
+      </parameter>
+      <parameter name="canWalk">
+        <usage>bool canWalk</usage>
+        <comment>Turn on or off ability to walk</comment>
+      </parameter>
+      <parameter name="canMantle">
+        <usage>bool canMantle</usage>
+        <comment>Turn on or off ability to mantle</comment>
+      </parameter>
+      <parameter name="maxMantleHeight">
+        <usage>number maxMantleHeight</usage>
+        <comment>Set the maximum height that a player can mantle</comment>
+      </parameter>
+      <parameter name="canSlide">
+        <usage>bool canSlide</usage>
+        <comment>Turn on or off ability to slide</comment>
+      </parameter>
+      <parameter name="canRoll">
+        <usage>bool canRoll</usage>
+        <comment>Turn on or off ability to roll</comment>
+      </parameter>
+      <parameter name="canRelax">
+        <usage>bool canRelax</usage>
+        <comment>Turn on or off ability to go into a grip's relaxed pose</comment>
+      </parameter>
+      <parameter name="breakFall">
+        <usage>bool breakFall</usage>
+        <comment>Turn on or off ability to break fall on landing</comment>
+      </parameter>
+      <parameter name="breakFallSpeed">
+        <usage>number breakFallSpeed</usage>
+        <comment>Turn on or off ability to break fall on landing</comment>
       </parameter>
       <parameter name="canJump">
         <usage>bool canJump</usage>
@@ -377,6 +491,10 @@
       <parameter name="cameraLock">
         <usage>bool cameraLock</usage>
         <comment>Lock/Unlock the orbit camera</comment>
+      </parameter>
+      <parameter name="cameraSecondaryAction">
+        <usage>number cameraSecondaryAction</usage>
+        <comment>Set what the secondary action does in the orbit camera</comment>
       </parameter>
       <parameter name="cameraCollisionEnabled">
         <usage>bool cameraCollisionEnabled</usage>
@@ -553,6 +671,16 @@
         <info returntype="Vector"><args></args></info>
         <comment>Get the forward facing vector of an Entity from its rotation.</comment>
       </function>
+      <function name="GetRight">
+        <usage>Vector entity:GetRight()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get the right facing vector of an Entity from its rotation.</comment>
+      </function>
+      <function name="GetUp">
+        <usage>Vector entity:GetUp()</usage>
+        <info returntype="Vector"><args></args></info>
+        <comment>Get the up facing vector of an Entity from its rotation.</comment>
+      </function>
       <function name="SetForward">
         <usage>entity:SetForward(Vector forward)</usage>
         <info><args><arg type="Vector" name="forward"/></args></info>
@@ -564,83 +692,83 @@
         <comment>Set the rotation of an Entity to make its front face in a given direction, and its top point in another.</comment>
       </function>
       <function name="PlaySound">
-        <usage>Handle entity:PlaySound(SoundAsset sound)</usage>
-        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/></args></info>
+        <usage>SoundHandle entity:PlaySound(SoundAsset sound)</usage>
+        <info returntype="SoundHandle"><args><arg type="SoundAsset" name="sound"/></args></info>
         <comment>Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound.</comment>
       </function>
       <function name="PlaySound">
-        <usage>Handle entity:PlaySound(SoundAsset sound, number fadeIn)</usage>
-        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/></args></info>
+        <usage>SoundHandle entity:PlaySound(SoundAsset sound, number fadeIn)</usage>
+        <info returntype="SoundHandle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/></args></info>
         <comment>Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound. Fades in over the given fadeIn time.</comment>
       </function>
       <function name="PlaySound">
-        <usage>Handle entity:PlaySound(SoundAsset sound, number fadeIn, string groupName)</usage>
-        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/><arg type="string" name="groupName"/></args></info>
+        <usage>SoundHandle entity:PlaySound(SoundAsset sound, number fadeIn, string groupName)</usage>
+        <info returntype="SoundHandle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/><arg type="string" name="groupName"/></args></info>
         <comment>Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound. Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the given fadeIn time.</comment>
       </function>
       <function name="PlaySound2D">
-        <usage>Handle entity:PlaySound2D(SoundAsset sound)</usage>
-        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/></args></info>
+        <usage>SoundHandle entity:PlaySound2D(SoundAsset sound)</usage>
+        <info returntype="SoundHandle"><args><arg type="SoundAsset" name="sound"/></args></info>
         <comment>Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds, stereo music stings, etc).</comment>
       </function>
       <function name="PlaySound2D">
-        <usage>Handle entity:PlaySound2D(SoundAsset sound, number fadeIn)</usage>
-        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/></args></info>
+        <usage>SoundHandle entity:PlaySound2D(SoundAsset sound, number fadeIn)</usage>
+        <info returntype="SoundHandle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/></args></info>
         <comment>Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds, stereo music stings, etc). Fades in over the given fadeIn time.</comment>
       </function>
       <function name="PlaySound2D">
-        <usage>Handle entity:PlaySound2D(SoundAsset sound, number fadeIn, string groupName)</usage>
-        <info returntype="Handle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/><arg type="string" name="groupName"/></args></info>
+        <usage>SoundHandle entity:PlaySound2D(SoundAsset sound, number fadeIn, string groupName)</usage>
+        <info returntype="SoundHandle"><args><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/><arg type="string" name="groupName"/></args></info>
         <comment>Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds, stereo music stings, etc). Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the given fadeIn time.</comment>
       </function>
       <function name="PlaySoundAtLocation">
-        <usage>Handle entity:PlaySoundAtLocation(Vector location, SoundAsset sound)</usage>
-        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="SoundAsset" name="sound"/></args></info>
+        <usage>SoundHandle entity:PlaySoundAtLocation(Vector location, SoundAsset sound)</usage>
+        <info returntype="SoundHandle"><args><arg type="Vector" name="location"/><arg type="SoundAsset" name="sound"/></args></info>
         <comment>Play a sound Asset on this Entity at the given location.</comment>
       </function>
       <function name="PlaySoundAtLocation">
-        <usage>Handle entity:PlaySoundAtLocation(Vector location, SoundAsset sound, number fadeIn)</usage>
-        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/></args></info>
+        <usage>SoundHandle entity:PlaySoundAtLocation(Vector location, SoundAsset sound, number fadeIn)</usage>
+        <info returntype="SoundHandle"><args><arg type="Vector" name="location"/><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/></args></info>
         <comment>Play a sound Asset on this Entity at the given location. Fades in over the given fadeIn time.</comment>
       </function>
       <function name="PlaySoundAtLocation">
-        <usage>Handle entity:PlaySoundAtLocation(Vector location, SoundAsset sound, number fadeIn, string groupName)</usage>
-        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/><arg type="string" name="groupName"/></args></info>
+        <usage>SoundHandle entity:PlaySoundAtLocation(Vector location, SoundAsset sound, number fadeIn, string groupName)</usage>
+        <info returntype="SoundHandle"><args><arg type="Vector" name="location"/><arg type="SoundAsset" name="sound"/><arg type="number" name="fadeIn"/><arg type="string" name="groupName"/></args></info>
         <comment>Play a sound Asset on this Entity at the given location. Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the given fadeIn time.</comment>
       </function>
       <function name="StopSound">
-        <usage>entity:StopSound(Handle soundHandle)</usage>
-        <info><args><arg type="Handle" name="soundHandle"/></args></info>
+        <usage>entity:StopSound(SoundHandle handle)</usage>
+        <info><args><arg type="SoundHandle" name="handle"/></args></info>
         <comment>Given a sound Handle stop the sound on this Entity.</comment>
       </function>
       <function name="StopSound">
-        <usage>entity:StopSound(Handle soundHandle, number fadeOut)</usage>
-        <info><args><arg type="Handle" name="soundHandle"/><arg type="number" name="fadeOut"/></args></info>
+        <usage>entity:StopSound(SoundHandle handle, number fadeOut)</usage>
+        <info><args><arg type="SoundHandle" name="handle"/><arg type="number" name="fadeOut"/></args></info>
         <comment>Given a sound Handle stop the sound on this Entity. Fade the sound out over the given fadeOut time.</comment>
       </function>
       <function name="PlayEffect">
-        <usage>Handle entity:PlayEffect(EffectAsset effect)</usage>
-        <info returntype="Handle"><args><arg type="EffectAsset" name="effect"/></args></info>
+        <usage>EffectHandle entity:PlayEffect(EffectAsset effect)</usage>
+        <info returntype="EffectHandle"><args><arg type="EffectAsset" name="effect"/></args></info>
         <comment>Play a particle effect Asset on this Entity, returning a Handle which can be used to stop the effect.</comment>
       </function>
       <function name="PlayEffect">
-        <usage>Handle entity:PlayEffect(EffectAsset effect, bool attached)</usage>
-        <info returntype="Handle"><args><arg type="EffectAsset" name="effect"/><arg type="bool" name="attached"/></args></info>
+        <usage>EffectHandle entity:PlayEffect(EffectAsset effect, bool attached)</usage>
+        <info returntype="EffectHandle"><args><arg type="EffectAsset" name="effect"/><arg type="bool" name="attached"/></args></info>
         <comment>Play a particle effect Asset on this Entity, returning a Handle which can be used to stop the effect. Optionally the effect is attached to the entity and so all spawned particles are relative to it.</comment>
       </function>
       <function name="PlayEffectAtLocation">
-        <usage>Handle entity:PlayEffectAtLocation(Vector location, Rotation rotation, EffectAsset effect)</usage>
-        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="Rotation" name="rotation"/><arg type="EffectAsset" name="effect"/></args></info>
+        <usage>EffectHandle entity:PlayEffectAtLocation(Vector location, Rotation rotation, EffectAsset effect)</usage>
+        <info returntype="EffectHandle"><args><arg type="Vector" name="location"/><arg type="Rotation" name="rotation"/><arg type="EffectAsset" name="effect"/></args></info>
         <comment>Play a particle effect Asset at a given world location and rotation, returning a Handle which can be used to stop the effect.</comment>
       </function>
       <function name="PlayEffectAtLocation">
-        <usage>Handle entity:PlayEffectAtLocation(Vector location, Rotation rotation, EffectAsset effect, bool attached)</usage>
-        <info returntype="Handle"><args><arg type="Vector" name="location"/><arg type="Rotation" name="rotation"/><arg type="EffectAsset" name="effect"/><arg type="bool" name="attached"/></args></info>
+        <usage>EffectHandle entity:PlayEffectAtLocation(Vector location, Rotation rotation, EffectAsset effect, bool attached)</usage>
+        <info returntype="EffectHandle"><args><arg type="Vector" name="location"/><arg type="Rotation" name="rotation"/><arg type="EffectAsset" name="effect"/><arg type="bool" name="attached"/></args></info>
         <comment>Play a particle effect Asset at a given world location and rotation, returning a Handle which can be used to stop the effect. Optionally the effect is attached to the entity and so all spawned particles are relative to it.</comment>
       </function>
       <function name="StopEffect">
-        <usage>entity:StopEffect(Handle effectHandle)</usage>
-        <info><args><arg type="Handle" name="effectHandle"/></args></info>
+        <usage>entity:StopEffect(EffectHandle handle)</usage>
+        <info><args><arg type="EffectHandle" name="handle"/></args></info>
         <comment></comment>
       </function>
       <function name="Clone" serveronly="true">
@@ -938,12 +1066,56 @@
   </apidoc>
   <apidoc name="Handle">
     <comment></comment>
-    <overrides>
-      <override name="to_string">
-        <usage>string tostring(Handle var)</usage>
+  </apidoc>
+  <apidoc name="ScheduleHandle">
+    <comment></comment>
+    <functions>
+      <function name="Cancel">
+        <usage>handle:Cancel()</usage>
+        <info><args></args></info>
         <comment></comment>
-      </override>
-    </overrides>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="EffectHandle">
+    <comment></comment>
+    <functions>
+      <function name="Stop">
+        <usage>handle:Stop()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="SoundHandle">
+    <comment></comment>
+    <functions>
+      <function name="Stop">
+        <usage>handle:Stop()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="Stop">
+        <usage>handle:Stop(number fadeOut)</usage>
+        <info><args><arg type="number" name="fadeOut"/></args></info>
+        <comment></comment>
+      </function>
+    </functions>
+  </apidoc>
+  <apidoc name="AdjustAimHandle">
+    <comment></comment>
+    <functions>
+      <function name="Cancel">
+        <usage>handle:Cancel()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="IsActive">
+        <usage>bool handle:IsActive()</usage>
+        <info returntype="bool"><args></args></info>
+        <comment></comment>
+      </function>
+    </functions>
   </apidoc>
   <apidoc name="HitResult">
     <comment>A HitResult is used by the World Raycast function to give details about where the collision happened (GetPosition) and what the normal vector of the collision is (GetNormal).</comment>
@@ -967,6 +1139,11 @@
         <usage>Vector hitResult:GetRelativeNormal()</usage>
         <info returntype="Vector"><args></args></info>
         <comment>Get normal direction of the hit relative to the rotation of the Entity hit</comment>
+      </function>
+      <function name="GetPartName">
+        <usage>string hitResult:GetPartName()</usage>
+        <info returntype="string"><args></args></info>
+        <comment>get the name of the part of the entity that was hit. For example a headshot on a player character will return 'head'</comment>
       </function>
     </functions>
   </apidoc>
@@ -1047,6 +1224,18 @@
       <parameter name="attenuation">
         <usage>number attenuation</usage>
         <comment>Set attenuation of the light (units?)</comment>
+      </parameter>
+      <parameter name="exponent">
+        <usage>number exponent</usage>
+        <comment></comment>
+      </parameter>
+      <parameter name="specular">
+        <usage>boolean specular</usage>
+        <comment></comment>
+      </parameter>
+      <parameter name="shadows">
+        <usage>boolean shadows</usage>
+        <comment></comment>
       </parameter>
     </parameters>
   </apidoc>
@@ -1343,24 +1532,29 @@
     <comment>An Entity can have a single physical representation. Mesh is for 3D objects that exist in the scene. They can be collided with and recieve damage when hit. Mesh derives from Entity so if you have a Mesh you can do any of these functions as well as the functions in Entity. You can do entity:IsA(Mesh) to see if a particular entity variable is a Mesh type entity.</comment>
     <functions>
       <function name="PlayAnimation">
-        <usage>mesh:PlayAnimation(string animationName)</usage>
-        <info><args><arg type="string" name="animationName"/></args></info>
+        <usage>AnimationHandle mesh:PlayAnimation(string animationName)</usage>
+        <info returntype="AnimationHandle"><args><arg type="string" name="animationName"/></args></info>
         <comment>Play a named animation on this mesh, once.</comment>
       </function>
       <function name="PlayAnimation">
-        <usage>mesh:PlayAnimation(string animationName, bool looping)</usage>
-        <info><args><arg type="string" name="animationName"/><arg type="bool" name="looping"/></args></info>
+        <usage>AnimationHandle mesh:PlayAnimation(string animationName, bool looping)</usage>
+        <info returntype="AnimationHandle"><args><arg type="string" name="animationName"/><arg type="bool" name="looping"/></args></info>
         <comment>Play a named animation on this mesh, optionally looping.</comment>
       </function>
       <function name="PlayAnimation">
-        <usage>mesh:PlayAnimation(string animationName, table properties)</usage>
-        <info><args><arg type="string" name="animationName"/><arg type="table" name="properties"/></args></info>
-        <comment>Play a named animation on this mesh, optional table can contain named values looping and either playbackTime or playbackSpeed</comment>
+        <usage>AnimationHandle mesh:PlayAnimation(string animationName, table properties)</usage>
+        <info returntype="AnimationHandle"><args><arg type="string" name="animationName"/><arg type="table" name="properties"/></args></info>
+        <comment>Play a named animation on this mesh, optional table can contain named values looping, either playbackTime or playbackSpeed and either 'positionFactor' or 'positionTime' a negative playbackSpeed will play the animation in reverse.  For example playbackSpeed = -2 will play the animation twice as fast in reverse</comment>
       </function>
       <function name="PlayAnimationLooping">
-        <usage>mesh:PlayAnimationLooping(string animationName)</usage>
-        <info><args><arg type="string" name="animationName"/></args></info>
+        <usage>AnimationHandle mesh:PlayAnimationLooping(string animationName)</usage>
+        <info returntype="AnimationHandle"><args><arg type="string" name="animationName"/></args></info>
         <comment>Play a named animation on this mesh, repeatedly.</comment>
+      </function>
+      <function name="PlayAnimationLooping">
+        <usage>AnimationHandle mesh:PlayAnimationLooping(string animationName, table properties)</usage>
+        <info returntype="AnimationHandle"><args><arg type="string" name="animationName"/><arg type="table" name="properties"/></args></info>
+        <comment>This is the same as the PlayAnimation function taking a table containing playbackTime or playbackSpeed except that looping defaults to true</comment>
       </function>
       <function name="PlayAnimationClient" deprecated="true">
         <usage>mesh:PlayAnimationClient(string animationName)</usage>
@@ -1381,6 +1575,11 @@
         <usage>table mesh:GetAnimationNames()</usage>
         <info returntype="table"><args></args></info>
         <comment>Get a table of animation names that you can play on this mesh with PlayAnimation.</comment>
+      </function>
+      <function name="GetAnimationLength">
+        <usage>number mesh:GetAnimationLength(string animationName)</usage>
+        <info returntype="number"><args><arg type="string" name="animationName"/></args></info>
+        <comment>Get the length of an animation in seconds</comment>
       </function>
       <function name="CreateThruster">
         <usage>Thruster mesh:CreateThruster()</usage>
@@ -1434,7 +1633,7 @@
         <comment>Called when this entity is damaged with the amount of damage, the entity causing the damage and a HitResult structure, as well as the mesh Entity from which the onDamage event was sent. An alternative to listening for OnDamage in a script on the entity.</comment>
       </parameter>
       <parameter name="mesh">
-        <usage>mesh mesh</usage>
+        <usage>meshno mesh</usage>
         <comment>Get or change the mesh</comment>
       </parameter>
     </parameters>
@@ -1538,13 +1737,13 @@
         <comment>Call eventName on any scripts that have registered for it using ListenForEvent with the given args. If called on the server do it only on the server, if called on a client do it only on that client.</comment>
       </function>
       <function name="Schedule">
-        <usage>Handle scriptComponent:Schedule(callback function)</usage>
-        <info returntype="Handle"><args><arg type="callback" name="function"/></args></info>
+        <usage>ScheduleHandle scriptComponent:Schedule(callback function)</usage>
+        <info returntype="ScheduleHandle"><args><arg type="callback" name="function"/></args></info>
         <comment>Pass this a function to do that function in a thread. Can use globals like Wait to control flow as the function will be re-entrant. Returns a Handle which can be passed to Cancel</comment>
       </function>
       <function name="Cancel">
-        <usage>scriptComponent:Cancel(Handle handle)</usage>
-        <info><args><arg type="Handle" name="handle"/></args></info>
+        <usage>scriptComponent:Cancel(ScheduleHandle handle)</usage>
+        <info><args><arg type="ScheduleHandle" name="handle"/></args></info>
         <comment>Cancel a scheduled task if its running.</comment>
       </function>
       <function name="SetSaveData" serveronly="true">
@@ -1597,7 +1796,7 @@
       <entrypoint name="OnDamage" serveronly="true">
         <usage>function Script:OnDamage(number damageAmount, Entity damageCauser, HitResult hitResult) ... end</usage>
         <info static="true"><args><arg type="number" name="damageAmount"/><arg type="Entity" name="damageCauser"/><arg type="HitResult" name="hitResult"/></args></info>
-        <comment>Called when an entity is damaged on all scripts of the entity. TODO: work out what gets passed in here for radial damage instead of the HitResult.</comment>
+        <comment>Called when an entity is damaged on all scripts of the entity.</comment>
       </entrypoint>
       <entrypoint name="Init" serveronly="true">
         <usage>function Script:Init() ... end</usage>
@@ -1970,7 +2169,7 @@
     </functions>
     <parameters>
       <parameter name="js">
-        <usage>WidgetBindings js</usage>
+        <usage>unknown js</usage>
         <comment></comment>
       </parameter>
       <parameter name="visible">
@@ -2122,6 +2321,36 @@
         <info><args><arg type="WorldAsset" name="worldAsset"/><arg type="callback" name="travelFailedCallback"/></args></info>
         <comment></comment>
       </function>
+      <function name="OpenStore" serveronly="true" localonly="true">
+        <usage>user:OpenStore()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="OpenNews" serveronly="true" localonly="true">
+        <usage>user:OpenNews()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="OpenGameHelp" serveronly="true" localonly="true">
+        <usage>user:OpenGameHelp(string helpPageId)</usage>
+        <info><args><arg type="string" name="helpPageId"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="OpenGameHelp" serveronly="true" localonly="true">
+        <usage>user:OpenGameHelp()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
+      <function name="OpenGameControls" serveronly="true" localonly="true">
+        <usage>user:OpenGameControls(string controlSchemeId)</usage>
+        <info><args><arg type="string" name="controlSchemeId"/></args></info>
+        <comment></comment>
+      </function>
+      <function name="OpenGameControls" serveronly="true" localonly="true">
+        <usage>user:OpenGameControls()</usage>
+        <info><args></args></info>
+        <comment></comment>
+      </function>
       <function name="ShowCursor" deprecated="true">
         <usage>user:ShowCursor(bool showCursor)</usage>
         <info><args><arg type="bool" name="showCursor"/></args></info>
@@ -2130,7 +2359,12 @@
       <function name="ProjectPositionToScreen" localonly="true">
         <usage>Vector2D user:ProjectPositionToScreen(Vector worldLocation)</usage>
         <info returntype="Vector2D"><args><arg type="Vector" name="worldLocation"/></args></info>
-        <comment>Converts a position in world space to a screen space co-ordinate Returned values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user = self:GetEntity():GetUser() 	local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0)) 	Printf("Screen pos: {1}", screenPos) end</comment>
+        <comment>Converts a position in world space to a screen space co-ordinate Returned on-screen values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user = self:GetEntity():GetUser() 	local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0)) 	Printf("Screen pos: {1}", screenPos) end</comment>
+      </function>
+      <function name="ProjectPositionToWidget" localonly="true">
+        <usage>Vector2D user:ProjectPositionToWidget(Widget widget, Vector worldLocation)</usage>
+        <info returntype="Vector2D"><args><arg type="Widget" name="widget"/><arg type="Vector" name="worldLocation"/></args></info>
+        <comment>Converts a position in world space to a widget space co-ordinate Returned on-screen values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user = self:GetEntity():GetUser()  local widget = self:GetEntity().widget 	local screenPos = user:ProjectPositionToWidget(widget, Vector.New(0,0,0)) 	Printf("Screen pos: {1}", screenPos) end</comment>
       </function>
       <function name="PlayVibrationEffect">
         <usage>user:PlayVibrationEffect(VibrationEffectAsset vibrationEffect)</usage>
@@ -2141,6 +2375,16 @@
         <usage>user:PlayManualVibration(number intensity, number duration, bool affectSmallMotors, bool affectLargeMotors)</usage>
         <info><args><arg type="number" name="intensity"/><arg type="number" name="duration"/><arg type="bool" name="affectSmallMotors"/><arg type="bool" name="affectLargeMotors"/></args></info>
         <comment></comment>
+      </function>
+      <function name="PlayCameraShakeEffect">
+        <usage>user:PlayCameraShakeEffect(CameraShakeAsset cameraShake, number scale)</usage>
+        <info><args><arg type="CameraShakeAsset" name="cameraShake"/><arg type="number" name="scale"/></args></info>
+        <comment>Play a camera shake effect on this User with a scale multiplier</comment>
+      </function>
+      <function name="PlayCameraShakeEffect">
+        <usage>user:PlayCameraShakeEffect(CameraShakeAsset cameraShake)</usage>
+        <info><args><arg type="CameraShakeAsset" name="cameraShake"/></args></info>
+        <comment>Play a camera shake effect on this User</comment>
       </function>
       <function name="SetMoveOverride">
         <usage>user:SetMoveOverride(Vector2D scale, Vector2D add)</usage>
@@ -2334,6 +2578,16 @@
         <info><args><arg type="Vector" name="start"/><arg type="Vector" name="end"/><arg type="table" name="entitiesToIgnoreTable"/><arg type="callback" name="collisionCallback"/></args></info>
         <comment>Send a ray (line) from start position to end position, and call the collisionCallback with the entity that was hit and a HitResult structure if any Entity is hit along the way. Pass an array of entities to ignore.</comment>
       </function>
+      <function name="Raycast">
+        <usage>world:Raycast(Vector start, Vector end, Entity entityToIgnore, bool highFidelityCollision, callback collisionCallback)</usage>
+        <info><args><arg type="Vector" name="start"/><arg type="Vector" name="end"/><arg type="Entity" name="entityToIgnore"/><arg type="bool" name="highFidelityCollision"/><arg type="callback" name="collisionCallback"/></args></info>
+        <comment>Send a ray (line) from start position to end position, and call the collisionCallback with the entity that was hit and a HitResult structure if any Entity is hit along the way. Pass an entityToIgnore to tell it not to hit that one (for example ignore the player when doing a ray from a gun the player is holding).  High fidelity collisions will ignore any collision with an entity's bounding box if it would not also collide with it's more complex inner collision</comment>
+      </function>
+      <function name="Raycast">
+        <usage>world:Raycast(Vector start, Vector end, table entitiesToIgnoreTable, bool highFidelityCollision, callback collisionCallback)</usage>
+        <info><args><arg type="Vector" name="start"/><arg type="Vector" name="end"/><arg type="table" name="entitiesToIgnoreTable"/><arg type="bool" name="highFidelityCollision"/><arg type="callback" name="collisionCallback"/></args></info>
+        <comment>Send a ray (line) from start position to end position, and call the collisionCallback with the entity that was hit and a HitResult structure if any Entity is hit along the way. Pass an array of entities to ignore. High fidelity collisions will ignore any collision with an entity's bounding box if it would not also collide with it's more complex inner collision</comment>
+      </function>
       <function name="Find">
         <usage>Entity world:Find(string name)</usage>
         <info returntype="Entity"><args><arg type="string" name="name"/></args></info>
@@ -2422,7 +2676,7 @@
       <function name="GetTimeOfDay">
         <usage>number world:GetTimeOfDay()</usage>
         <info returntype="number"><args></args></info>
-        <comment>Get the time of day (see SetTimeOfTime for what the return value means)</comment>
+        <comment>Get the time of day as a value between 0 and 1</comment>
       </function>
       <function name="Spawn" serveronly="true">
         <usage>Entity world:Spawn(Template templateAsset, Vector position, Rotation rotation)</usage>
@@ -2464,6 +2718,21 @@
         <info returntype="table"><args></args></info>
         <comment>Gets the current active challenges Example result table: result = {} result[1] = {id = &lt;ChallengeId&gt;, name = &lt;LocalisedName&gt;, icon = &lt;IconUrl&gt;, count = &lt;TotalCountToComplete&gt;} result[2] = {id...</comment>
       </function>
+      <function name="PlayCameraShakeEffectAtLocation">
+        <usage>world:PlayCameraShakeEffectAtLocation(CameraShakeAsset cameraShake, number scale, Vector location, number innerRadius, number outerRadius, number falloff, bool orientToDirection)</usage>
+        <info><args><arg type="CameraShakeAsset" name="cameraShake"/><arg type="number" name="scale"/><arg type="Vector" name="location"/><arg type="number" name="innerRadius"/><arg type="number" name="outerRadius"/><arg type="number" name="falloff"/><arg type="bool" name="orientToDirection"/></args></info>
+        <comment>Play a camera shake effect at this location in the world with a scale multiplier</comment>
+      </function>
+      <function name="PlayCameraShakeEffectAtLocation">
+        <usage>world:PlayCameraShakeEffectAtLocation(CameraShakeAsset cameraShake, Vector location, number innerRadius, number outerRadius, number falloff, bool orientToDirection)</usage>
+        <info><args><arg type="CameraShakeAsset" name="cameraShake"/><arg type="Vector" name="location"/><arg type="number" name="innerRadius"/><arg type="number" name="outerRadius"/><arg type="number" name="falloff"/><arg type="bool" name="orientToDirection"/></args></info>
+        <comment>Play a camera shake effect at this location in the world</comment>
+      </function>
+      <function name="GetWorldAsset">
+        <usage>WorldAsset world:GetWorldAsset()</usage>
+        <info returntype="WorldAsset"><args></args></info>
+        <comment>Returns the WorldAsset that's currently loaded</comment>
+      </function>
     </functions>
     <parameters>
       <parameter name="startTime">
@@ -2486,19 +2755,19 @@
         <usage>number sunIntensity</usage>
         <comment>Intensity of the sun</comment>
       </parameter>
-      <parameter name="heightFogStartDistance">
+      <parameter name="heightFogStartDistance" deprecated="true">
         <usage>number heightFogStartDistance</usage>
         <comment>Height fog start distance</comment>
       </parameter>
-      <parameter name="heightFogFalloff">
+      <parameter name="heightFogFalloff" deprecated="true">
         <usage>number heightFogFalloff</usage>
         <comment>Height fog falloff</comment>
       </parameter>
-      <parameter name="heightFogDensity">
+      <parameter name="heightFogDensity" deprecated="true">
         <usage>number heightFogDensity</usage>
         <comment>Height fog density</comment>
       </parameter>
-      <parameter name="heightFogColor">
+      <parameter name="heightFogColor" deprecated="true">
         <usage>Color heightFogColor</usage>
         <comment>Color of the height fog</comment>
       </parameter>
@@ -2506,7 +2775,7 @@
         <usage>number skyLightIntensity</usage>
         <comment>Intensity of the ambient light</comment>
       </parameter>
-      <parameter name="skyLightColor">
+      <parameter name="skyLightColor" deprecated="true">
         <usage>Color skyLightColor</usage>
         <comment>Color of the ambient light</comment>
       </parameter>
@@ -2518,7 +2787,7 @@
         <usage>ColorGradingAsset colorGrading</usage>
         <comment>Color Grading effect</comment>
       </parameter>
-      <parameter name="skydome">
+      <parameter name="skydome" deprecated="true">
         <usage>SkydomeAsset skydome</usage>
         <comment>Skydome asset</comment>
       </parameter>
@@ -2533,6 +2802,58 @@
       <parameter name="skyMesh">
         <usage>SkyMeshAsset skyMesh</usage>
         <comment>Sky Mesh asset</comment>
+      </parameter>
+      <parameter name="enableShadows">
+        <usage>bool enableShadows</usage>
+        <comment>Enable/Disable Shadows</comment>
+      </parameter>
+      <parameter name="fogStartDistance">
+        <usage>number fogStartDistance</usage>
+        <comment>Fog start distance</comment>
+      </parameter>
+      <parameter name="fogDensity">
+        <usage>number fogDensity</usage>
+        <comment>Fog density</comment>
+      </parameter>
+      <parameter name="fogFalloff">
+        <usage>number fogFalloff</usage>
+        <comment>Fog falloff</comment>
+      </parameter>
+      <parameter name="fogColor">
+        <usage>Color fogColor</usage>
+        <comment>Color of the fog</comment>
+      </parameter>
+      <parameter name="fogAffectedByAtmosphere">
+        <usage>bool fogAffectedByAtmosphere</usage>
+        <comment>Fog Affects Atmosphere</comment>
+      </parameter>
+      <parameter name="cloudDensity">
+        <usage>number cloudDensity</usage>
+        <comment>Cloud Density</comment>
+      </parameter>
+      <parameter name="cloudCoverage">
+        <usage>number cloudCoverage</usage>
+        <comment>Cloud Coverage</comment>
+      </parameter>
+      <parameter name="cloudAltitude">
+        <usage>number cloudAltitude</usage>
+        <comment>Cloud Altitude</comment>
+      </parameter>
+      <parameter name="cloudLayerThickness">
+        <usage>number cloudLayerThickness</usage>
+        <comment>Cloud Layer Thickness</comment>
+      </parameter>
+      <parameter name="atmosphereThickness">
+        <usage>number atmosphereThickness</usage>
+        <comment>Set the thickness of the atmosphere. 1 = None, 2 = Thin, 3 = Earth-Like</comment>
+      </parameter>
+      <parameter name="atmosphericScatteringColor">
+        <usage>color atmosphericScatteringColor</usage>
+        <comment>Atmospheric Scattering Color</comment>
+      </parameter>
+      <parameter name="atmosphereTint">
+        <usage>color atmosphereTint</usage>
+        <comment>Atmosphere Tint</comment>
       </parameter>
       <parameter name="deathPlaneActive">
         <usage>bool deathPlaneActive</usage>

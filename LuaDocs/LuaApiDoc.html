@@ -285,13 +285,16 @@ div.api div.api-comment {
 </style>
 </head>
 <body>
-<div class='version' id='version'>Version: <span class='version-number'>0.7.619.108548</span></div>
+<div class='version' id='version'>Version: <span class='version-number'>0.d5.9.111485</span></div>
 <div class='toc'>
 <span class='toc-item'><p id='buttonGlobals' class='toc-text'>Globals</p></span>
 <span class='toc-item'><p id='buttonmath' class='toc-text'>math</p></span>
+<span class='toc-item'><p id='buttonAnalyticsHandle' class='toc-text'>AnalyticsHandle</p></span>
 <span class='toc-item'><p id='buttonAnalytics' class='toc-text'>Analytics</p></span>
+<span class='toc-item'><p id='buttonAnimationHandle' class='toc-text'>AnimationHandle</p></span>
 <span class='toc-item'><p id='buttonAsset' class='toc-text'>Asset</p></span>
 <span class='toc-item'><p id='buttonTemplate' class='toc-text'>Template</p></span>
+<span class='toc-item'><p id='buttonMeshAsset' class='toc-text'>MeshAsset</p></span>
 <span class='toc-item'><p id='buttonCamera' class='toc-text'>Camera</p></span>
 <span class='toc-item'><p id='buttonCharacter' class='toc-text'>Character</p></span>
 <span class='toc-item'><p id='buttonColor' class='toc-text'>Color</p></span>
@@ -300,6 +303,10 @@ div.api div.api-comment {
 <span class='toc-item'><p id='buttonEvent' class='toc-text'>Event</p></span>
 <span class='toc-item'><p id='buttonGameStorage' class='toc-text'>GameStorage</p></span>
 <span class='toc-item'><p id='buttonHandle' class='toc-text'>Handle</p></span>
+<span class='toc-item'><p id='buttonScheduleHandle' class='toc-text'>ScheduleHandle</p></span>
+<span class='toc-item'><p id='buttonEffectHandle' class='toc-text'>EffectHandle</p></span>
+<span class='toc-item'><p id='buttonSoundHandle' class='toc-text'>SoundHandle</p></span>
+<span class='toc-item'><p id='buttonAdjustAimHandle' class='toc-text'>AdjustAimHandle</p></span>
 <span class='toc-item'><p id='buttonHitResult' class='toc-text'>HitResult</p></span>
 <span class='toc-item'><p id='buttonLeaderboards' class='toc-text'>Leaderboards</p></span>
 <span class='toc-item'><p id='buttonLight' class='toc-text'>Light</p></span>
@@ -410,6 +417,11 @@ div.api div.api-comment {
     </div>
   </div>
 </div>
+<div class='api' id='sectionAnalyticsHandle'>
+  <button class='top-link'>Back to top</button>
+  <div class='api-name'>AnalyticsHandle</div>
+  <div class='api-comment'></div>
+</div>
 <div class='api' id='sectionAnalytics'>
   <button class='top-link'>Back to top</button>
   <div class='api-name'>Analytics</div>
@@ -427,17 +439,17 @@ div.api div.api-comment {
     </div>
     <div class='api-function'>
       <span class='api-function-name'>MatchStarted</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> Analytics.MatchStarted()</span>
+      <span class='api-function-usage'><span class='type'>AnalyticsHandle</span> Analytics.MatchStarted()</span>
       <span class='api-function-comment'>Send a MatchStarted event for later analysis. It is up to the game to define what a match is, for example a single round of a game might be defined as a match. Returns a handle that can be passed to MatchEnded to define the match start and end. (Note: Currently specific telemetry analytics are not available to creators)</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>MatchEnded</span>
-      <span class='api-function-usage'>Analytics.MatchEnded(<span class='type'>Handle</span> matchHandle)</span>
+      <span class='api-function-usage'>Analytics.MatchEnded(<span class='type'>AnalyticsHandle</span> matchHandle)</span>
       <span class='api-function-comment'>Send a MatchEnded event for later analysis. (Note: Currently specific telemetry analytics are not available to creators)</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>MatchEnded</span>
-      <span class='api-function-usage'>Analytics.MatchEnded(<span class='type'>Handle</span> matchHandle, <span class='type'>table</span> userEntriesTable)</span>
+      <span class='api-function-usage'>Analytics.MatchEnded(<span class='type'>AnalyticsHandle</span> matchHandle, <span class='type'>table</span> userEntriesTable)</span>
       <span class='api-function-comment'>Send a MatchEnded event for later analysis. Takes a table with an entry per user with a 'user' and 'rank' value (Note: Currently specific telemetry analytics are not available to creators)</span>
     </div>
     <div class='api-function'>
@@ -459,6 +471,53 @@ div.api div.api-comment {
       <span class='api-function-name'>PlayerHealthCritical</span>
       <span class='api-function-usage'>Analytics.PlayerHealthCritical(<span class='type'>Entity</span> playerOrUser)</span>
       <span class='api-function-comment'>Send a PlayerHealthCritical event for later analysis. When a players health is critically low. (Note: Currently specific telemetry analytics are not available to creators)</span>
+    </div>
+  </div>
+</div>
+<div class='api' id='sectionAnimationHandle'>
+  <button class='top-link'>Back to top</button>
+  <div class='api-name'>AnimationHandle</div>
+  <div class='api-comment'></div>
+  <div class='section-title'>Functions</div><div class='api-functions'>
+    <div class='api-function'>
+      <span class='api-function-name'>IsPlaying</span>
+      <span class='api-function-usage'><span class='type'>bool</span> handle:IsPlaying()</span>
+      <span class='api-function-comment'>returns true if this animation is still playing</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>GetPlaybackSpeed</span>
+      <span class='api-function-usage'><span class='type'>number</span> handle:GetPlaybackSpeed()</span>
+      <span class='api-function-comment'>get the current playback speed of the animation</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>SetPlaybackSpeed</span>
+      <span class='api-function-usage'>handle:SetPlaybackSpeed(<span class='type'>number</span> value)</span>
+      <span class='api-function-comment'>set the current playback speed of the animation</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>IsLooping</span>
+      <span class='api-function-usage'><span class='type'>bool</span> handle:IsLooping()</span>
+      <span class='api-function-comment'>get whether this animation is set to loop</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>SetLooping</span>
+      <span class='api-function-usage'>handle:SetLooping(<span class='type'>bool</span> value)</span>
+      <span class='api-function-comment'>set whether this animation should loop</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>Stop</span>
+      <span class='api-function-usage'>handle:Stop()</span>
+      <span class='api-function-comment'>stops/cancels the animation on this mesh, this will invalidate this handle as the animation it relates to is no longer playing</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>SetProgress</span>
+      <span class='api-function-usage'>handle:SetProgress(<span class='type'>number</span> normalizedTime)</span>
+      <span class='api-function-comment'>Set the progress of the animation.  0.0 = the start of the animation, 0.5 = 50% of the way through the animation, 1.0 = the end of the animation, etc</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>GetProgress</span>
+      <span class='api-function-usage'><span class='type'>number</span> handle:GetProgress()</span>
+      <span class='api-function-comment'></span>
     </div>
   </div>
 </div>
@@ -513,6 +572,23 @@ div.api div.api-comment {
       <span class='api-function-name'>FindAllScriptProperties</span>
       <span class='api-function-usage'><span class='type'>table</span> templateAsset:FindAllScriptProperties(<span class='type'>ScriptAsset</span> script)</span>
       <span class='api-function-comment'></span>
+    </div>
+  </div>
+</div>
+<div class='api' id='sectionMeshAsset'>
+  <button class='top-link'>Back to top</button>
+  <div class='api-name'>MeshAsset</div>
+  <div class='api-comment'></div>
+  <div class='section-title'>Functions</div><div class='api-functions'>
+    <div class='api-function'>
+      <span class='api-function-name'>GetAnimationNames</span>
+      <span class='api-function-usage'><span class='type'>table</span> meshAsset:GetAnimationNames()</span>
+      <span class='api-function-comment'>Get a table of animation names that you can play on a mesh with mesh:PlayAnimation.</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>GetAnimationLength</span>
+      <span class='api-function-usage'><span class='type'>number</span> meshAsset:GetAnimationLength(<span class='type'>string</span> animationName)</span>
+      <span class='api-function-comment'>Get the length of an animation in seconds</span>
     </div>
   </div>
 </div>
@@ -633,6 +709,21 @@ div.api div.api-comment {
       <span class='api-function-usage'>character:PlayManualVibration(<span class='type'>number</span> intensity, <span class='type'>number</span> duration, <span class='type'>bool</span> affectSmallMotors, <span class='type'>bool</span> affectLargeMotors)</span>
       <span class='api-function-comment'></span>
     </div>
+    <div class='api-function'>
+      <span class='api-function-name'>AdjustAim</span>
+      <span class='api-function-usage'><span class='type'>AdjustAimHandle</span> character:AdjustAim(<span class='type'>...</span> args)</span>
+      <span class='api-function-comment'></span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>CancelAdjustAim</span>
+      <span class='api-function-usage'>character:CancelAdjustAim(<span class='type'>AdjustAimHandle</span> handle)</span>
+      <span class='api-function-comment'></span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>IsAdjustAimActive</span>
+      <span class='api-function-usage'><span class='type'>bool</span> character:IsAdjustAimActive()</span>
+      <span class='api-function-comment'></span>
+    </div>
   </div>
   <div class='section-title'>Variables</div><div class='api-parameters'>
     <div class='api-parameter'>
@@ -649,6 +740,51 @@ div.api div.api-comment {
       <span class='api-parameter-name'>canSprint</span>
       <span class='api-parameter-usage'><span class='type'>bool</span> canSprint</span>
       <span class='api-parameter-comment'>Turn on or off ability to sprint</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>canRun</span>
+      <span class='api-parameter-usage'><span class='type'>bool</span> canRun</span>
+      <span class='api-parameter-comment'>Turn on or off ability to run</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>canWalk</span>
+      <span class='api-parameter-usage'><span class='type'>bool</span> canWalk</span>
+      <span class='api-parameter-comment'>Turn on or off ability to walk</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>canMantle</span>
+      <span class='api-parameter-usage'><span class='type'>bool</span> canMantle</span>
+      <span class='api-parameter-comment'>Turn on or off ability to mantle</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>maxMantleHeight</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> maxMantleHeight</span>
+      <span class='api-parameter-comment'>Set the maximum height that a player can mantle</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>canSlide</span>
+      <span class='api-parameter-usage'><span class='type'>bool</span> canSlide</span>
+      <span class='api-parameter-comment'>Turn on or off ability to slide</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>canRoll</span>
+      <span class='api-parameter-usage'><span class='type'>bool</span> canRoll</span>
+      <span class='api-parameter-comment'>Turn on or off ability to roll</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>canRelax</span>
+      <span class='api-parameter-usage'><span class='type'>bool</span> canRelax</span>
+      <span class='api-parameter-comment'>Turn on or off ability to go into a grip's relaxed pose</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>breakFall</span>
+      <span class='api-parameter-usage'><span class='type'>bool</span> breakFall</span>
+      <span class='api-parameter-comment'>Turn on or off ability to break fall on landing</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>breakFallSpeed</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> breakFallSpeed</span>
+      <span class='api-parameter-comment'>Turn on or off ability to break fall on landing</span>
     </div>
     <div class='api-parameter'>
       <span class='api-parameter-name'>canJump</span>
@@ -734,6 +870,11 @@ div.api div.api-comment {
       <span class='api-parameter-name'>cameraLock</span>
       <span class='api-parameter-usage'><span class='type'>bool</span> cameraLock</span>
       <span class='api-parameter-comment'>Lock/Unlock the orbit camera</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>cameraSecondaryAction</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> cameraSecondaryAction</span>
+      <span class='api-parameter-comment'>Set what the secondary action does in the orbit camera</span>
     </div>
     <div class='api-parameter'>
       <span class='api-parameter-name'>cameraCollisionEnabled</span>
@@ -926,6 +1067,16 @@ div.api div.api-comment {
       <span class='api-function-comment'>Get the forward facing vector of an Entity from its rotation.</span>
     </div>
     <div class='api-function'>
+      <span class='api-function-name'>GetRight</span>
+      <span class='api-function-usage'><span class='type'>Vector</span> entity:GetRight()</span>
+      <span class='api-function-comment'>Get the right facing vector of an Entity from its rotation.</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>GetUp</span>
+      <span class='api-function-usage'><span class='type'>Vector</span> entity:GetUp()</span>
+      <span class='api-function-comment'>Get the up facing vector of an Entity from its rotation.</span>
+    </div>
+    <div class='api-function'>
       <span class='api-function-name'>SetForward</span>
       <span class='api-function-usage'>entity:SetForward(<span class='type'>Vector</span> forward)</span>
       <span class='api-function-comment'>Set the rotation of an Entity to make its front face in a given direction.</span>
@@ -937,82 +1088,82 @@ div.api div.api-comment {
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlaySound</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlaySound(<span class='type'>SoundAsset</span> sound)</span>
+      <span class='api-function-usage'><span class='type'>SoundHandle</span> entity:PlaySound(<span class='type'>SoundAsset</span> sound)</span>
       <span class='api-function-comment'>Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlaySound</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlaySound(<span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn)</span>
+      <span class='api-function-usage'><span class='type'>SoundHandle</span> entity:PlaySound(<span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn)</span>
       <span class='api-function-comment'>Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound. Fades in over the given fadeIn time.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlaySound</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlaySound(<span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn, <span class='type'>string</span> groupName)</span>
+      <span class='api-function-usage'><span class='type'>SoundHandle</span> entity:PlaySound(<span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn, <span class='type'>string</span> groupName)</span>
       <span class='api-function-comment'>Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound. Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the given fadeIn time.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlaySound2D</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlaySound2D(<span class='type'>SoundAsset</span> sound)</span>
+      <span class='api-function-usage'><span class='type'>SoundHandle</span> entity:PlaySound2D(<span class='type'>SoundAsset</span> sound)</span>
       <span class='api-function-comment'>Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds, stereo music stings, etc).</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlaySound2D</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlaySound2D(<span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn)</span>
+      <span class='api-function-usage'><span class='type'>SoundHandle</span> entity:PlaySound2D(<span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn)</span>
       <span class='api-function-comment'>Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds, stereo music stings, etc). Fades in over the given fadeIn time.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlaySound2D</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlaySound2D(<span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn, <span class='type'>string</span> groupName)</span>
+      <span class='api-function-usage'><span class='type'>SoundHandle</span> entity:PlaySound2D(<span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn, <span class='type'>string</span> groupName)</span>
       <span class='api-function-comment'>Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds, stereo music stings, etc). Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the given fadeIn time.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlaySoundAtLocation</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlaySoundAtLocation(<span class='type'>Vector</span> location, <span class='type'>SoundAsset</span> sound)</span>
+      <span class='api-function-usage'><span class='type'>SoundHandle</span> entity:PlaySoundAtLocation(<span class='type'>Vector</span> location, <span class='type'>SoundAsset</span> sound)</span>
       <span class='api-function-comment'>Play a sound Asset on this Entity at the given location.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlaySoundAtLocation</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlaySoundAtLocation(<span class='type'>Vector</span> location, <span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn)</span>
+      <span class='api-function-usage'><span class='type'>SoundHandle</span> entity:PlaySoundAtLocation(<span class='type'>Vector</span> location, <span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn)</span>
       <span class='api-function-comment'>Play a sound Asset on this Entity at the given location. Fades in over the given fadeIn time.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlaySoundAtLocation</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlaySoundAtLocation(<span class='type'>Vector</span> location, <span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn, <span class='type'>string</span> groupName)</span>
+      <span class='api-function-usage'><span class='type'>SoundHandle</span> entity:PlaySoundAtLocation(<span class='type'>Vector</span> location, <span class='type'>SoundAsset</span> sound, <span class='type'>number</span> fadeIn, <span class='type'>string</span> groupName)</span>
       <span class='api-function-comment'>Play a sound Asset on this Entity at the given location. Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the given fadeIn time.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>StopSound</span>
-      <span class='api-function-usage'>entity:StopSound(<span class='type'>Handle</span> soundHandle)</span>
+      <span class='api-function-usage'>entity:StopSound(<span class='type'>SoundHandle</span> handle)</span>
       <span class='api-function-comment'>Given a sound Handle stop the sound on this Entity.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>StopSound</span>
-      <span class='api-function-usage'>entity:StopSound(<span class='type'>Handle</span> soundHandle, <span class='type'>number</span> fadeOut)</span>
+      <span class='api-function-usage'>entity:StopSound(<span class='type'>SoundHandle</span> handle, <span class='type'>number</span> fadeOut)</span>
       <span class='api-function-comment'>Given a sound Handle stop the sound on this Entity. Fade the sound out over the given fadeOut time.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayEffect</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlayEffect(<span class='type'>EffectAsset</span> effect)</span>
+      <span class='api-function-usage'><span class='type'>EffectHandle</span> entity:PlayEffect(<span class='type'>EffectAsset</span> effect)</span>
       <span class='api-function-comment'>Play a particle effect Asset on this Entity, returning a Handle which can be used to stop the effect.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayEffect</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlayEffect(<span class='type'>EffectAsset</span> effect, <span class='type'>bool</span> attached)</span>
+      <span class='api-function-usage'><span class='type'>EffectHandle</span> entity:PlayEffect(<span class='type'>EffectAsset</span> effect, <span class='type'>bool</span> attached)</span>
       <span class='api-function-comment'>Play a particle effect Asset on this Entity, returning a Handle which can be used to stop the effect. Optionally the effect is attached to the entity and so all spawned particles are relative to it.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayEffectAtLocation</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlayEffectAtLocation(<span class='type'>Vector</span> location, <span class='type'>Rotation</span> rotation, <span class='type'>EffectAsset</span> effect)</span>
+      <span class='api-function-usage'><span class='type'>EffectHandle</span> entity:PlayEffectAtLocation(<span class='type'>Vector</span> location, <span class='type'>Rotation</span> rotation, <span class='type'>EffectAsset</span> effect)</span>
       <span class='api-function-comment'>Play a particle effect Asset at a given world location and rotation, returning a Handle which can be used to stop the effect.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayEffectAtLocation</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> entity:PlayEffectAtLocation(<span class='type'>Vector</span> location, <span class='type'>Rotation</span> rotation, <span class='type'>EffectAsset</span> effect, <span class='type'>bool</span> attached)</span>
+      <span class='api-function-usage'><span class='type'>EffectHandle</span> entity:PlayEffectAtLocation(<span class='type'>Vector</span> location, <span class='type'>Rotation</span> rotation, <span class='type'>EffectAsset</span> effect, <span class='type'>bool</span> attached)</span>
       <span class='api-function-comment'>Play a particle effect Asset at a given world location and rotation, returning a Handle which can be used to stop the effect. Optionally the effect is attached to the entity and so all spawned particles are relative to it.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>StopEffect</span>
-      <span class='api-function-usage'>entity:StopEffect(<span class='type'>Handle</span> effectHandle)</span>
+      <span class='api-function-usage'>entity:StopEffect(<span class='type'>EffectHandle</span> handle)</span>
       <span class='api-function-comment'></span>
     </div>
     <div class='api-function'>
@@ -1321,11 +1472,62 @@ div.api div.api-comment {
   <button class='top-link'>Back to top</button>
   <div class='api-name'>Handle</div>
   <div class='api-comment'></div>
-  <div class='section-title'>Overrides</div><div class='api-overrides'>
-    <div class='api-override'>
-      <span class='api-override-name'>to_string</span>
-      <span class='api-override-usage'><span class='type'>string</span> tostring(<span class='type'>Handle var</span>)</span>
-      <span class='api-override-comment'></span>
+</div>
+<div class='api' id='sectionScheduleHandle'>
+  <button class='top-link'>Back to top</button>
+  <div class='api-name'>ScheduleHandle</div>
+  <div class='api-comment'></div>
+  <div class='section-title'>Functions</div><div class='api-functions'>
+    <div class='api-function'>
+      <span class='api-function-name'>Cancel</span>
+      <span class='api-function-usage'>handle:Cancel()</span>
+      <span class='api-function-comment'></span>
+    </div>
+  </div>
+</div>
+<div class='api' id='sectionEffectHandle'>
+  <button class='top-link'>Back to top</button>
+  <div class='api-name'>EffectHandle</div>
+  <div class='api-comment'></div>
+  <div class='section-title'>Functions</div><div class='api-functions'>
+    <div class='api-function'>
+      <span class='api-function-name'>Stop</span>
+      <span class='api-function-usage'>handle:Stop()</span>
+      <span class='api-function-comment'></span>
+    </div>
+  </div>
+</div>
+<div class='api' id='sectionSoundHandle'>
+  <button class='top-link'>Back to top</button>
+  <div class='api-name'>SoundHandle</div>
+  <div class='api-comment'></div>
+  <div class='section-title'>Functions</div><div class='api-functions'>
+    <div class='api-function'>
+      <span class='api-function-name'>Stop</span>
+      <span class='api-function-usage'>handle:Stop()</span>
+      <span class='api-function-comment'></span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>Stop</span>
+      <span class='api-function-usage'>handle:Stop(<span class='type'>number</span> fadeOut)</span>
+      <span class='api-function-comment'></span>
+    </div>
+  </div>
+</div>
+<div class='api' id='sectionAdjustAimHandle'>
+  <button class='top-link'>Back to top</button>
+  <div class='api-name'>AdjustAimHandle</div>
+  <div class='api-comment'></div>
+  <div class='section-title'>Functions</div><div class='api-functions'>
+    <div class='api-function'>
+      <span class='api-function-name'>Cancel</span>
+      <span class='api-function-usage'>handle:Cancel()</span>
+      <span class='api-function-comment'></span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>IsActive</span>
+      <span class='api-function-usage'><span class='type'>bool</span> handle:IsActive()</span>
+      <span class='api-function-comment'></span>
     </div>
   </div>
 </div>
@@ -1353,6 +1555,11 @@ div.api div.api-comment {
       <span class='api-function-name'>GetRelativeNormal</span>
       <span class='api-function-usage'><span class='type'>Vector</span> hitResult:GetRelativeNormal()</span>
       <span class='api-function-comment'>Get normal direction of the hit relative to the rotation of the Entity hit</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>GetPartName</span>
+      <span class='api-function-usage'><span class='type'>string</span> hitResult:GetPartName()</span>
+      <span class='api-function-comment'>get the name of the part of the entity that was hit. For example a headshot on a player character will return 'head'</span>
     </div>
   </div>
 </div>
@@ -1442,6 +1649,21 @@ div.api div.api-comment {
       <span class='api-parameter-name'>attenuation</span>
       <span class='api-parameter-usage'><span class='type'>number</span> attenuation</span>
       <span class='api-parameter-comment'>Set attenuation of the light (units?)</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>exponent</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> exponent</span>
+      <span class='api-parameter-comment'></span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>specular</span>
+      <span class='api-parameter-usage'><span class='type'>boolean</span> specular</span>
+      <span class='api-parameter-comment'></span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>shadows</span>
+      <span class='api-parameter-usage'><span class='type'>boolean</span> shadows</span>
+      <span class='api-parameter-comment'></span>
     </div>
   </div>
 </div>
@@ -1776,23 +1998,28 @@ div.api div.api-comment {
   <div class='section-title'>Functions</div><div class='api-functions'>
     <div class='api-function'>
       <span class='api-function-name'>PlayAnimation</span>
-      <span class='api-function-usage'>mesh:PlayAnimation(<span class='type'>string</span> animationName)</span>
+      <span class='api-function-usage'><span class='type'>AnimationHandle</span> mesh:PlayAnimation(<span class='type'>string</span> animationName)</span>
       <span class='api-function-comment'>Play a named animation on this mesh, once.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayAnimation</span>
-      <span class='api-function-usage'>mesh:PlayAnimation(<span class='type'>string</span> animationName, <span class='type'>bool</span> looping)</span>
+      <span class='api-function-usage'><span class='type'>AnimationHandle</span> mesh:PlayAnimation(<span class='type'>string</span> animationName, <span class='type'>bool</span> looping)</span>
       <span class='api-function-comment'>Play a named animation on this mesh, optionally looping.</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayAnimation</span>
-      <span class='api-function-usage'>mesh:PlayAnimation(<span class='type'>string</span> animationName, <span class='type'>table</span> properties)</span>
-      <span class='api-function-comment'>Play a named animation on this mesh, optional table can contain named values `looping` and either `playbackTime` or `playbackSpeed`</span>
+      <span class='api-function-usage'><span class='type'>AnimationHandle</span> mesh:PlayAnimation(<span class='type'>string</span> animationName, <span class='type'>table</span> properties)</span>
+      <span class='api-function-comment'>Play a named animation on this mesh, optional table can contain named values `looping`, either `playbackTime` or `playbackSpeed` and either 'positionFactor' or 'positionTime' a negative playbackSpeed will play the animation in reverse.  For example playbackSpeed = -2 will play the animation twice as fast in reverse</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayAnimationLooping</span>
-      <span class='api-function-usage'>mesh:PlayAnimationLooping(<span class='type'>string</span> animationName)</span>
+      <span class='api-function-usage'><span class='type'>AnimationHandle</span> mesh:PlayAnimationLooping(<span class='type'>string</span> animationName)</span>
       <span class='api-function-comment'>Play a named animation on this mesh, repeatedly.</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>PlayAnimationLooping</span>
+      <span class='api-function-usage'><span class='type'>AnimationHandle</span> mesh:PlayAnimationLooping(<span class='type'>string</span> animationName, <span class='type'>table</span> properties)</span>
+      <span class='api-function-comment'>This is the same as the PlayAnimation function taking a table containing `playbackTime` or `playbackSpeed` except that `looping` defaults to true</span>
     </div>
     <div class='api-function deprecated'>
       <span class='api-function-name'>PlayAnimationClient</span>
@@ -1813,6 +2040,11 @@ div.api div.api-comment {
       <span class='api-function-name'>GetAnimationNames</span>
       <span class='api-function-usage'><span class='type'>table</span> mesh:GetAnimationNames()</span>
       <span class='api-function-comment'>Get a table of animation names that you can play on this mesh with PlayAnimation.</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>GetAnimationLength</span>
+      <span class='api-function-usage'><span class='type'>number</span> mesh:GetAnimationLength(<span class='type'>string</span> animationName)</span>
+      <span class='api-function-comment'>Get the length of an animation in seconds</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>CreateThruster</span>
@@ -1873,7 +2105,7 @@ div.api div.api-comment {
     </div>
     <div class='api-parameter'>
       <span class='api-parameter-name'>mesh</span>
-      <span class='api-parameter-usage'><span class='type'>mesh</span> mesh</span>
+      <span class='api-parameter-usage'><span class='type'>meshno</span> mesh</span>
       <span class='api-parameter-comment'>Get or change the mesh</span>
     </div>
   </div>
@@ -1991,12 +2223,12 @@ div.api div.api-comment {
     </div>
     <div class='api-function'>
       <span class='api-function-name'>Schedule</span>
-      <span class='api-function-usage'><span class='type'>Handle</span> scriptComponent:Schedule(<span class='type'>callback</span> function)</span>
+      <span class='api-function-usage'><span class='type'>ScheduleHandle</span> scriptComponent:Schedule(<span class='type'>callback</span> function)</span>
       <span class='api-function-comment'>Pass this a function to do that function in a thread. Can use globals like Wait to control flow as the function will be re-entrant. Returns a Handle which can be passed to Cancel</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>Cancel</span>
-      <span class='api-function-usage'>scriptComponent:Cancel(<span class='type'>Handle</span> handle)</span>
+      <span class='api-function-usage'>scriptComponent:Cancel(<span class='type'>ScheduleHandle</span> handle)</span>
       <span class='api-function-comment'>Cancel a scheduled task if its running.</span>
     </div>
     <div class='api-function'>
@@ -2049,7 +2281,7 @@ div.api div.api-comment {
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>OnDamage</span>
       <span class='api-entrypoint-usage'>function Script:OnDamage(<span class='type'>number</span> damageAmount, <span class='type'>Entity</span> damageCauser, <span class='type'>HitResult</span> hitResult) ... end</span>
-      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called when an entity is damaged on all scripts of the entity. TODO: work out what gets passed in here for radial damage instead of the HitResult.</span>
+      <span class='api-entrypoint-comment'><span class='comment-bold'>Server</span> Called when an entity is damaged on all scripts of the entity.</span>
     </div>
     <div class='api-entrypoint'>
       <span class='api-entrypoint-name'>Init</span>
@@ -2446,7 +2678,7 @@ div.api div.api-comment {
   <div class='section-title'>Variables</div><div class='api-parameters'>
     <div class='api-parameter'>
       <span class='api-parameter-name'>js</span>
-      <span class='api-parameter-usage'><span class='type'>WidgetBindings</span> js</span>
+      <span class='api-parameter-usage'><span class='type'>unknown</span> js</span>
       <span class='api-parameter-comment'></span>
     </div>
     <div class='api-parameter'>
@@ -2603,6 +2835,36 @@ div.api div.api-comment {
       <span class='api-function-usage'>user:GoToWorld(<span class='type'>WorldAsset</span> worldAsset, <span class='type'>callback</span> travelFailedCallback)</span>
       <span class='api-function-comment'><span class='comment-bold'>Server</span> </span>
     </div>
+    <div class='api-function'>
+      <span class='api-function-name'>OpenStore</span>
+      <span class='api-function-usage'>user:OpenStore()</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> <span class='comment-bold'>Local</span> </span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>OpenNews</span>
+      <span class='api-function-usage'>user:OpenNews()</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> <span class='comment-bold'>Local</span> </span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>OpenGameHelp</span>
+      <span class='api-function-usage'>user:OpenGameHelp(<span class='type'>string</span> helpPageId)</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> <span class='comment-bold'>Local</span> </span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>OpenGameHelp</span>
+      <span class='api-function-usage'>user:OpenGameHelp()</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> <span class='comment-bold'>Local</span> </span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>OpenGameControls</span>
+      <span class='api-function-usage'>user:OpenGameControls(<span class='type'>string</span> controlSchemeId)</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> <span class='comment-bold'>Local</span> </span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>OpenGameControls</span>
+      <span class='api-function-usage'>user:OpenGameControls()</span>
+      <span class='api-function-comment'><span class='comment-bold'>Server</span> <span class='comment-bold'>Local</span> </span>
+    </div>
     <div class='api-function deprecated'>
       <span class='api-function-name'>ShowCursor</span>
       <span class='api-function-usage'>user:ShowCursor(<span class='type'>bool</span> showCursor)</span>
@@ -2611,7 +2873,12 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>ProjectPositionToScreen</span>
       <span class='api-function-usage'><span class='type'>Vector2D</span> user:ProjectPositionToScreen(<span class='type'>Vector</span> worldLocation)</span>
-      <span class='api-function-comment'><span class='comment-bold'>Local</span> Converts a position in world space to a screen space co-ordinate Returned values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user = self:GetEntity():GetUser() 	local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0)) 	Printf("Screen pos: {1}", screenPos) end</span>
+      <span class='api-function-comment'><span class='comment-bold'>Local</span> Converts a position in world space to a screen space co-ordinate Returned on-screen values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user = self:GetEntity():GetUser() 	local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0)) 	Printf("Screen pos: {1}", screenPos) end</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>ProjectPositionToWidget</span>
+      <span class='api-function-usage'><span class='type'>Vector2D</span> user:ProjectPositionToWidget(<span class='type'>Widget</span> widget, <span class='type'>Vector</span> worldLocation)</span>
+      <span class='api-function-comment'><span class='comment-bold'>Local</span> Converts a position in world space to a widget space co-ordinate Returned on-screen values are in the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user = self:GetEntity():GetUser()  local widget = self:GetEntity().widget 	local screenPos = user:ProjectPositionToWidget(widget, Vector.New(0,0,0)) 	Printf("Screen pos: {1}", screenPos) end</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>PlayVibrationEffect</span>
@@ -2622,6 +2889,16 @@ div.api div.api-comment {
       <span class='api-function-name'>PlayManualVibration</span>
       <span class='api-function-usage'>user:PlayManualVibration(<span class='type'>number</span> intensity, <span class='type'>number</span> duration, <span class='type'>bool</span> affectSmallMotors, <span class='type'>bool</span> affectLargeMotors)</span>
       <span class='api-function-comment'></span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>PlayCameraShakeEffect</span>
+      <span class='api-function-usage'>user:PlayCameraShakeEffect(<span class='type'>CameraShakeAsset</span> cameraShake, <span class='type'>number</span> scale)</span>
+      <span class='api-function-comment'>Play a camera shake effect on this User with a scale multiplier</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>PlayCameraShakeEffect</span>
+      <span class='api-function-usage'>user:PlayCameraShakeEffect(<span class='type'>CameraShakeAsset</span> cameraShake)</span>
+      <span class='api-function-comment'>Play a camera shake effect on this User</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>SetMoveOverride</span>
@@ -2832,6 +3109,16 @@ div.api div.api-comment {
       <span class='api-function-comment'>Send a ray (line) from start position to end position, and call the collisionCallback with the entity that was hit and a HitResult structure if any Entity is hit along the way. Pass an array of entities to ignore.</span>
     </div>
     <div class='api-function'>
+      <span class='api-function-name'>Raycast</span>
+      <span class='api-function-usage'>world:Raycast(<span class='type'>Vector</span> start, <span class='type'>Vector</span> end, <span class='type'>Entity</span> entityToIgnore, <span class='type'>bool</span> highFidelityCollision, <span class='type'>callback</span> collisionCallback)</span>
+      <span class='api-function-comment'>Send a ray (line) from start position to end position, and call the collisionCallback with the entity that was hit and a HitResult structure if any Entity is hit along the way. Pass an entityToIgnore to tell it not to hit that one (for example ignore the player when doing a ray from a gun the player is holding).  High fidelity collisions will ignore any collision with an entity's bounding box if it would not also collide with it's more complex inner collision</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>Raycast</span>
+      <span class='api-function-usage'>world:Raycast(<span class='type'>Vector</span> start, <span class='type'>Vector</span> end, <span class='type'>table</span> entitiesToIgnoreTable, <span class='type'>bool</span> highFidelityCollision, <span class='type'>callback</span> collisionCallback)</span>
+      <span class='api-function-comment'>Send a ray (line) from start position to end position, and call the collisionCallback with the entity that was hit and a HitResult structure if any Entity is hit along the way. Pass an array of entities to ignore. High fidelity collisions will ignore any collision with an entity's bounding box if it would not also collide with it's more complex inner collision</span>
+    </div>
+    <div class='api-function'>
       <span class='api-function-name'>Find</span>
       <span class='api-function-usage'><span class='type'>Entity</span> world:Find(<span class='type'>string</span> name)</span>
       <span class='api-function-comment'>Find a named Entity within the world. Generally an entity type property which is filled in in the editor is a better option.</span>
@@ -2919,7 +3206,7 @@ div.api div.api-comment {
     <div class='api-function'>
       <span class='api-function-name'>GetTimeOfDay</span>
       <span class='api-function-usage'><span class='type'>number</span> world:GetTimeOfDay()</span>
-      <span class='api-function-comment'>Get the time of day (see SetTimeOfTime for what the return value means)</span>
+      <span class='api-function-comment'>Get the time of day as a value between 0 and 1</span>
     </div>
     <div class='api-function'>
       <span class='api-function-name'>Spawn</span>
@@ -2961,6 +3248,21 @@ div.api div.api-comment {
       <span class='api-function-usage'><span class='type'>table</span> world:GetActiveChallenges()</span>
       <span class='api-function-comment'>Gets the current active challenges Example result table: result = {} result[1] = {id = ChallengeId, name = LocalisedName, icon = IconUrl, count = TotalCountToComplete} result[2] = {id...</span>
     </div>
+    <div class='api-function'>
+      <span class='api-function-name'>PlayCameraShakeEffectAtLocation</span>
+      <span class='api-function-usage'>world:PlayCameraShakeEffectAtLocation(<span class='type'>CameraShakeAsset</span> cameraShake, <span class='type'>number</span> scale, <span class='type'>Vector</span> location, <span class='type'>number</span> innerRadius, <span class='type'>number</span> outerRadius, <span class='type'>number</span> falloff, <span class='type'>bool</span> orientToDirection)</span>
+      <span class='api-function-comment'>Play a camera shake effect at this location in the world with a scale multiplier</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>PlayCameraShakeEffectAtLocation</span>
+      <span class='api-function-usage'>world:PlayCameraShakeEffectAtLocation(<span class='type'>CameraShakeAsset</span> cameraShake, <span class='type'>Vector</span> location, <span class='type'>number</span> innerRadius, <span class='type'>number</span> outerRadius, <span class='type'>number</span> falloff, <span class='type'>bool</span> orientToDirection)</span>
+      <span class='api-function-comment'>Play a camera shake effect at this location in the world</span>
+    </div>
+    <div class='api-function'>
+      <span class='api-function-name'>GetWorldAsset</span>
+      <span class='api-function-usage'><span class='type'>WorldAsset</span> world:GetWorldAsset()</span>
+      <span class='api-function-comment'>Returns the WorldAsset that's currently loaded</span>
+    </div>
   </div>
   <div class='section-title'>Variables</div><div class='api-parameters'>
     <div class='api-parameter'>
@@ -2988,35 +3290,35 @@ div.api div.api-comment {
       <span class='api-parameter-usage'><span class='type'>number</span> sunIntensity</span>
       <span class='api-parameter-comment'>Intensity of the sun</span>
     </div>
-    <div class='api-parameter'>
+    <div class='api-parameter deprecated'>
       <span class='api-parameter-name'>heightFogStartDistance</span>
       <span class='api-parameter-usage'><span class='type'>number</span> heightFogStartDistance</span>
-      <span class='api-parameter-comment'>Height fog start distance</span>
+      <span class='api-parameter-comment'><span class='comment-bold'>DEPRECATED</span> Height fog start distance</span>
     </div>
-    <div class='api-parameter'>
+    <div class='api-parameter deprecated'>
       <span class='api-parameter-name'>heightFogFalloff</span>
       <span class='api-parameter-usage'><span class='type'>number</span> heightFogFalloff</span>
-      <span class='api-parameter-comment'>Height fog falloff</span>
+      <span class='api-parameter-comment'><span class='comment-bold'>DEPRECATED</span> Height fog falloff</span>
     </div>
-    <div class='api-parameter'>
+    <div class='api-parameter deprecated'>
       <span class='api-parameter-name'>heightFogDensity</span>
       <span class='api-parameter-usage'><span class='type'>number</span> heightFogDensity</span>
-      <span class='api-parameter-comment'>Height fog density</span>
+      <span class='api-parameter-comment'><span class='comment-bold'>DEPRECATED</span> Height fog density</span>
     </div>
-    <div class='api-parameter'>
+    <div class='api-parameter deprecated'>
       <span class='api-parameter-name'>heightFogColor</span>
       <span class='api-parameter-usage'><span class='type'>Color</span> heightFogColor</span>
-      <span class='api-parameter-comment'>Color of the height fog</span>
+      <span class='api-parameter-comment'><span class='comment-bold'>DEPRECATED</span> Color of the height fog</span>
     </div>
     <div class='api-parameter'>
       <span class='api-parameter-name'>skyLightIntensity</span>
       <span class='api-parameter-usage'><span class='type'>number</span> skyLightIntensity</span>
       <span class='api-parameter-comment'>Intensity of the ambient light</span>
     </div>
-    <div class='api-parameter'>
+    <div class='api-parameter deprecated'>
       <span class='api-parameter-name'>skyLightColor</span>
       <span class='api-parameter-usage'><span class='type'>Color</span> skyLightColor</span>
-      <span class='api-parameter-comment'>Color of the ambient light</span>
+      <span class='api-parameter-comment'><span class='comment-bold'>DEPRECATED</span> Color of the ambient light</span>
     </div>
     <div class='api-parameter'>
       <span class='api-parameter-name'>postProcess</span>
@@ -3028,10 +3330,10 @@ div.api div.api-comment {
       <span class='api-parameter-usage'><span class='type'>ColorGradingAsset</span> colorGrading</span>
       <span class='api-parameter-comment'>Color Grading effect</span>
     </div>
-    <div class='api-parameter'>
+    <div class='api-parameter deprecated'>
       <span class='api-parameter-name'>skydome</span>
       <span class='api-parameter-usage'><span class='type'>SkydomeAsset</span> skydome</span>
-      <span class='api-parameter-comment'>Skydome asset</span>
+      <span class='api-parameter-comment'><span class='comment-bold'>DEPRECATED</span> Skydome asset</span>
     </div>
     <div class='api-parameter'>
       <span class='api-parameter-name'>innerHorizon</span>
@@ -3047,6 +3349,71 @@ div.api div.api-comment {
       <span class='api-parameter-name'>skyMesh</span>
       <span class='api-parameter-usage'><span class='type'>SkyMeshAsset</span> skyMesh</span>
       <span class='api-parameter-comment'>Sky Mesh asset</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>enableShadows</span>
+      <span class='api-parameter-usage'><span class='type'>bool</span> enableShadows</span>
+      <span class='api-parameter-comment'>Enable/Disable Shadows</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>fogStartDistance</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> fogStartDistance</span>
+      <span class='api-parameter-comment'>Fog start distance</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>fogDensity</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> fogDensity</span>
+      <span class='api-parameter-comment'>Fog density</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>fogFalloff</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> fogFalloff</span>
+      <span class='api-parameter-comment'>Fog falloff</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>fogColor</span>
+      <span class='api-parameter-usage'><span class='type'>Color</span> fogColor</span>
+      <span class='api-parameter-comment'>Color of the fog</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>fogAffectedByAtmosphere</span>
+      <span class='api-parameter-usage'><span class='type'>bool</span> fogAffectedByAtmosphere</span>
+      <span class='api-parameter-comment'>Fog Affects Atmosphere</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>cloudDensity</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> cloudDensity</span>
+      <span class='api-parameter-comment'>Cloud Density</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>cloudCoverage</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> cloudCoverage</span>
+      <span class='api-parameter-comment'>Cloud Coverage</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>cloudAltitude</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> cloudAltitude</span>
+      <span class='api-parameter-comment'>Cloud Altitude</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>cloudLayerThickness</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> cloudLayerThickness</span>
+      <span class='api-parameter-comment'>Cloud Layer Thickness</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>atmosphereThickness</span>
+      <span class='api-parameter-usage'><span class='type'>number</span> atmosphereThickness</span>
+      <span class='api-parameter-comment'>Set the thickness of the atmosphere. 1 = None, 2 = Thin, 3 = Earth-Like</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>atmosphericScatteringColor</span>
+      <span class='api-parameter-usage'><span class='type'>color</span> atmosphericScatteringColor</span>
+      <span class='api-parameter-comment'>Atmospheric Scattering Color</span>
+    </div>
+    <div class='api-parameter'>
+      <span class='api-parameter-name'>atmosphereTint</span>
+      <span class='api-parameter-usage'><span class='type'>color</span> atmosphereTint</span>
+      <span class='api-parameter-comment'>Atmosphere Tint</span>
     </div>
     <div class='api-parameter'>
       <span class='api-parameter-name'>deathPlaneActive</span>

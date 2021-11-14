@@ -31,8 +31,8 @@ class LuaFunction extends Variable
         'scriptComponent:GetProperties' => 'Properties',
         'scriptComponent:GetEntity' => 'T',
         'entity:FindScriptProperty' => 'PropertyValue',
-        'entity:FindAllScripts' => 'Script<Entity>[]',
-        'world:FindAllScripts' => 'Script<Entity>[]',
+        'entity:FindAllScripts' => 'Script<self>[]',
+        'world:FindAllScripts' => 'Script<self>[]',
     ];
 
     const OVERLOADS = [
@@ -174,7 +174,7 @@ class LuaFunction extends Variable
 
         foreach ($this->arguments as $argument) {
             if ('...' === $argument->getIdentifier()) {
-                $doc[] = " @vararg any";
+                $doc[] = " @vararg any|nil";
             } else {
                 $identifier = str_pad(
                     $argument->getIdentifier(),

@@ -29,6 +29,9 @@ class Argument extends Variable
         'camera:RevertClientProperty' => [
             'propertyName' => 'string',
         ],
+        'character:Attach' => [
+            'socketName' => 'SocketName',
+        ],
         'character:PlayAction(actionName)' => [
             'actionName' => 'string',
         ],
@@ -44,6 +47,9 @@ class Argument extends Variable
         ],
         'effect:RevertClientProperty' => [
             'propertyName' => 'string',
+        ],
+        'entity:AttachTo' => [
+            'socketName' => 'SocketName',
         ],
         'light:RevertClientProperty' => [
             'propertyName' => 'string',
@@ -147,7 +153,7 @@ class Argument extends Variable
             'entitiesToIgnoreTable' => 'Entity[]',
         ],
         'world:ForEachUser' => [
-            'callback' => 'fun(user: User, ...): void',
+            'callback' => 'fun(user: User, ...: any|nil): void',
         ],
         'world:GetGames' => [
             'callback' => 'fun(games: string[]): void',
